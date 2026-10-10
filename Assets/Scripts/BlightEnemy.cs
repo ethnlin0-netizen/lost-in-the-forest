@@ -83,7 +83,7 @@ public class BlightEnemy : MonoBehaviour
     private void OnDestroy() { if (health != null) health.Died -= Die; }
     private void FindPlayer()
     {
-        target = FindFirstObjectByType<Movement>();
+        target = FindAnyObjectByType<Movement>();
         targetShape = target != null ? target.GetComponent<Collider2D>() : null;
     }
     private void Die()

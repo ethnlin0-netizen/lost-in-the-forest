@@ -124,7 +124,7 @@ public static class BuildLevel01
         follow.minimum = new Vector2(2, 4);
         follow.maximum = new Vector2(37, 14);
 
-        var goal = new GameObject("FirstItem_PlacementMarker");
+        var goal = new GameObject("Amulet01");
         goal.transform.SetParent(root.parent);
         goal.transform.position = new Vector3(41, 17.5f, 0);
         goal.transform.localScale = new Vector3(0.7f, 0.7f, 1);
@@ -132,7 +132,10 @@ public static class BuildLevel01
         var renderer = goal.AddComponent<SpriteRenderer>();
         renderer.sprite = square; renderer.sharedMaterial = material;
         renderer.color = new Color(1f, 0.8f, 0.2f); renderer.sortingOrder = 3;
-        // Marker deliberately has no pickup script; the team can attach its shared progression system.
+        var trigger = goal.AddComponent<BoxCollider2D>();
+        trigger.size = square.bounds.size; trigger.isTrigger = true;
+        var pickup = goal.AddComponent<AmuletPickup>();
+        pickup.amuletNumber = 1; pickup.nextScene = "Level02";
         EditorSceneManager.MarkSceneDirty(scene);
         if (!EditorSceneManager.SaveScene(scene)) throw new IOException("Could not save generated scene.");
         AssetDatabase.SaveAssets();

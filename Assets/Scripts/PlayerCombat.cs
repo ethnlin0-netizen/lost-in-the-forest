@@ -41,6 +41,7 @@ public class PlayerCombat : MonoBehaviour
     // Presentation and damage now start together on the X press, without a charge phase.
     public event System.Action<bool, int, float, float> MeleePerformed;
     public event System.Action VisualsReset;
+    public event System.Action RangedPerformed;
 
     private void Awake()
     {
@@ -121,6 +122,7 @@ public class PlayerCombat : MonoBehaviour
             (Vector2)bounds.center + direction * clearance;
         var projectile = Instantiate(projectilePrefab, origin, Quaternion.identity);
         projectile.Launch(direction, projectileSpeed, projectileRange, GetComponent<Rigidbody2D>(), projectileDamage);
+        RangedPerformed?.Invoke();
     }
 
     private void ResetVisuals()

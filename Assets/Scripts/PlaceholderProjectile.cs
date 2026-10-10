@@ -12,8 +12,11 @@ public class PlaceholderProjectile : MonoBehaviour
     private float remainingRange;
     private bool launched;
     private bool spent;
+    private float damage;
+    private Transform onlyDamageTarget;
+    private bool restrictDamage;
 
-    public void Launch(Vector2 aim, float travelSpeed, float range, Rigidbody2D shooter)
+    public void Launch(Vector2 aim, float travelSpeed, float range, Rigidbody2D shooter, float damageAmount = 15f, Transform target = null)
     {
         body = GetComponent<Rigidbody2D>();
         shape = GetComponent<CircleCollider2D>();
@@ -22,6 +25,9 @@ public class PlaceholderProjectile : MonoBehaviour
         speed = travelSpeed;
         remainingRange = range;
         launched = true;
+        damage = damageAmount;
+        onlyDamageTarget = target;
+        restrictDamage = target != null;
     }
 
     private void FixedUpdate()
@@ -47,8 +53,13 @@ public class PlaceholderProjectile : MonoBehaviour
 
         if (nearest != null)
         {
-            var target = nearest.GetComponentInParent<PracticeTarget>();
-            if (target != null) target.ReceiveHit(false, direction, 0f);
+            if (!restrictDamage || (onlyDamageTarget != null && nearest.transform.IsChildOf(onlyDamageTarget)))
+            {
+                var target = nearest.GetComponentInParent<PracticeTarget>();
+                if (target != null) target.ReceiveHit(false, direction, 0f);
+                var receiver = DamageUtility.Find(nearest);
+                if (receiver != null) receiver.TakeDamage(damage, direction, 0f);
+            }
             Spend();
             return;
         }

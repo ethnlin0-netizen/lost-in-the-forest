@@ -17,8 +17,11 @@ to give it keyboard focus.
 
 The green rectangle is the player, the orange block is a movable practice
 target, and the purple shapes flash as wings on the second jump. Attacks flash
-the target; the charged melee also applies knockback. This placeholder has no
-health, damage, or enemy AI. Projectiles stop at solid colliders or their maximum
+the target; the charged melee also applies knockback. The practice target has no
+health or enemy AI. The reusable player has 300 HP and an overhead health bar;
+enemy attacks in EnemyAI reduce it. A hit gives 0.65 seconds of protection,
+with a red flash and brief flickering. At zero HP, movement and combat stop.
+Projectiles stop at solid colliders or their maximum
 range. Stop and restart Play mode to reset the scene after falling off the
 platform or pushing the target off it.
 

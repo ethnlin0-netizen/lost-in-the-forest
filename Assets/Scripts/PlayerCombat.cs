@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class PlayerCombat : MonoBehaviour
 {
     [Header("Melee")]
-    [SerializeField, Min(0.01f)] private float chargeDuration = 0.75f;
     [SerializeField, Min(0.01f)] private float swingDuration = 0.2f;
     [SerializeField, Min(0.01f)] private float meleeReach = 0.9f;
     [SerializeField, Min(0.01f)] private float tailSweepReach = 1.8f;
@@ -17,10 +16,12 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField, Min(0f)] private float tailSweepDamage = 30f;
     [SerializeField] private LayerMask targetLayers = ~0;
     [SerializeField] private Transform meleeVisual;
-    [SerializeField] private SpriteRenderer chargeIndicator;
+    [SerializeField] private bool usePlaceholderChargedTailAnimation = true;
 
     [Header("Ranged")]
     [SerializeField] private PlaceholderProjectile projectilePrefab;
+    [Tooltip("Mouth launch point, directly under the player root. Its local X mirrors with facing.")]
+    [SerializeField] private Transform projectileOrigin;
     [SerializeField, Min(0.01f)] private float projectileSpeed = 12f;
     [SerializeField, Min(0.01f)] private float projectileRange = 14f;
     [SerializeField, Min(0f)] private float projectileDamage = 15f;
@@ -31,16 +32,15 @@ public class PlayerCombat : MonoBehaviour
     private Movement movement;
     private Collider2D bodyCollider;
     private ContactFilter2D targetFilter;
-    private bool isCharging;
-    private float chargeStartedAt;
     private float swingTimeRemaining;
     private int swingDirection;
     private bool strongSwing;
 
-    public bool IsCharging => isCharging;
-    public float ChargeProgress => isCharging
-        ? Mathf.Clamp01((Time.time - chargeStartedAt) / chargeDuration) : 0f;
     public bool LastMeleeWasCharged { get; private set; }
+    // The legacy "charged" flag selects the full-strength tail visuals and knockback.
+    // Presentation and damage now start together on the X press, without a charge phase.
+    public event System.Action<bool, int, float, float> MeleePerformed;
+    public event System.Action VisualsReset;
 
     private void Awake()
     {
@@ -54,33 +54,17 @@ public class PlayerCombat : MonoBehaviour
     private void Update()
     {
         UpdateSwingVisual();
+        if (projectileOrigin != null)
+        {
+            var position = projectileOrigin.localPosition;
+            position.x = Mathf.Abs(position.x) * movement.FacingDirection;
+            projectileOrigin.localPosition = position;
+        }
         var keyboard = Keyboard.current;
-        if (keyboard == null)
-        {
-            CancelCharge();
-            return;
-        }
+        if (keyboard == null) return;
 
-        if (keyboard.xKey.wasPressedThisFrame)
-        {
-            isCharging = true;
-            chargeStartedAt = Time.time;
-        }
-
-        // Resolve on release so a charged press cannot also fire a basic hit.
-        if (keyboard.xKey.wasReleasedThisFrame && isCharging)
-        {
-            bool charged = Time.time - chargeStartedAt >= chargeDuration;
-            CancelCharge();
-            PerformMelee(charged);
-        }
-
-        if (chargeIndicator != null)
-        {
-            chargeIndicator.gameObject.SetActive(isCharging);
-            chargeIndicator.color = Color.Lerp(new Color(1f, 0.65f, 0.2f), Color.yellow, ChargeProgress);
-            chargeIndicator.transform.localScale = new Vector3(0.2f + 0.6f * ChargeProgress, 0.1f, 1f);
-        }
+        // One full-strength tail sweep per press; holding and releasing do not attack.
+        if (keyboard.xKey.wasPressedThisFrame) PerformMelee(true);
 
         if (keyboard.fKey.wasPressedThisFrame) FireProjectile();
     }
@@ -92,6 +76,7 @@ public class PlayerCombat : MonoBehaviour
         strongSwing = charged;
         swingTimeRemaining = swingDuration;
         float reach = charged ? tailSweepReach : meleeReach;
+        MeleePerformed?.Invoke(charged, swingDirection, swingDuration, bodyCollider.bounds.extents.x + reach);
         var direction = new Vector2(swingDirection, 0f);
         var center = (Vector2)bodyCollider.bounds.center + direction *
             (bodyCollider.bounds.extents.x + reach * 0.5f);
@@ -115,7 +100,8 @@ public class PlayerCombat : MonoBehaviour
     {
         if (meleeVisual == null) return;
         swingTimeRemaining = Mathf.Max(0f, swingTimeRemaining - Time.deltaTime);
-        meleeVisual.gameObject.SetActive(swingTimeRemaining > 0f);
+        meleeVisual.gameObject.SetActive(swingTimeRemaining > 0f &&
+            (!strongSwing || usePlaceholderChargedTailAnimation));
         if (swingTimeRemaining <= 0f) return;
         float progress = 1f - swingTimeRemaining / swingDuration;
         meleeVisual.localScale = new Vector3(swingDirection * (strongSwing ? 1.8f : 0.9f), 1f, 1f);
@@ -130,22 +116,18 @@ public class PlayerCombat : MonoBehaviour
         var bounds = bodyCollider.bounds;
         float clearance = Mathf.Abs(direction.x) * bounds.extents.x +
             Mathf.Abs(direction.y) * bounds.extents.y + 0.2f;
-        Vector2 origin = (Vector2)bounds.center + direction * clearance;
+        // Keep the collider-clearance fallback for existing setups without a mouth reference.
+        Vector2 origin = projectileOrigin != null ? (Vector2)projectileOrigin.position :
+            (Vector2)bounds.center + direction * clearance;
         var projectile = Instantiate(projectilePrefab, origin, Quaternion.identity);
         projectile.Launch(direction, projectileSpeed, projectileRange, GetComponent<Rigidbody2D>(), projectileDamage);
     }
 
-    private void CancelCharge()
-    {
-        isCharging = false;
-        if (chargeIndicator != null) chargeIndicator.gameObject.SetActive(false);
-    }
-
     private void ResetVisuals()
     {
-        CancelCharge();
         swingTimeRemaining = 0f;
         if (meleeVisual != null) meleeVisual.gameObject.SetActive(false);
+        VisualsReset?.Invoke();
     }
 
     private void OnApplicationFocus(bool hasFocus)
@@ -160,8 +142,7 @@ public class PlayerCombat : MonoBehaviour
         GUI.Box(new Rect(12, 12, 430, 114), "Movement practice");
         GUI.Label(new Rect(24, 38, 406, 22), "Left / Right: move    Up / Down: aim");
         GUI.Label(new Rect(24, 60, 406, 22), "Z: jump    Z again in the air: wing double jump");
-        GUI.Label(new Rect(24, 82, 406, 22),
-            $"X: melee    Hold X {chargeDuration:0.##}s, release: tail sweep");
-        GUI.Label(new Rect(24, 104, 406, 22), "F: ranged    Orange block: practice target");
+        GUI.Label(new Rect(24, 82, 406, 22), "X: tail sweep");
+        GUI.Label(new Rect(24, 104, 406, 22), "F: fireball    Orange block: practice target");
     }
 }

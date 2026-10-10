@@ -11,11 +11,12 @@ public class Movement : MonoBehaviour
     [SerializeField, Min(0f)] private float doubleJumpSpeed = 14f;
     [SerializeField] private LayerMask groundLayers = ~0;
 
-    [Header("Placeholder visuals")]
+    [Header("Visuals")]
     [SerializeField] private Transform facingMarker;
     [SerializeField] private Transform aimMarker;
     [SerializeField] private Transform wings;
     [SerializeField, Min(0.01f)] private float wingDisplayTime = 0.35f;
+    [SerializeField] private bool usePlaceholderWingAnimation = true;
 
     private readonly RaycastHit2D[] groundHits = new RaycastHit2D[8];
     private Rigidbody2D body;
@@ -29,6 +30,7 @@ public class Movement : MonoBehaviour
     public int FacingDirection { get; private set; } = 1;
     public Vector2 AimDirection { get; private set; } = Vector2.right;
     public bool IsGrounded { get; private set; }
+    public event System.Action DoubleJumped;
 
     private void Awake()
     {
@@ -36,7 +38,7 @@ public class Movement : MonoBehaviour
         bodyCollider = GetComponent<CapsuleCollider2D>();
         groundFilter = new ContactFilter2D { useTriggers = false };
         groundFilter.SetLayerMask(groundLayers);
-        if (wings != null) wings.gameObject.SetActive(false);
+        if (usePlaceholderWingAnimation && wings != null) wings.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -69,7 +71,7 @@ public class Movement : MonoBehaviour
         if (aimMarker != null)
             aimMarker.localRotation = Quaternion.FromToRotation(Vector3.right, AimDirection);
 
-        if (wings != null)
+        if (usePlaceholderWingAnimation && wings != null)
         {
             wingTimeRemaining = Mathf.Max(0f, wingTimeRemaining - Time.deltaTime);
             wings.gameObject.SetActive(wingTimeRemaining > 0f);
@@ -97,7 +99,8 @@ public class Movement : MonoBehaviour
                 velocity.y = doubleJumpSpeed;
                 airJumpAvailable = false;
                 wingTimeRemaining = wingDisplayTime;
-                if (wings != null) wings.gameObject.SetActive(true);
+                if (usePlaceholderWingAnimation && wings != null) wings.gameObject.SetActive(true);
+                DoubleJumped?.Invoke();
             }
         }
         jumpRequested = false;
@@ -123,7 +126,7 @@ public class Movement : MonoBehaviour
     {
         ClearInput();
         wingTimeRemaining = 0f;
-        if (wings != null) wings.gameObject.SetActive(false);
+        if (usePlaceholderWingAnimation && wings != null) wings.gameObject.SetActive(false);
     }
 
     private void ClearInput()

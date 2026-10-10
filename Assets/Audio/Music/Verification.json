@@ -1,0 +1,344 @@
+{
+  "checked_date": "2026-10-10",
+  "editor_version": "6000.6.1f1",
+  "imports": {
+    "assets": [
+      {
+        "path": "Assets/Audio/Music/Loops/AshpetalForest_Loop.wav",
+        "seconds": 92,
+        "frames": 4057200,
+        "channels": 2,
+        "sampleRate": 44100,
+        "loadType": "Streaming",
+        "compression": "Vorbis",
+        "quality": 0.8,
+        "rateSetting": "PreserveSampleRate",
+        "preload": false,
+        "background": true,
+        "guid": "8956973885fdc8a46aaecdf940595812"
+      },
+      {
+        "path": "Assets/Audio/Music/Loops/DreadcrownForest_Loop.wav",
+        "seconds": 102,
+        "frames": 4498200,
+        "channels": 2,
+        "sampleRate": 44100,
+        "loadType": "Streaming",
+        "compression": "Vorbis",
+        "quality": 0.8,
+        "rateSetting": "PreserveSampleRate",
+        "preload": false,
+        "background": true,
+        "guid": "566d3f2d2514b5b4db2c68903bffa40b"
+      },
+      {
+        "path": "Assets/Audio/Music/Loops/GloamthornCanopy_Loop.wav",
+        "seconds": 88,
+        "frames": 3880800,
+        "channels": 2,
+        "sampleRate": 44100,
+        "loadType": "Streaming",
+        "compression": "Vorbis",
+        "quality": 0.8,
+        "rateSetting": "PreserveSampleRate",
+        "preload": false,
+        "background": true,
+        "guid": "c53123f25b9a0b44d976fae034b90267"
+      },
+      {
+        "path": "Assets/Audio/Music/Loops/PrismbloodForest_Loop.wav",
+        "seconds": 94,
+        "frames": 4145400,
+        "channels": 2,
+        "sampleRate": 44100,
+        "loadType": "Streaming",
+        "compression": "Vorbis",
+        "quality": 0.8,
+        "rateSetting": "PreserveSampleRate",
+        "preload": false,
+        "background": true,
+        "guid": "772a65c91d53e2444b1790b0e3614d58"
+      },
+      {
+        "path": "Assets/Audio/Music/Loops/VeinrootHollow_Loop.wav",
+        "seconds": 88,
+        "frames": 3880800,
+        "channels": 2,
+        "sampleRate": 44100,
+        "loadType": "Streaming",
+        "compression": "Vorbis",
+        "quality": 0.8,
+        "rateSetting": "PreserveSampleRate",
+        "preload": false,
+        "background": true,
+        "guid": "c76513d69bf750341810f42392bb3c7b"
+      },
+      {
+        "path": "Assets/Audio/Music/Loops/WraithglassBarrens_Loop.wav",
+        "seconds": 96,
+        "frames": 4233600,
+        "channels": 2,
+        "sampleRate": 44100,
+        "loadType": "Streaming",
+        "compression": "Vorbis",
+        "quality": 0.8,
+        "rateSetting": "PreserveSampleRate",
+        "preload": false,
+        "background": true,
+        "guid": "2e12b79a021cf0848bc6410f18439865"
+      },
+      {
+        "path": "Assets/Audio/Music/Sources/decoherence/Original.mp3",
+        "seconds": 618.1616,
+        "frames": 27260927,
+        "channels": 2,
+        "sampleRate": 44100,
+        "loadType": "Streaming",
+        "compression": "Vorbis",
+        "quality": 0.8,
+        "rateSetting": "PreserveSampleRate",
+        "preload": false,
+        "background": true,
+        "guid": "953cf462eecf2a044b12670cba3ab5f4"
+      },
+      {
+        "path": "Assets/Audio/Music/Sources/echoes-of-home/Original.mp3",
+        "seconds": 291.78775,
+        "frames": 12867840,
+        "channels": 2,
+        "sampleRate": 44100,
+        "loadType": "Streaming",
+        "compression": "Vorbis",
+        "quality": 0.8,
+        "rateSetting": "PreserveSampleRate",
+        "preload": false,
+        "background": true,
+        "guid": "7228cf7e056f35b429d397b60744b72e"
+      },
+      {
+        "path": "Assets/Audio/Music/Sources/moonlight/Original.mp3",
+        "seconds": 254.406525,
+        "frames": 11219328,
+        "channels": 2,
+        "sampleRate": 44100,
+        "loadType": "Streaming",
+        "compression": "Vorbis",
+        "quality": 0.8,
+        "rateSetting": "PreserveSampleRate",
+        "preload": false,
+        "background": true,
+        "guid": "1b55cffa2bc066140856282b7ccbf69a"
+      },
+      {
+        "path": "Assets/Audio/Music/Sources/permafrost/Original.mp3",
+        "seconds": 448.4441,
+        "frames": 19776384,
+        "channels": 2,
+        "sampleRate": 44100,
+        "loadType": "Streaming",
+        "compression": "Vorbis",
+        "quality": 0.8,
+        "rateSetting": "PreserveSampleRate",
+        "preload": false,
+        "background": true,
+        "guid": "a3056c57bd3a1d94588b3b4efc6f3018"
+      },
+      {
+        "path": "Assets/Audio/Music/Sources/reverie/Original.mp3",
+        "seconds": 223.73877,
+        "frames": 9866880,
+        "channels": 2,
+        "sampleRate": 44100,
+        "loadType": "Streaming",
+        "compression": "Vorbis",
+        "quality": 0.8,
+        "rateSetting": "PreserveSampleRate",
+        "preload": false,
+        "background": true,
+        "guid": "105125a7c8ae98943a49b2af8206373f"
+      },
+      {
+        "path": "Assets/Audio/Music/Sources/the-long-dark/Original.mp3",
+        "seconds": 439.8498,
+        "frames": 19397376,
+        "channels": 2,
+        "sampleRate": 44100,
+        "loadType": "Streaming",
+        "compression": "Vorbis",
+        "quality": 0.8,
+        "rateSetting": "PreserveSampleRate",
+        "preload": false,
+        "background": true,
+        "guid": "64c3c33b23aa088429d8015efbba9957"
+      }
+    ],
+    "scenePath": "Assets/Scenes/EnemyAI.unity",
+    "sceneDirty": false,
+    "sceneSaved": false
+  },
+  "inspector_preview_backend_checks": [
+    {
+      "biome": "Prismblood Forest",
+      "start": {
+        "path": "Assets/Audio/Music/Loops/PrismbloodForest_Loop.wav",
+        "playing": true,
+        "seconds": 94,
+        "scene": "Assets/Scenes/EnemyAI.unity",
+        "dirty": false
+      },
+      "advance_and_seek": {
+        "path": "Assets/Audio/Music/Loops/PrismbloodForest_Loop.wav",
+        "playing": true,
+        "position": 2.325,
+        "sample": 102547,
+        "seekForBoundarySeconds": 93.5
+      },
+      "boundary_and_stop": {
+        "path": "Assets/Audio/Music/Loops/PrismbloodForest_Loop.wav",
+        "wrapped": true,
+        "positionAfterBoundary": 1.761,
+        "stopped": true,
+        "dirty": false
+      }
+    },
+    {
+      "biome": "Gloamthorn Canopy",
+      "start": {
+        "path": "Assets/Audio/Music/Loops/GloamthornCanopy_Loop.wav",
+        "playing": true,
+        "seconds": 88,
+        "scene": "Assets/Scenes/EnemyAI.unity",
+        "dirty": false
+      },
+      "advance_and_seek": {
+        "path": "Assets/Audio/Music/Loops/GloamthornCanopy_Loop.wav",
+        "playing": true,
+        "position": 2.41,
+        "sample": 106310,
+        "seekForBoundarySeconds": 87.5
+      },
+      "boundary_and_stop": {
+        "path": "Assets/Audio/Music/Loops/GloamthornCanopy_Loop.wav",
+        "wrapped": true,
+        "positionAfterBoundary": 1.80300009,
+        "stopped": true,
+        "dirty": false
+      }
+    },
+    {
+      "biome": "Ashpetal Forest",
+      "start": {
+        "path": "Assets/Audio/Music/Loops/AshpetalForest_Loop.wav",
+        "playing": true,
+        "seconds": 92,
+        "scene": "Assets/Scenes/EnemyAI.unity",
+        "dirty": false
+      },
+      "advance_and_seek": {
+        "path": "Assets/Audio/Music/Loops/AshpetalForest_Loop.wav",
+        "playing": true,
+        "position": 2.17500019,
+        "sample": 95961,
+        "seekForBoundarySeconds": 91.5
+      },
+      "boundary_and_stop": {
+        "path": "Assets/Audio/Music/Loops/AshpetalForest_Loop.wav",
+        "wrapped": true,
+        "positionAfterBoundary": 1.718,
+        "stopped": true,
+        "dirty": false
+      }
+    },
+    {
+      "biome": "Veinroot Hollow",
+      "start": {
+        "path": "Assets/Audio/Music/Loops/VeinrootHollow_Loop.wav",
+        "playing": true,
+        "seconds": 88,
+        "scene": "Assets/Scenes/EnemyAI.unity",
+        "dirty": false
+      },
+      "advance_and_seek": {
+        "path": "Assets/Audio/Music/Loops/VeinrootHollow_Loop.wav",
+        "playing": true,
+        "position": 2.43100023,
+        "sample": 107251,
+        "seekForBoundarySeconds": 87.5
+      },
+      "boundary_and_stop": {
+        "path": "Assets/Audio/Music/Loops/VeinrootHollow_Loop.wav",
+        "wrapped": true,
+        "positionAfterBoundary": 1.73900008,
+        "stopped": true,
+        "dirty": false
+      }
+    },
+    {
+      "biome": "Wraithglass Barrens",
+      "start": {
+        "path": "Assets/Audio/Music/Loops/WraithglassBarrens_Loop.wav",
+        "playing": true,
+        "seconds": 96,
+        "scene": "Assets/Scenes/EnemyAI.unity",
+        "dirty": false
+      },
+      "advance_and_seek": {
+        "path": "Assets/Audio/Music/Loops/WraithglassBarrens_Loop.wav",
+        "playing": true,
+        "position": 2.26100016,
+        "sample": 99724,
+        "seekForBoundarySeconds": 95.5
+      },
+      "boundary_and_stop": {
+        "path": "Assets/Audio/Music/Loops/WraithglassBarrens_Loop.wav",
+        "wrapped": true,
+        "positionAfterBoundary": 2.0170002,
+        "stopped": true,
+        "dirty": false
+      }
+    },
+    {
+      "biome": "Dreadcrown Forest",
+      "start": {
+        "path": "Assets/Audio/Music/Loops/DreadcrownForest_Loop.wav",
+        "playing": true,
+        "seconds": 102,
+        "scene": "Assets/Scenes/EnemyAI.unity",
+        "dirty": false
+      },
+      "advance_and_seek": {
+        "path": "Assets/Audio/Music/Loops/DreadcrownForest_Loop.wav",
+        "playing": true,
+        "position": 2.154,
+        "sample": 95020,
+        "seekForBoundarySeconds": 101.5
+      },
+      "boundary_and_stop": {
+        "path": "Assets/Audio/Music/Loops/DreadcrownForest_Loop.wav",
+        "wrapped": true,
+        "positionAfterBoundary": 1.697,
+        "stopped": true,
+        "dirty": false
+      }
+    }
+  ],
+  "scope_before_this_report_import": {
+    "existing_tracked_files_unchanged": 313,
+    "new_music_metadata_pairs": 29,
+    "prepared_loops": 6,
+    "original_source_hashes_match": true,
+    "scope": "Assets/Audio/Music plus its folder metadata",
+    "all_checks_passed": true
+  },
+  "listening_verified": false,
+  "three_full_repetitions_auditioned": false,
+  "scope_of_preview_test": "Editor AudioClip Inspector preview backend starts and advances, then seeks to the final half-second and wraps. Playback is stopped after each check. No runtime scene objects created.",
+  "remaining_acceptance_checks": [
+    "Human audition of three full repeats per loop",
+    "Musical phrasing at edited crossfades",
+    "Perceived volume at biome transitions",
+    "Suitability against artwork and future gameplay sounds"
+  ],
+  "no_scene_opened_or_saved": true,
+  "no_commit_push_or_merge_during_asset_preparation": true
+}

@@ -40,7 +40,7 @@ public class EnemyNavigator2D : MonoBehaviour
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>(); shape = GetComponent<BoxCollider2D>();
-        world = FindFirstObjectByType<PlatformNavigation2D>();
+        world = FindAnyObjectByType<PlatformNavigation2D>();
     }
     public void SetDestination(Vector2 feet)
     {
@@ -56,7 +56,7 @@ public class EnemyNavigator2D : MonoBehaviour
     public void Interrupt() { Stop(); graph = null; }
     public float Tick(float deltaTime, float speed)
     {
-        if (world == null) world = FindFirstObjectByType<PlatformNavigation2D>();
+        if (world == null) world = FindAnyObjectByType<PlatformNavigation2D>();
         if (world == null || !hasDestination || speed <= 0f) return 0f;
         refreshRemaining -= deltaTime; retryRemaining -= deltaTime;
         if (traversing)

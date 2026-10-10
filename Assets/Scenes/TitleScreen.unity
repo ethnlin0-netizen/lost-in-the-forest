@@ -2189,9 +2189,7 @@ MonoBehaviour:
 
     Double tap Z - Double Jump
 
-    X - Melee Attack
-
-    Hold X and Release - Strong Melee Attack
+    X: tail sweep
 
     F - Ranged Attack'
   m_isRightToLeft: 0

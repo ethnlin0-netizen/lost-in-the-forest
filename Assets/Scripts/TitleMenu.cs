@@ -24,8 +24,7 @@ public sealed class TitleMenu : MonoBehaviour
         "Down Arrow - Aim Below\n" +
         "Z - Jump\n" +
         "Double tap Z - Double Jump\n" +
-        "X - Melee Attack\n" +
-        "Hold X and Release - Strong Melee Attack\n" +
+        "X: tail sweep\n" +
         "F - Ranged Attack";
 
     [SerializeField] private string firstBiomeScene = "Biome1";

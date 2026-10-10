@@ -28,6 +28,7 @@ public class PlaceholderProjectile : MonoBehaviour
         damage = damageAmount;
         onlyDamageTarget = target;
         restrictDamage = target != null;
+        GetComponent<FireballAnimation>()?.SetDirection(direction);
     }
 
     private void FixedUpdate()

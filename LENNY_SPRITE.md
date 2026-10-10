@@ -6,7 +6,8 @@ the game's build scene list.
 
 Drag `Assets/Prefabs/LennyVisual.prefab` from the Project window into any scene
 or Hierarchy to reuse the artwork. This visual-only prefab contains a Transform
-and SpriteRenderer. The existing gameplay Player prefab and controls are unchanged.
+and SpriteRenderer. For the playable character, use `Assets/Prefabs/Player.prefab`,
+which now includes derived body, wing, and tail layers. See `LENNY_ANIMATIONS.md`.
 
 The original PNG is stored locally at `Assets/Art/Sprites/Lenny.png` without
 editing. Its transparency, aspect ratio, and transparent padding are preserved.
@@ -28,4 +29,5 @@ Imported and reopened in a separate Unity 6000.6.1f1 verification project using
 the project's URP settings. The visual prefab and linked preview scene instance
 have valid sprite references. The rendered preview was visually checked for the
 correct artwork, transparency, labels, and framing. The exported PNG matches
-the downloaded original byte for byte, and existing project assets are unchanged.
+the downloaded original byte for byte. This standalone visual and its preview
+remain separate from the playable character's derived animation artwork.

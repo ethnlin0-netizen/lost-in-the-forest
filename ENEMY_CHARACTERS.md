@@ -15,8 +15,11 @@ Drag one of these prefabs from the Project window into any scene or Hierarchy:
 - `Assets/Prefabs/EnemyCharacters/Spora.prefab`
 - `Assets/Prefabs/EnemyCharacters/Collosus.prefab`
 
-Each prefab contains only a Transform and SpriteRenderer. Enemy AI, movement,
-combat, health, and physics behavior have not been implemented.
+These artwork-only prefabs contain a Transform and SpriteRenderer. For playable
+enemies with AI, movement, combat, health, and physics, use the prefabs in
+`Assets/Prefabs/Enemies`. Those gameplay prefabs now use these same designs in
+`EnemyAI.unity`, while preserving their colliders and existing visual effects.
+The gameplay Collosus prefab retains its existing filename `Collusus.prefab`.
 
 The original PNG files are stored locally in `Assets/Art/Sprites/EnemyCharacters`
 and remain unmodified. Import settings match the friendly character artwork:

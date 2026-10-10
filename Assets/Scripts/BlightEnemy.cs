@@ -56,6 +56,9 @@ public class BlightEnemy : MonoBehaviour
     public BehaviourState State { get; private set; }
     public int AttacksPerformed { get; private set; }
     public BlightType Kind => kind;
+    public int Facing => facing;
+    public float WindupProgress => State == BehaviourState.Windup ? Mathf.Clamp01((Time.time - windupStarted) / windup) : 0f;
+    private EnemyVisualAnimator visualAnimator;
 
     private void Awake()
     {
@@ -63,6 +66,7 @@ public class BlightEnemy : MonoBehaviour
         shape = GetComponent<BoxCollider2D>();
         health = GetComponent<EnemyHealth>();
         navigator = GetComponent<EnemyNavigator2D>();
+        visualAnimator = GetComponent<EnemyVisualAnimator>();
         visualScale = visuals != null ? visuals.localScale : Vector3.one;
         health.Died += Die;
         FindPlayer();
@@ -221,7 +225,8 @@ public class BlightEnemy : MonoBehaviour
     {
         if (visuals != null)
         {
-            float pulse = State == BehaviourState.Windup ? 1f + 0.12f * Mathf.Sin(Time.time * 28f) : 1f;
+            float pulse = visualAnimator != null && visualAnimator.enabled ? 1f :
+                State == BehaviourState.Windup ? 1f + 0.12f * Mathf.Sin(Time.time * 28f) : 1f;
             visuals.localScale = new Vector3(visualScale.x * facing * pulse, visualScale.y * pulse, visualScale.z);
         }
         if (attackVisual != null)

@@ -14,10 +14,12 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private Rigidbody2D body;
     private float flashUntil;
     private float deathAt;
+    private EnemyVisualAnimator visualAnimator;
     public float CurrentHealth { get; private set; }
     public float MaximumHealth => maximumHealth;
     public bool IsDead => CurrentHealth <= 0f;
     public float LastHitTime { get; private set; } = float.NegativeInfinity;
+    public Vector2 LastHitDirection { get; private set; }
     public event Action HealthChanged;
     public event Action Died;
 
@@ -25,6 +27,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         CurrentHealth = maximumHealth;
         body = GetComponent<Rigidbody2D>();
+        visualAnimator = GetComponent<EnemyVisualAnimator>();
         renderers = GetComponentsInChildren<SpriteRenderer>();
         colors = new Color[renderers.Length];
         for (int i = 0; i < renderers.Length; i++) colors[i] = renderers[i].color;
@@ -35,6 +38,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         if (IsDead || amount <= 0f) return;
         CurrentHealth = Mathf.Max(0f, CurrentHealth - amount);
         LastHitTime = Time.time;
+        LastHitDirection = direction.normalized;
         flashUntil = Time.time + 0.15f;
         HealthChanged?.Invoke();
         if (!IsDead)
@@ -47,7 +51,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         body.linearVelocity = Vector2.zero;
         body.simulated = false;
         Died?.Invoke();
-        Destroy(gameObject, deathDelay);
+        Destroy(gameObject, visualAnimator != null && visualAnimator.enabled ? Mathf.Max(deathDelay, visualAnimator.DeathDuration) : deathDelay);
     }
 
     private void Update()
@@ -59,6 +63,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             color.a *= fade;
             renderers[i].color = color;
         }
-        if (IsDead && visuals != null) visuals.localScale *= Mathf.Max(0f, 1f - Time.deltaTime * 4f);
+        if (IsDead && visuals != null && (visualAnimator == null || !visualAnimator.enabled))
+            visuals.localScale *= Mathf.Max(0f, 1f - Time.deltaTime * 4f);
     }
 }

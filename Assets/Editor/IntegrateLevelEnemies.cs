@@ -35,6 +35,12 @@ public static class IntegrateLevelEnemies
             var art=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/EnemyCharacters/"+artName+".prefab");
             if(source==null||art==null) throw new InvalidOperationException("Missing enemy assets: "+aiName);
             var enemy=(GameObject)PrefabUtility.InstantiatePrefab(source,preview);
+            // Animated gameplay prefabs already include their finished artwork.
+            if(enemy.GetComponent<EnemyVisualAnimator>() != null)
+            {
+                if(PrefabUtility.SaveAsPrefabAsset(enemy,path)==null) throw new IOException("Could not save enemy variant.");
+                return;
+            }
             var data=new SerializedObject(enemy.GetComponent<BlightEnemy>());
             var visuals=(Transform)data.FindProperty("visuals").objectReferenceValue;
             var cue=(GameObject)data.FindProperty("attackVisual").objectReferenceValue;

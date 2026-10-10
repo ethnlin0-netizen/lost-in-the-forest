@@ -23,8 +23,59 @@ and blue Collusus lane. Enemy spawns are -18, -3.5, and 28 respectively.
   it. Enemies choose a reachable alternative and wait.
 
 Platforms are solid BoxCollider2D surfaces. Actors physically jump and fall;
-navigation never teleports an enemy onto a route. The placeholder visuals and
-health bars remain on reusable prefabs in Assets/Prefabs/Enemies.
+navigation never teleports an enemy onto a route. The finished Chomper, Spora,
+and Collosus artwork and health bars are on reusable gameplay prefabs in
+Assets/Prefabs/Enemies. Each design keeps its original aspect ratio and is
+aligned to the existing collider's feet. The Visuals root handles facing;
+EnemyVisualAnimator supplies the distinct animation poses. The AttackCue remains
+a separate indicator.
+
+## Enemy animations
+
+All three gameplay prefabs include EnemyVisualAnimator. It builds a subdivided
+UV mesh from the original transparent artwork at runtime. The source PNGs stay
+unchanged, and the original SpriteRenderer remains visible in Edit Mode. The
+animation only changes the artwork; colliders, navigation and attack ranges
+retain their existing shapes and settings.
+
+- Chomper sways and twitches its petals while idle, crawls its roots and trails
+  its crown while moving, coils during windup, and lashes forward on a real
+  strike. Hits bend it away from the impact. Death curls and wilts the body with
+  falling pink petals over 1.65 seconds.
+- Spora breathes and ripples its cap and smaller mushrooms while stationary.
+  Windup compresses its stem and swells its cap. A successful projectile launch
+  triggers a pop, rebound and purple spores. Hits squash it sideways. Death
+  deflates and slumps the mushroom with a harmless cloud over 1.9 seconds.
+- Collosus shifts its weight and blinks, swings its rigid limbs during movement,
+  and emits dust on steps and landings. Windup raises its arms; a real slam
+  drives them down with dust. Hits produce a short jolt and stone chips. Death
+  separates the helmet, body, arms and feet into falling regions over 2.2 seconds.
+
+The controller exposes facing and normalized windup progress. Successful attacks
+are detected through AttacksPerformed, so a cancelled attack never produces a
+successful strike animation. EnemyHealth exposes hit direction and defers removal
+until the complete death animation ends. The original windup pulse and death
+shrink remain as fallbacks for enemies without an enabled animation component.
+All pose clocks, particles and delayed removal use scaled game time, including
+while the title menu pauses the game. Health bars and attack indicators remain
+independent of the animated artwork.
+
+Materials are in Assets/Materials/EnemyAnimations; the unlit artwork/particle
+shader is Assets/Shaders/EnemyAnimatedArtwork.shader. Per-prefab visible pixel
+bounds and death duration are configurable on EnemyVisualAnimator. Material
+references ensure the shader is included in builds.
+
+The level variants in Assets/Prefabs/IntegratedEnemies inherit the same animated
+artwork. Their former added CharacterArtwork copies are removed to avoid drawing
+two bodies. UpgradeEnemyAnimationVariants.Apply upgrades those variants and
+verifies all six gameplay/level prefabs; level placement and colliders stay intact.
+
+Tools/VerifyEnemyAnimations.cs is an Editor eval statement block for EnemyAI in
+Play Mode. It checks idle/movement poses, real windup and attack signals,
+recovery, damage, paused geometry, death, cancelled strikes, particles and stone
+joint continuity. Tools/VerifyEnemyAnimationLifetime.cs checks real-time death
+removal, pause and particle simulation, and captures poses under Library. Stop
+Play Mode after running either verification to restore the original scene.
 
 ## How the navigation works
 
@@ -148,6 +199,6 @@ can require a new capability graph; this prototype has been checked on the demo
 size, not profiled on a large production level. Jump paths use the project's
 fixed physics timestep. Change capabilities in Edit mode before testing.
 
-There are no final character animations, audio cues, automatic respawn, or
-crowd-avoidance routing. RyanRothmund can replace temporary art under Visuals
-while preserving gameplay component references.
+Enemy artwork now uses procedural animations. Audio cues, automatic respawn,
+and crowd-avoidance routing are not implemented. The artwork-only preview
+prefabs remain static; use the gameplay or integrated prefabs for animation.

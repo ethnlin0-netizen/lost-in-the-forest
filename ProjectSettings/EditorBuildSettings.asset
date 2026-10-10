@@ -32,5 +32,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level06.unity
     guid: d8f8369244d0eb84f9f8ec1ccc014f9c
+  - enabled: 1
+    path: Assets/Scenes/PrismbloomLevel01.unity
+    guid: e56beb53496a83e4aa4cdbdf4ae58e44
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

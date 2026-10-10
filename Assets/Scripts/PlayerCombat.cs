@@ -13,6 +13,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField, Min(0.01f)] private float tailSweepReach = 1.8f;
     [SerializeField, Min(0.01f)] private float hitHeight = 1.2f;
     [SerializeField, Min(0f)] private float tailSweepKnockback = 8f;
+    [SerializeField, Min(0f)] private float meleeDamage = 15f;
+    [SerializeField, Min(0f)] private float tailSweepDamage = 30f;
     [SerializeField] private LayerMask targetLayers = ~0;
     [SerializeField] private Transform meleeVisual;
     [SerializeField] private SpriteRenderer chargeIndicator;
@@ -21,9 +23,11 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private PlaceholderProjectile projectilePrefab;
     [SerializeField, Min(0.01f)] private float projectileSpeed = 12f;
     [SerializeField, Min(0.01f)] private float projectileRange = 14f;
+    [SerializeField, Min(0f)] private float projectileDamage = 15f;
 
     private readonly Collider2D[] hitColliders = new Collider2D[32];
     private readonly HashSet<PracticeTarget> hitTargets = new HashSet<PracticeTarget>();
+    private readonly HashSet<IDamageable> damagedTargets = new HashSet<IDamageable>();
     private Movement movement;
     private Collider2D bodyCollider;
     private ContactFilter2D targetFilter;
@@ -94,11 +98,15 @@ public class PlayerCombat : MonoBehaviour
         int count = Physics2D.OverlapBox(center, new Vector2(reach, hitHeight),
             0f, targetFilter, hitColliders);
         hitTargets.Clear();
+        damagedTargets.Clear();
         for (int i = 0; i < count; i++)
         {
             var target = hitColliders[i].GetComponentInParent<PracticeTarget>();
             if (target != null && hitTargets.Add(target))
                 target.ReceiveHit(charged, direction, tailSweepKnockback);
+            var receiver = DamageUtility.Find(hitColliders[i]);
+            if (receiver != null && !hitColliders[i].transform.IsChildOf(transform) && damagedTargets.Add(receiver))
+                receiver.TakeDamage(charged ? tailSweepDamage : meleeDamage, direction, charged ? tailSweepKnockback : 0f);
         }
         UpdateSwingVisual();
     }
@@ -124,7 +132,7 @@ public class PlayerCombat : MonoBehaviour
             Mathf.Abs(direction.y) * bounds.extents.y + 0.2f;
         Vector2 origin = (Vector2)bounds.center + direction * clearance;
         var projectile = Instantiate(projectilePrefab, origin, Quaternion.identity);
-        projectile.Launch(direction, projectileSpeed, projectileRange, GetComponent<Rigidbody2D>());
+        projectile.Launch(direction, projectileSpeed, projectileRange, GetComponent<Rigidbody2D>(), projectileDamage);
     }
 
     private void CancelCharge()

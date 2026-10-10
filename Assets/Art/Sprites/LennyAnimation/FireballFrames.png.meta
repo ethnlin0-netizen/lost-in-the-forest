@@ -112,7 +112,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.7488231, y: 0.4234951}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
+      customData:
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -120,7 +120,7 @@ TextureImporter:
       spriteID: 710c7c83d7f194640a42c4ae21cbe353
       internalID: 974546548
       vertices: []
-      indices: 
+      indices:
       edges: []
       weights: []
     - serializedVersion: 2
@@ -134,7 +134,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.6870752, y: 0.4224802}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
+      customData:
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -142,7 +142,7 @@ TextureImporter:
       spriteID: 60e05580098d7fd488aea461ddba2206
       internalID: 2122698667
       vertices: []
-      indices: 
+      indices:
       edges: []
       weights: []
     - serializedVersion: 2
@@ -156,7 +156,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.7516836, y: 0.4858973}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
+      customData:
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -164,7 +164,7 @@ TextureImporter:
       spriteID: 4db706e765bb1d640988d8969e8db68a
       internalID: 654960987
       vertices: []
-      indices: 
+      indices:
       edges: []
       weights: []
     - serializedVersion: 2
@@ -178,7 +178,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.686024, y: 0.486762}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
+      customData:
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -186,17 +186,17 @@ TextureImporter:
       spriteID: 77e6600d8d9080344ba0352e6be92104
       internalID: 1558871825
       vertices: []
-      indices: 
+      indices:
       edges: []
       weights: []
     outline: []
-    customData: 
+    customData:
     physicsShape: []
     bones: []
     spriteID: b1ff4e2871a39ab44832d1aad8bac396
     internalID: 0
     vertices: []
-    indices: 
+    indices:
     edges: []
     weights: []
     secondaryTextures: []
@@ -207,8 +207,8 @@ TextureImporter:
       Fireball_1: 2122698667
       Fireball_2: 654960987
       Fireball_3: 1558871825
-  mipmapLimitGroupName: 
+  mipmapLimitGroupName:
   pSDRemoveMatte: 0
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  userData:
+  assetBundleName:
+  assetBundleVariant:

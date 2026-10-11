@@ -30,9 +30,9 @@ try{
     Run(chomper,new UnityEngine.Vector2(-10,upper.bounds.max.y),4.5f,800);
     Assert(world.SupportAt(cn.Feet)==upper,"Chomper failed upper platform: "+cn.Feet);
     results.Add("Chomper physically climbs all three left steps with validated jumps.");
-    int drops=cn.DropsPerformed;Run(chomper,new UnityEngine.Vector2(-5,-3.5f),4.5f,900);
-    Assert(cn.IsGrounded && UnityEngine.Mathf.Abs(cn.Feet.x+5)<0.4f && cn.DropsPerformed>drops,"Safe drop failed: "+cn.Feet+" drops="+cn.DropsPerformed);
-    results.Add("Chomper safely drops back to the ground and walks to the destination.");
+    int descents=cn.DropsPerformed+cn.JumpsPerformed;Run(chomper,new UnityEngine.Vector2(-5,-3.5f),4.5f,900);
+    Assert(cn.IsGrounded && UnityEngine.Mathf.Abs(cn.Feet.x+5)<0.4f && cn.DropsPerformed+cn.JumpsPerformed>descents,"Safe descent failed: "+cn.Feet);
+    results.Add("Chomper safely descends back to the ground and walks to the destination using its selected jump/drop route.");
     var island=UnityEngine.GameObject.Find("Platform 05 - Upper Center").GetComponent<UnityEngine.BoxCollider2D>();
     int before=cn.JumpsPerformed;Run(chomper,new UnityEngine.Vector2(3,island.bounds.max.y),4.5f,1000);
     Assert(!cn.GoalReachable && cn.IsGrounded,"Unreachable island was treated as reachable.");

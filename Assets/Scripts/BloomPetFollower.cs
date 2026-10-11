@@ -5,6 +5,10 @@ using UnityEngine;
 [DefaultExecutionOrder(40)]
 public sealed class BloomPetFollower : MonoBehaviour
 {
+    [Header("Run recruitment")]
+    [SerializeField] private BloomCompanionId companionId;
+    [Tooltip("Reusable source prefabs for companions carried into subsequent levels.")]
+    [SerializeField] private BloomCompanionCatalog companionCatalog;
     [Header("Walking follow")]
     [SerializeField, Min(0.1f)] private float movementSpeed = 6f;
     [SerializeField, Min(0.1f)] private float catchUpSpeed = 8f;
@@ -52,6 +56,8 @@ public sealed class BloomPetFollower : MonoBehaviour
     private bool walking;
 
     public Movement Owner { get; private set; }
+    public BloomCompanionId CompanionId => companionId;
+    public BloomPetFollower CompanionPrefab => companionCatalog == null ? null : companionCatalog.PrefabFor(companionId);
     public bool IsRecruited => Owner != null;
     public int FollowSlot => group == null ? -1 : group.SlotOf(this);
     public bool IsWalking => walking && Mathf.Abs(horizontalSpeed) > 0.01f;
@@ -74,7 +80,7 @@ public sealed class BloomPetFollower : MonoBehaviour
         terrainFilter = new ContactFilter2D { useTriggers = false };
         terrainFilter.SetLayerMask(terrainLayers);
         navigator = GetComponent<EnemyNavigator2D>();
-        navigationWorld = FindAnyObjectByType<PlatformNavigation2D>();
+        navigationWorld = PlatformNavigation2D.GetOrCreate(gameObject.scene);
         if (visual == null) visual = GetComponentInChildren<SpriteRenderer>();
         if (visual != null)
         {
@@ -94,15 +100,46 @@ public sealed class BloomPetFollower : MonoBehaviour
         if (candidate == null || !candidate.isActiveAndEnabled) return;
         var health = candidate.GetComponent<PlayerHealth>();
         if (health != null && health.IsDead) return;
+        if (!BloomCompanionSession.Remember(this)) return;
+        AttachToOwner(candidate, true);
+    }
+
+    internal void AttachToOwner(Movement candidate, bool showRecruitment)
+    {
+        if (group != null) group.Unregister(this);
         Owner = candidate;
         playerShape = candidate.GetComponent<Collider2D>();
-        playerHealth = health;
+        playerHealth = candidate.GetComponent<PlayerHealth>();
         group = candidate.GetComponent<BloomPetGroup>();
         if (group == null) group = candidate.gameObject.AddComponent<BloomPetGroup>();
         group.Register(this);
         seenJumpRevision = group.JumpRevision;
-        flashRemaining = recruitmentFlashDuration;
-        GetComponent<GameplaySfx>()?.Recruit();
+        navigationWorld = PlatformNavigation2D.GetOrCreate(candidate.gameObject.scene);
+        if (showRecruitment)
+        {
+            flashRemaining = recruitmentFlashDuration;
+            GetComponent<GameplaySfx>()?.Recruit();
+        }
+    }
+
+    internal void PlaceAtFeet(Vector2 feet)
+    {
+        body.position += feet - Feet;
+        body.linearVelocity = Vector2.zero;
+        horizontalSpeed = fallSpeed = pendingJumpSpeed = 0f;
+        navigator.Interrupt();
+        Physics2D.SyncTransforms();
+    }
+
+    internal void RemoveFollower()
+    {
+        if (group != null) group.Unregister(this);
+        group = null;
+        Owner = null;
+        enabled = false;
+        shape.enabled = false;
+        navigator.Stop();
+        Destroy(gameObject);
     }
 
     private void FixedUpdate()

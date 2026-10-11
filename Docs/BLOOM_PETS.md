@@ -1,4 +1,24 @@
-# Bloom preview pets
+# Recruitable Bloom companions
+
+## Fixed gameplay placements
+
+The three regular levels were randomly selected once during development. These saved prefab instances do not reroll on new games or deaths:
+
+- **Petalborn:** `Assets/Scenes/GameLoop/PrismbloomLevel01Story.unity`, feet at `(2.882, -1.460)`. This is the playable Level 1 scene used by the title-screen story route; main removed the older standalone Level 1 scene.
+- **Whisperseed:** `Assets/Scenes/GameLoop/GloamthorneLevel02.unity`, feet at `(1.691, 11.040)`.
+- **Dryad:** `Assets/Scenes/GameLoop/Ashpetal Level 03.unity`, feet at `(0.017, -1.960)`.
+
+Each companion stands on the entrance platform, a short clear walk away from Lenny, outside lethal hazards and enemy contact. Touch one to recruit it automatically. There are no new abilities, power-ups, or dialogue.
+
+`BloomCompanionSession` remembers each recruited identity and recruitment order in memory. On subsequent GameLoop scene loads, it recreates followers from the existing pet prefabs and attaches them to the new Lenny, with distinct arrival positions and follow slots. A collected companion's original scene instance is reused when revisiting that level, so it does not create an extra pickup. Physical followers remain owned by their current scene; no character object survives with stale terrain references.
+
+`Assets/Prefabs/BloomPets/BloomCompanions.asset` is the reusable catalog containing the source prefabs. Each pet's **Run recruitment** Inspector section contains its unique identity and catalog reference. Tune speed, distance, and spacing on the pet prefabs. Move the saved scene instances in Unity to change pickup locations. `Tools/PlaceBloomCompanions.cs` is the one-time authoring tool and deliberately refuses to reroll existing placements.
+
+Recruited companions stay recruited after health death or lethal acid/thorn contact. The existing level restart recreates all collected companions at safe, separate positions beside the new Lenny. A collected companion's authored pickup is reused as its follower when its own level restarts, preventing duplicate pickups or followers. Uncollected companions remain at their fixed scene placements. New Game, return to title, and quit clear recruitment for a fresh run. Nothing is written to a saved game or PlayerPrefs.
+
+The story introduction pauses and restores the existing follower components. Companions also carry into Boss and BossStory; their existing ending pauses them with the rest of gameplay. The current story route uses Boss and its victory crystal ending. Source art, player prefabs, navigation algorithms, enemy placement, and scene progression are unchanged by the companion feature.
+
+## Preview
 
 Open `Assets/Scenes/BloomPreview.unity` and enter Play mode. Walk right with the arrow keys to touch Whisperseed, Dryad and Petalborn; each joins a trailing group once. The existing player prefab retains its movement, double jump, attacks and health. This scene originally contained only a camera, so the preview adds that prefab, a ground platform, a raised platform and a cover wall.
 
@@ -62,6 +82,12 @@ The repeatable integration suite is `Tools/VerifyBloomPets.cs`. Start fresh Play
 
 ## Limitations
 
-Platform navigation supports static, axis-aligned BoxCollider2D terrain, including reachable jumps and safe drops. Moving platforms, slopes, TilemapCollider2D navigation, climbing and recruitment persistence are not supported. Solid undersides can block a reactive hop; pets then land and find a validated route. A reactive hop remains over its original platform while a subsequent route handles crossing to another surface. There are no pet attacks, abilities, health systems or menus. Gameplay feel has not been assessed by a human playtester.
+Platform navigation supports static, axis-aligned BoxCollider2D terrain, including reachable jumps and safe drops. Moving platforms, slopes, TilemapCollider2D navigation and climbing are not supported. Solid undersides can block a reactive hop; pets then land and find a validated route. A reactive hop remains over its original platform while a subsequent route handles crossing to another surface. There are no pet attacks, abilities, health systems or menus. Gameplay feel has not been assessed by a human playtester.
 
-The Bloom feature changes are limited to BloomPreview, the new pet prefabs/scripts, this document and its verification tool.
+## Gameplay verification — October 11, 2026
+
+`Tools/VerifyBloomCompanionRun.cs` passed 17 asynchronous Play mode scene cases. It uses actual physics contacts for recruitment, actual scene loads for progression, the existing health damage/death coroutine, and the lethal hazard trigger callback. It verified all three recruits, persistent prefab references, unique identities and slots, arrival separation, revisiting collected pickup scenes, repeated scene callbacks, companions respawning beside Lenny after both health and acid deaths, retaining recruitment in earlier levels without duplicate pickups, the Level 1 story pause/walk/resume, and clearing recruitment on return to title.
+
+`Tools/VerifyBloomPets.cs` passed all 12 physical following and player-control checks against the latest navigation code: enemy/projectile rejection, touch recruitment, separated follow destinations, settling without jitter, facing changes, walls/edges/ceilings, raised-platform navigation, returning to lower terrain, both jumps, tail sweep knockback, and projectiles passing through companions. Its synthetic keyboard updates explicitly use the game's input update while the editor is unfocused; temporary input settings are restored afterward. The lower-platform check validates physical landing at the follow destination rather than requiring a particular route-link type.
+
+These controlled Editor checks do not replace a complete human playthrough or standalone executable build; neither has been completed for this change. Navigation retains the terrain-type limitations above, and unreachable routes do not teleport companions through obstacles.

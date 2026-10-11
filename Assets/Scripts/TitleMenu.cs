@@ -126,6 +126,7 @@ public sealed class TitleMenu : MonoBehaviour
 
     private IEnumerator ReturnToTitleScreen()
     {
+        BloomCompanionSession.ResetCollected();
         StoryRunSession.EndRun();
         RestorePausedState();
         loading = true;
@@ -161,6 +162,7 @@ public sealed class TitleMenu : MonoBehaviour
         Time.timeScale = 1f;
         AudioListener.pause = false;
         StoryRunSession.BeginNewGame(startScene == StoryRunSession.IntroductionScenePath);
+        BloomCompanionSession.ResetCollected();
         var operation = SceneManager.LoadSceneAsync(startScene, LoadSceneMode.Single);
         if (operation == null)
         {
@@ -270,6 +272,7 @@ public sealed class TitleMenu : MonoBehaviour
 
     public void QuitGame()
     {
+        BloomCompanionSession.ResetCollected();
         StoryRunSession.EndRun();
         RestorePausedState();
         HasStartedRun = false;

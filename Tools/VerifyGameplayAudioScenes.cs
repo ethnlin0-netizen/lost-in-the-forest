@@ -1,6 +1,6 @@
 if(!UnityEditor.EditorApplication.isPlaying)throw new System.Exception("Play mode required.");
 var names=new[]{"PrismbloomLevel01","GloamthorneLevel02","Ashpetal Level 03","Boss"};
-var tracks=new[]{"PrismbloodForest_Loop","GloamthornCanopy_Loop","AshpetalForest_Loop","DreadcrownForest_Loop"};
+var tracks=new[]{"VeinrootHollow_Loop","GloamthornCanopy_Loop","AshpetalForest_Loop","DreadcrownForest_Loop"};
 var beds=new[]{"Prismbloom","Gloamthorne","Ashpetal","Boss"};
 int index=0,phase=0,sourceSample=0,musicSample=0,wraps=0;double deadline=0;
 var results=new System.Collections.Generic.List<string>();

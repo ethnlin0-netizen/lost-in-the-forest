@@ -1,7 +1,7 @@
 if(UnityEditor.EditorApplication.isPlaying)throw new System.Exception("Edit mode required.");
 var original=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path;
 var sceneNames=new[]{"PrismbloomLevel01","GloamthorneLevel02","Ashpetal Level 03","Boss"};
-var loopNames=new[]{"PrismbloodForest","GloamthornCanopy","AshpetalForest","DreadcrownForest"};
+var loopNames=new[]{"VeinrootHollow","GloamthornCanopy","AshpetalForest","DreadcrownForest"};
 var results=new System.Collections.Generic.List<string>();
 for(int i=0;i<sceneNames.Length;i++){
  var clip=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.AudioClip>("Assets/Audio/Music/Loops/"+loopNames[i]+"_Loop.wav");if(clip==null)throw new System.Exception("Music missing: "+loopNames[i]);

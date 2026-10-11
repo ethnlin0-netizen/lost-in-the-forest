@@ -1,5 +1,5 @@
 if(!UnityEditor.EditorApplication.isPlaying)throw new System.Exception("Play mode required.");
-var scenes=new[]{"PrismbloomLevel01","GloamthorneLevel02","Ashpetal Level 03","Boss"};var clips=new[]{"PrismbloodForest_Loop","GloamthornCanopy_Loop","AshpetalForest_Loop","DreadcrownForest_Loop"};
+var scenes=new[]{"PrismbloomLevel01","GloamthorneLevel02","Ashpetal Level 03","Boss"};var clips=new[]{"VeinrootHollow_Loop","GloamthornCanopy_Loop","AshpetalForest_Loop","DreadcrownForest_Loop"};
 var results=new System.Collections.Generic.List<string>();int index=0,phase=0,sample=0;double deadline=0;UnityEngine.AudioSource current=null,previous=null;bool oldBackground=UnityEngine.Application.runInBackground;UnityEngine.Application.runInBackground=true;UnityEngine.Time.timeScale=1;UnityEngine.AudioListener.pause=false;
 UnityEditor.EditorApplication.CallbackFunction tick=null;
 void Finish(string error){UnityEditor.EditorApplication.update-=tick;UnityEngine.AudioListener.pause=false;UnityEngine.Application.runInBackground=oldBackground;results.Add(error==null?"PASS: all four scene sources tested with normal Unity/audio callbacks":"FAIL: "+error);System.IO.File.WriteAllLines("Temp/GameLoopMusicResults.txt",results);}

@@ -122,8 +122,7 @@ public class LennyAnimation : MonoBehaviour
 
     private void ApplyTailPose(float progress)
     {
-        // Contact is immediate on release, matching the existing OverlapBox and knockback.
-        // Stretch along the tail's length to match the existing reach, then sweep back to rest.
+        // Contact is immediate on press; extend the tail to the existing attack reach.
         float recovery = Mathf.SmoothStep(0f, 1f, progress);
         float localDirection = tailDirection * movement.FacingDirection;
         float contactAngle = localDirection > 0f ? 180f : 0f;

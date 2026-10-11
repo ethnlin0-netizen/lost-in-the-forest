@@ -370,3 +370,35 @@ MonoBehaviour:
     minimumInterval: 0.3
     priority: 55
     maximumConcurrent: 1
+  - sound: 45
+    clips:
+    - {fileID: 8300000, guid: 78f601552b9f6fb46935e6f423efd83f, type: 3}
+    volume: 0.4
+    pitch: {x: 1, y: 1}
+    minimumInterval: 0.5
+    priority: 45
+    maximumConcurrent: 1
+  - sound: 46
+    clips:
+    - {fileID: 8300000, guid: cfdd2395e2150ed49a238f53514204f1, type: 3}
+    volume: 0.3
+    pitch: {x: 1, y: 1}
+    minimumInterval: 0.5
+    priority: 45
+    maximumConcurrent: 1
+  - sound: 43
+    clips:
+    - {fileID: 8300000, guid: 0e58b1537579f0c488d2fe37cc060a27, type: 3}
+    volume: 0.6
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.08
+    priority: 100
+    maximumConcurrent: 2
+  - sound: 44
+    clips:
+    - {fileID: 8300000, guid: 879ef0d622b82b24e9204dba930dd0b3, type: 3}
+    volume: 0.6
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.08
+    priority: 100
+    maximumConcurrent: 2

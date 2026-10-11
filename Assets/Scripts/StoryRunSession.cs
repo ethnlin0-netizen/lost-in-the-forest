@@ -4,9 +4,9 @@ using UnityEngine;
 public static class StoryRunSession
 {
     public const string IntroductionScene = "PrismbloomLevel01Story";
-    public const string EndingScene = "BossStory";
+    public const string EndingScene = "Boss";
     public const string IntroductionScenePath = "Assets/Scenes/GameLoop/PrismbloomLevel01Story.unity";
-    public const string EndingScenePath = "Assets/Scenes/GameLoop/BossStory.unity";
+    public const string EndingScenePath = "Assets/Scenes/GameLoop/Boss.unity";
     public static bool Active { get; private set; }
     public static bool IntroductionPlayed { get; private set; }
     private static int gameplayLocks;

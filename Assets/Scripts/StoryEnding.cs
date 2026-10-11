@@ -88,7 +88,7 @@ public sealed class StoryEnding : MonoBehaviour
             if (progress < 1) return;
             State = EndingState.AwaitingReturn;
             waitingForKeyRelease = true;
-            dialogue.ShowText("Lenny", "T.K. is awake!", "Enter: return to title");
+            dialogue.ShowText("Lenny", "T.K. is awake!", "Enter: Return to menu");
         }
     }
 
@@ -112,6 +112,7 @@ public sealed class StoryEnding : MonoBehaviour
             AudioListener.pause = false;
             if (SceneManager.LoadSceneAsync(TitleMenu.TitleSceneName, LoadSceneMode.Single) == null) return;
         }
+        GameAudioController.Instance?.PlayTransition(GameSound.CrystalTouch, this);
         State = EndingState.ReturningToTitle;
     }
 

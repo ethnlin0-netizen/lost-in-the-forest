@@ -24,6 +24,7 @@ public class AmuletPickup : MonoBehaviour
             return;
         }
         loading = true;
+        GameAudioController.Instance?.PlayTransition(GameSound.AmuletCollect, this);
         var operation = SceneManager.LoadSceneAsync(destination, LoadSceneMode.Single);
         if (operation == null) loading = false;
     }

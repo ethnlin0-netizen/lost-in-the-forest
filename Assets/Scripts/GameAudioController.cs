@@ -23,6 +23,7 @@ public sealed class GameAudioController : MonoBehaviour
     }
     private Voice[] voices;
     private int nextToken;
+    private static string restartingLevel;
     private readonly Dictionary<(Object, GameSound), float> lastPlayed = new Dictionary<(Object, GameSound), float>();
     private readonly Dictionary<GameSound, int> counts = new Dictionary<GameSound, int>();
     public int Played(GameSound sound) => counts.TryGetValue(sound, out int count) ? count : 0;
@@ -41,6 +42,15 @@ public sealed class GameAudioController : MonoBehaviour
             voices[i] = new Voice { source = source };
         }
         ApplyVolumes();
+    }
+
+    // Carry only a cue request across a reload, never a controller or a music source.
+    public static void QueueLevelRestart(string scenePath) { restartingLevel = scenePath; }
+    private void Start()
+    {
+        bool restarted = restartingLevel == gameObject.scene.path;
+        restartingLevel = null;
+        if (restarted) Play(GameSound.LevelRestart, this, 1f, true);
     }
 
     public int Play(GameSound sound, Object emitter = null, float gain = 1f, bool ui = false)
@@ -115,16 +125,20 @@ public sealed class GameAudioController : MonoBehaviour
     {
         var cue = catalog == null ? null : catalog.Find(sound);
         if (transitionVoices >= 4 || cue == null || cue.clips == null || cue.clips.Length == 0) return;
+        var key = (emitter, sound);
+        float now = Time.unscaledTime;
+        if (lastPlayed.TryGetValue(key, out float previous) && now - previous < cue.minimumInterval) return;
         var clip = cue.clips[Random.Range(0, cue.clips.Length)]; if (clip == null) return;
         var root = new GameObject("InteractionSoundTail"); DontDestroyOnLoad(root);
         var source = root.AddComponent<AudioSource>(); source.playOnAwake = false; source.clip = clip;
         source.volume = cue.volume * effectsVolume; source.priority = cue.priority; source.ignoreListenerPause = true;
+        lastPlayed[key] = now;
         transitionVoices++; counts[sound] = Played(sound) + 1; source.Play();
         root.AddComponent<InteractionSoundTail>().remaining = clip.length + 0.1f;
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    private static void ResetSession() { Instance = null; transitionVoices = 0; }
+    private static void ResetSession() { Instance = null; transitionVoices = 0; restartingLevel = null; }
     private void OnDestroy() { if (Instance == this) Instance = null; }
     public sealed class InteractionSoundTail : MonoBehaviour
     {

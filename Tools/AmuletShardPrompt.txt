@@ -1,0 +1,9 @@
+Generated with the built-in image tool; reference: the user's attached green pixel-art shard.
+
+Use case: stylized-concept
+Asset type: one reusable transparent-background pixel-art collectible sprite for a 2D game, colored later inside Unity.
+Input image: visual reference only for the angular broken amulet-shard silhouette and chunky pixel-art style. Create original sprite artwork inspired by it.
+Primary request: One jagged broken magical amulet shard. Broad diagonal upper-right point, a smaller angular broken protrusion to the left, a tapered lower point, sharp irregular broken edges and a few bright crystalline facet highlights, like the reference.
+Style: Very simple crisp pixel art, chunky square pixel clusters equivalent to a roughly 32x32 pixel item, flat front-facing game icon, dark outline and 4-5 grayscale shades. Neutral grayscale only: charcoal outlines, medium silver facets, near-white bright faces and white highlights. Absolutely no colored pixels, because Unity will tint the same sprite red, orange, yellow, green, blue and purple.
+Composition: single centered shard filling most of a square canvas with a narrow transparent margin. No extra objects.
+Constraints: genuinely transparent background, no shadow behind sprite, no floor, no text, logos or watermarks, no blur, no thin detail, no glow beyond the silhouette.

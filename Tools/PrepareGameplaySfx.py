@@ -120,7 +120,9 @@ for name,archive,licensefile,creator,url,license in packs:
     for file in files: shutil.copy2(file,target/file.name)
     if licensefile:shutil.copy2(root/licensefile,target/Path(licensefile).name)
     licenseurl='https://creativecommons.org/publicdomain/zero/1.0/' if license=='CC0' else 'https://creativecommons.org/licenses/by/3.0/'
-    (target/'LICENSE.md').write_text(f'# {name}\n\nCreator: {creator}\n\nSource: {url}\n\nLicense: [{license}]({licenseurl})\n\nLicense verified on the creator/distributor page on 2026-10-10. Original downloaded files are retained here. Prepared effects are adaptations, not original recordings. See Measurements.json for exact source layers, pitch changes, cuts and offsets.\n',encoding='utf8')
+    license_target=Path('Docs')/target
+    license_target.mkdir(parents=True,exist_ok=True)
+    (license_target/'LICENSE.md').write_text(f'# {name}\n\nCreator: {creator}\n\nSource: {url}\n\nLicense: [{license}]({licenseurl})\n\nLicense verified on the creator/distributor page on 2026-10-10. Original downloaded files are retained in `{target.as_posix()}`. Prepared effects are adaptations, not original recordings. See `Assets/Audio/SFX/Sources/Measurements.json` for exact source layers, pitch changes, cuts and offsets.\n',encoding='utf8')
     sources.append(dict(pack=name,creator=creator,url=url,license=license,licenseUrl=licenseurl,files=[dict(name=f.name,sha256=hashlib.sha256(f.read_bytes()).hexdigest()) for f in files]))
 
 # Wind/leaf ambience, with an overlap crossfade at the original wind seam.

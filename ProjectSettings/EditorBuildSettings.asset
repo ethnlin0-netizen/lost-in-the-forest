@@ -38,5 +38,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameLoop/GloamthorneLevel02.unity
     guid: f47ea1f462e625f479e6d09f33cd606f
+  - enabled: 1
+    path: Assets/Scenes/GameLoop/Wraithglass Barrens Level 05.unity
+    guid: 3b9e01e63a8157342a3b28c332e407a6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

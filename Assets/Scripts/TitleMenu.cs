@@ -11,6 +11,7 @@ using UnityEngine.UI;
 [DisallowMultipleComponent]
 public sealed class TitleMenu : MonoBehaviour
 {
+    public const string TitleSceneName = "TitleScreen";
     public const string CreditsText =
         "Caleb Kimondo - Gameplay Programmer\n\n" +
         "Ryan Rothmund - Artist/UI Programmer\n\n" +
@@ -99,6 +100,40 @@ public sealed class TitleMenu : MonoBehaviour
             return;
         }
         if (!HasStartedRun) StartCoroutine(StartFreshRun());
+    }
+
+    public bool ReturnToMainMenu()
+    {
+        if (loading) return false;
+        if (!Application.CanStreamedLevelBeLoaded(TitleSceneName))
+        {
+            Debug.LogError("TitleScreen is missing from the build scene list.", this);
+            return false;
+        }
+        StartCoroutine(ReturnToTitleScreen());
+        return true;
+    }
+
+    private IEnumerator ReturnToTitleScreen()
+    {
+        RestorePausedState();
+        loading = true;
+        HasStartedRun = false;
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
+        menuView.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        BackToMenu();
+        playButton.interactable = false;
+
+        var operation = SceneManager.LoadSceneAsync(TitleSceneName, LoadSceneMode.Single);
+        if (operation != null)
+            while (!operation.isDone) yield return null;
+
+        loading = false;
+        playButton.interactable = true;
+        BackToMenu();
     }
 
     private IEnumerator StartFreshRun()

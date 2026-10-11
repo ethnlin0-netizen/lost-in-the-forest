@@ -36,9 +36,38 @@ public class PlatformNavigation2D : MonoBehaviour
     private readonly Collider2D[] overlaps = new Collider2D[64];
     private float checkRemaining;
     private Graph debugGraph;
+    private bool scanSceneSurfaces;
     public int Revision { get; private set; }
     public IReadOnlyList<BoxCollider2D> Surfaces => surfaces;
     private const float Skin = 0.04f;
+
+    // Dragged-in enemies share one runtime map when no authored map exists.
+    public static PlatformNavigation2D GetOrCreate(UnityEngine.SceneManagement.Scene scene)
+    {
+        foreach (var navigation in FindObjectsByType<PlatformNavigation2D>(FindObjectsSortMode.None))
+            if (navigation.gameObject.scene == scene && navigation.isActiveAndEnabled)
+                return navigation;
+
+        var root = new GameObject("Enemy Navigation (Automatic)");
+        UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(root, scene);
+        var world = root.AddComponent<PlatformNavigation2D>();
+        world.scanSceneSurfaces = true;
+        world.RebuildSurfaces();
+        return world;
+    }
+
+    private IEnumerable<BoxCollider2D> SurfaceColliders()
+    {
+        if (surfaceRoot != null || !scanSceneSurfaces)
+        {
+            foreach (var collider in (surfaceRoot != null ? surfaceRoot : transform).GetComponentsInChildren<BoxCollider2D>())
+                yield return collider;
+            yield break;
+        }
+        foreach (var root in gameObject.scene.GetRootGameObjects())
+            foreach (var collider in root.GetComponentsInChildren<BoxCollider2D>())
+                yield return collider;
+    }
 
     private void Awake() { RebuildSurfaces(); }
     private void Update()
@@ -46,7 +75,7 @@ public class PlatformNavigation2D : MonoBehaviour
         checkRemaining -= Time.deltaTime;
         if (checkRemaining > 0f) return;
         checkRemaining = geometryCheckInterval;
-        var found = (surfaceRoot != null ? surfaceRoot : transform).GetComponentsInChildren<BoxCollider2D>();
+        var found = SurfaceColliders();
         int count = 0;
         bool changed = false;
         foreach (var c in found)
@@ -60,7 +89,7 @@ public class PlatformNavigation2D : MonoBehaviour
     public void RebuildSurfaces()
     {
         surfaces.Clear(); lastBounds.Clear();
-        foreach (var c in (surfaceRoot != null ? surfaceRoot : transform).GetComponentsInChildren<BoxCollider2D>())
+        foreach (var c in SurfaceColliders())
             if (IsObstacle(c)) { surfaces.Add(c); lastBounds.Add(c.bounds); }
         Revision++;
     }
@@ -88,15 +117,24 @@ public class PlatformNavigation2D : MonoBehaviour
     private bool Clear(Vector2 feet, Vector2 size)
     {
         int count = Physics2D.OverlapBox(feet + Vector2.up * (size.y * 0.5f), size - Vector2.one * Skin, 0f, Filter(), overlaps);
-        for (int i = 0; i < count; i++) if (IsObstacle(overlaps[i])) return false;
+        for (int i = 0; i < count; i++)
+            if (IsObstacle(overlaps[i]) && (!IsOneWay(overlaps[i]) || feet.y >= overlaps[i].bounds.max.y - Skin * 0.5f)) return false;
         return true;
+    }
+    private static bool IsOneWay(Collider2D collider)
+    {
+        if (!collider.usedByEffector) return false;
+        var effector = collider.GetComponent<PlatformEffector2D>();
+        return effector != null && effector.isActiveAndEnabled && effector.useOneWay;
     }
     public bool ClearSegment(Vector2 from, Vector2 to, Vector2 size)
     {
         Vector2 delta = to - from;
         int count = Physics2D.BoxCast(from + Vector2.up * size.y * 0.5f, size - Vector2.one * Skin,
             0f, delta.normalized, Filter(), hits, delta.magnitude);
-        for (int i = 0; i < count; i++) if (IsObstacle(hits[i].collider)) return false;
+        for (int i = 0; i < count; i++)
+            if (IsObstacle(hits[i].collider) && (!IsOneWay(hits[i].collider) ||
+                (delta.y < 0f && from.y >= hits[i].collider.bounds.max.y - Skin * 0.5f && hits[i].normal.y > 0.5f))) return false;
         return true;
     }
     public Graph BuildGraph(Vector2 size, float speed, float jumpSpeed, float gravity, float maxDrop, float airSpeed = 0f)
@@ -224,6 +262,9 @@ public class PlatformNavigation2D : MonoBehaviour
             for (int i = 0; i < count; i++)
             {
                 if (!IsObstacle(hits[i].collider)) continue;
+                // One-way shelves only stop a descending actor arriving from above.
+                if (IsOneWay(hits[i].collider) && (velocity.y >= 0f ||
+                    end.y < hits[i].collider.bounds.max.y - Skin * 0.5f || hits[i].normal.y < 0.5f)) continue;
                 if (drop && hits[i].collider == source) continue;
                 if (hits[i].distance < distance) { closest = i; distance = hits[i].distance; }
             }

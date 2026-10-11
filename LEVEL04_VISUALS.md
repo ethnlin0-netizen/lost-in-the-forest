@@ -1,6 +1,6 @@
 # Level04 — Veinroot Hollow visuals
 
-Open `Assets/Scenes/Level04.unity` in Unity and press Play. The scene now uses
+Open `Assets/Scenes/GameLoop/Level04.unity` in Unity and press Play. The scene now uses
 the existing `Assets/Art/Sprites/VeinrootHollow-Background.png` behind the
 original Level04 course. Its aspect ratio is preserved. It stays fixed in world
 space and covers the original camera travel, including the entrance view, at

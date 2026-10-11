@@ -15,7 +15,7 @@ public static class BuildLevel04
     {
         if(EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Stop Play mode first.");
         if(!EditorSceneManager.SaveOpenScenes()) throw new IOException("Save open scenes first.");
-        const string path="Assets/Scenes/Level04.unity";
+        const string path="Assets/Scenes/GameLoop/Level04.unity";
         if(File.Exists(path))
         {
             var previous=EditorSceneManager.OpenScene(path);

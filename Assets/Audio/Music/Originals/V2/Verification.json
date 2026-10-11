@@ -1,0 +1,42 @@
+[
+  {
+    "file": "Level03_Ashpetal_FoxfireDance.wav",
+    "bpm": 156,
+    "beats_per_bar": 6,
+    "bars": 24,
+    "seconds": 55.384625850340136,
+    "peak_dbfs": -5.934821128845215,
+    "rms_dbfs": -18.0,
+    "loop_boundary_step": 0.00043432973325252533
+  },
+  {
+    "file": "Level04_Veinroot_Rootwork.wav",
+    "bpm": 112,
+    "beats_per_bar": 5,
+    "bars": 24,
+    "seconds": 64.28571428571429,
+    "peak_dbfs": -2.047457218170166,
+    "rms_dbfs": -18.219934463500977,
+    "loop_boundary_step": 2.2076070308685303e-05
+  },
+  {
+    "file": "Level05_Wraithglass_Shardrunner.wav",
+    "bpm": 124,
+    "beats_per_bar": 4,
+    "bars": 24,
+    "seconds": 46.45160997732426,
+    "peak_dbfs": -4.282679080963135,
+    "rms_dbfs": -18.0,
+    "loop_boundary_step": 0.01521393097937107
+  },
+  {
+    "file": "Boss_Dreadcrown_Crowncrusher.wav",
+    "bpm": 144,
+    "beats_per_bar": 4,
+    "bars": 32,
+    "seconds": 53.333333333333336,
+    "peak_dbfs": -2.0474579334259033,
+    "rms_dbfs": -17.294597625732422,
+    "loop_boundary_step": 0.0008658356964588165
+  }
+]

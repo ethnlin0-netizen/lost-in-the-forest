@@ -5294,7 +5294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmuletPickup
   amuletNumber: 3
-  nextScene: Level04
+  nextScene: Veinroot Level04
 --- !u!61 &867888318
 BoxCollider2D:
   m_ObjectHideFlags: 0

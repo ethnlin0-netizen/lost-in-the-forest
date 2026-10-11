@@ -12,12 +12,13 @@ public class Level02ThornRespawn : MonoBehaviour
 
     public void ReturnToEntrance()
     {
-        if (entrance == null || Time.time - lastReturn < 0.2f) return;
-        lastReturn = Time.time;
+        if (Time.unscaledTime - lastReturn < 0.2f) return;
+        if (!LevelRestartOnDeath.RestartScene(gameObject.scene, this)) return;
+        lastReturn = Time.unscaledTime;
         body.linearVelocity = Vector2.zero;
         body.angularVelocity = 0;
-        body.position = entrance.position;
-        transform.position = entrance.position;
+        // Keep the serialized entrance reference and notification for compatibility.
+        // The saved scene now restores the player and all other level objects.
         ReturnedToEntrance?.Invoke();
     }
 }

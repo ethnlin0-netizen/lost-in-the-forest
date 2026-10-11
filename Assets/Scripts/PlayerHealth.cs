@@ -55,14 +55,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         // Keep the death reaction visible, then restart this biome at its authored spawn.
         var biome = gameObject.scene;
-        yield return new WaitForSeconds(deathRespawnDelay);
+        yield return new WaitForSecondsRealtime(deathRespawnDelay);
         if (!biome.IsValid() || !biome.isLoaded) yield break;
-        if (biome.buildIndex < 0)
-        {
-            Debug.LogWarning("Add " + biome.name + " to the build scene list to enable death respawning.", this);
-            yield break;
-        }
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(biome.buildIndex);
+        LevelRestartOnDeath.RestartScene(biome, this);
     }
 
     private void FixedUpdate()

@@ -1723,7 +1723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76099d76aee6ed54084a7486b767490e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TitleMenu
-  firstBiomeScene: Biome1
+  firstBiomeScene: PrismbloomLevel01
   menuView: {fileID: 1955447674}
   mainButtons: {fileID: 790631081}
   creditsPanel: {fileID: 288499514}

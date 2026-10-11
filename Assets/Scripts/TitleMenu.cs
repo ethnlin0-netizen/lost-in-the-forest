@@ -27,7 +27,7 @@ public sealed class TitleMenu : MonoBehaviour
         "X: tail sweep\n" +
         "F - Ranged Attack";
 
-    [SerializeField] private string firstBiomeScene = "Biome1";
+    [SerializeField] private string firstBiomeScene = "PrismbloomLevel01";
     [SerializeField] private GameObject menuView;
     [SerializeField] private GameObject mainButtons;
     [SerializeField] private GameObject creditsPanel;

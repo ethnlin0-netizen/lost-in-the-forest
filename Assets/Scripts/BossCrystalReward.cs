@@ -22,5 +22,6 @@ public class BossCrystalReward : MonoBehaviour
         if(Revealed||crystal==null)return;
         Revealed=true;
         crystal.SetActive(true);
+        crystal.GetComponent<GameplaySfx>()?.Play(GameSound.CrystalAppear);
     }
 }

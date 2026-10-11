@@ -915,6 +915,7 @@ GameObject:
   - component: {fileID: 6859723391412356007}
   - component: {fileID: 7308051982506403085}
   - component: {fileID: 4290271518783826074}
+  - component: {fileID: 4218520708979892821}
   m_Layer: 0
   m_Name: BlightAmalgamBoss
   m_TagString: Untagged
@@ -1091,6 +1092,21 @@ MonoBehaviour:
   - {fileID: 3177590669787932175}
   - {fileID: 5499490811583122033}
   attackCue: {fileID: 6031727763884481931}
+--- !u!114 &4218520708979892821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6619015509139245120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ed93eefb5368647be66d2b504b5bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplaySfx
+  role: 4
+  volume: 1
+  stepDistance: 2
 --- !u!1 &7014112848096239502
 GameObject:
   m_ObjectHideFlags: 0

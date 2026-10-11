@@ -1,0 +1,450 @@
+[
+  {
+    "cue": "Footstep",
+    "path": "Assets/Audio/SFX/Player/Footstep_1.wav",
+    "volume": 0.24,
+    "priority": 180,
+    "interval": 0.17,
+    "concurrent": 3
+  },
+  {
+    "cue": "Land",
+    "path": "Assets/Audio/SFX/Player/Land_1.wav",
+    "volume": 0.35,
+    "priority": 160,
+    "interval": 0.12,
+    "concurrent": 3
+  },
+  {
+    "cue": "Footstep",
+    "path": "Assets/Audio/SFX/Player/Footstep_2.wav",
+    "volume": 0.24,
+    "priority": 180,
+    "interval": 0.17,
+    "concurrent": 3
+  },
+  {
+    "cue": "Land",
+    "path": "Assets/Audio/SFX/Player/Land_2.wav",
+    "volume": 0.35,
+    "priority": 160,
+    "interval": 0.12,
+    "concurrent": 3
+  },
+  {
+    "cue": "Footstep",
+    "path": "Assets/Audio/SFX/Player/Footstep_3.wav",
+    "volume": 0.24,
+    "priority": 180,
+    "interval": 0.17,
+    "concurrent": 3
+  },
+  {
+    "cue": "Land",
+    "path": "Assets/Audio/SFX/Player/Land_3.wav",
+    "volume": 0.35,
+    "priority": 160,
+    "interval": 0.12,
+    "concurrent": 3
+  },
+  {
+    "cue": "Jump",
+    "path": "Assets/Audio/SFX/Player/Jump.wav",
+    "volume": 0.38,
+    "priority": 140,
+    "interval": 0.09,
+    "concurrent": 3
+  },
+  {
+    "cue": "DoubleJump",
+    "path": "Assets/Audio/SFX/Player/DoubleJump.wav",
+    "volume": 0.4,
+    "priority": 130,
+    "interval": 0.09,
+    "concurrent": 3
+  },
+  {
+    "cue": "HardLand",
+    "path": "Assets/Audio/SFX/Player/HardLand.wav",
+    "volume": 0.5,
+    "priority": 140,
+    "interval": 0.09,
+    "concurrent": 3
+  },
+  {
+    "cue": "TailSweep",
+    "path": "Assets/Audio/SFX/Player/TailSweep_1.wav",
+    "volume": 0.53,
+    "priority": 100,
+    "interval": 0.08,
+    "concurrent": 3
+  },
+  {
+    "cue": "FireLaunch",
+    "path": "Assets/Audio/SFX/Player/FireLaunch_1.wav",
+    "volume": 0.45,
+    "priority": 100,
+    "interval": 0.12,
+    "concurrent": 3
+  },
+  {
+    "cue": "FireImpact",
+    "path": "Assets/Audio/SFX/Player/FireImpact_1.wav",
+    "volume": 0.5,
+    "priority": 110,
+    "interval": 0.14,
+    "concurrent": 3
+  },
+  {
+    "cue": "TailSweep",
+    "path": "Assets/Audio/SFX/Player/TailSweep_2.wav",
+    "volume": 0.53,
+    "priority": 100,
+    "interval": 0.08,
+    "concurrent": 3
+  },
+  {
+    "cue": "FireLaunch",
+    "path": "Assets/Audio/SFX/Player/FireLaunch_2.wav",
+    "volume": 0.45,
+    "priority": 100,
+    "interval": 0.12,
+    "concurrent": 3
+  },
+  {
+    "cue": "FireImpact",
+    "path": "Assets/Audio/SFX/Player/FireImpact_2.wav",
+    "volume": 0.5,
+    "priority": 110,
+    "interval": 0.14,
+    "concurrent": 3
+  },
+  {
+    "cue": "PlayerHurt",
+    "path": "Assets/Audio/SFX/Player/PlayerHurt.wav",
+    "volume": 0.5,
+    "priority": 70,
+    "interval": 0.2,
+    "concurrent": 1
+  },
+  {
+    "cue": "PlayerDeath",
+    "path": "Assets/Audio/SFX/Player/PlayerDeath.wav",
+    "volume": 0.55,
+    "priority": 40,
+    "interval": 0.5,
+    "concurrent": 1
+  },
+  {
+    "cue": "ChomperWarn",
+    "path": "Assets/Audio/SFX/Enemies/ChomperWarn.wav",
+    "volume": 0.52,
+    "priority": 35,
+    "interval": 0.2,
+    "concurrent": 3
+  },
+  {
+    "cue": "ChomperBite",
+    "path": "Assets/Audio/SFX/Enemies/ChomperBite.wav",
+    "volume": 0.6,
+    "priority": 80,
+    "interval": 0.15,
+    "concurrent": 3
+  },
+  {
+    "cue": "ChomperHit",
+    "path": "Assets/Audio/SFX/Enemies/ChomperHit_1.wav",
+    "volume": 0.42,
+    "priority": 115,
+    "interval": 0.1,
+    "concurrent": 3
+  },
+  {
+    "cue": "ChomperHit",
+    "path": "Assets/Audio/SFX/Enemies/ChomperHit_2.wav",
+    "volume": 0.42,
+    "priority": 115,
+    "interval": 0.1,
+    "concurrent": 3
+  },
+  {
+    "cue": "ChomperDeath",
+    "path": "Assets/Audio/SFX/Enemies/ChomperDeath.wav",
+    "volume": 0.58,
+    "priority": 45,
+    "interval": 0.4,
+    "concurrent": 2
+  },
+  {
+    "cue": "SporaWarn",
+    "path": "Assets/Audio/SFX/Enemies/SporaWarn.wav",
+    "volume": 0.48,
+    "priority": 35,
+    "interval": 0.2,
+    "concurrent": 3
+  },
+  {
+    "cue": "SporaLaunch",
+    "path": "Assets/Audio/SFX/Enemies/SporaLaunch_1.wav",
+    "volume": 0.48,
+    "priority": 90,
+    "interval": 0.2,
+    "concurrent": 3
+  },
+  {
+    "cue": "SporeImpact",
+    "path": "Assets/Audio/SFX/Enemies/SporeImpact_1.wav",
+    "volume": 0.42,
+    "priority": 120,
+    "interval": 0.16,
+    "concurrent": 3
+  },
+  {
+    "cue": "SporaHit",
+    "path": "Assets/Audio/SFX/Enemies/SporaHit_1.wav",
+    "volume": 0.4,
+    "priority": 115,
+    "interval": 0.1,
+    "concurrent": 3
+  },
+  {
+    "cue": "SporaLaunch",
+    "path": "Assets/Audio/SFX/Enemies/SporaLaunch_2.wav",
+    "volume": 0.48,
+    "priority": 90,
+    "interval": 0.2,
+    "concurrent": 3
+  },
+  {
+    "cue": "SporeImpact",
+    "path": "Assets/Audio/SFX/Enemies/SporeImpact_2.wav",
+    "volume": 0.42,
+    "priority": 120,
+    "interval": 0.16,
+    "concurrent": 3
+  },
+  {
+    "cue": "SporaHit",
+    "path": "Assets/Audio/SFX/Enemies/SporaHit_2.wav",
+    "volume": 0.4,
+    "priority": 115,
+    "interval": 0.1,
+    "concurrent": 3
+  },
+  {
+    "cue": "SporaDeath",
+    "path": "Assets/Audio/SFX/Enemies/SporaDeath.wav",
+    "volume": 0.5,
+    "priority": 45,
+    "interval": 0.4,
+    "concurrent": 2
+  },
+  {
+    "cue": "RockStep",
+    "path": "Assets/Audio/SFX/Enemies/RockStep_1.wav",
+    "volume": 0.4,
+    "priority": 175,
+    "interval": 0.25,
+    "concurrent": 2
+  },
+  {
+    "cue": "RockHit",
+    "path": "Assets/Audio/SFX/Enemies/RockHit_1.wav",
+    "volume": 0.45,
+    "priority": 110,
+    "interval": 0.12,
+    "concurrent": 3
+  },
+  {
+    "cue": "RockStep",
+    "path": "Assets/Audio/SFX/Enemies/RockStep_2.wav",
+    "volume": 0.4,
+    "priority": 175,
+    "interval": 0.25,
+    "concurrent": 2
+  },
+  {
+    "cue": "RockHit",
+    "path": "Assets/Audio/SFX/Enemies/RockHit_2.wav",
+    "volume": 0.45,
+    "priority": 110,
+    "interval": 0.12,
+    "concurrent": 3
+  },
+  {
+    "cue": "RockWarn",
+    "path": "Assets/Audio/SFX/Enemies/RockWarn.wav",
+    "volume": 0.58,
+    "priority": 30,
+    "interval": 0.25,
+    "concurrent": 3
+  },
+  {
+    "cue": "RockSlam",
+    "path": "Assets/Audio/SFX/Enemies/RockSlam.wav",
+    "volume": 0.65,
+    "priority": 70,
+    "interval": 0.25,
+    "concurrent": 2
+  },
+  {
+    "cue": "RockDeath",
+    "path": "Assets/Audio/SFX/Enemies/RockDeath.wav",
+    "volume": 0.6,
+    "priority": 40,
+    "interval": 0.4,
+    "concurrent": 2
+  },
+  {
+    "cue": "BossSlamWarn",
+    "path": "Assets/Audio/SFX/Boss/BossSlamWarn.wav",
+    "volume": 0.65,
+    "priority": 20,
+    "interval": 0.3,
+    "concurrent": 1
+  },
+  {
+    "cue": "BossLungeWarn",
+    "path": "Assets/Audio/SFX/Boss/BossLungeWarn.wav",
+    "volume": 0.62,
+    "priority": 20,
+    "interval": 0.3,
+    "concurrent": 1
+  },
+  {
+    "cue": "BossSporeWarn",
+    "path": "Assets/Audio/SFX/Boss/BossSporeWarn.wav",
+    "volume": 0.65,
+    "priority": 20,
+    "interval": 0.3,
+    "concurrent": 1
+  },
+  {
+    "cue": "BossSlam",
+    "path": "Assets/Audio/SFX/Boss/BossSlam.wav",
+    "volume": 0.7,
+    "priority": 40,
+    "interval": 0.2,
+    "concurrent": 1
+  },
+  {
+    "cue": "BossShockwave",
+    "path": "Assets/Audio/SFX/Boss/BossShockwave.wav",
+    "volume": 0.45,
+    "priority": 75,
+    "interval": 0.25,
+    "concurrent": 2
+  },
+  {
+    "cue": "BossLunge",
+    "path": "Assets/Audio/SFX/Boss/BossLunge.wav",
+    "volume": 0.65,
+    "priority": 40,
+    "interval": 0.3,
+    "concurrent": 1
+  },
+  {
+    "cue": "BossVolley",
+    "path": "Assets/Audio/SFX/Boss/BossVolley.wav",
+    "volume": 0.55,
+    "priority": 40,
+    "interval": 0.3,
+    "concurrent": 1
+  },
+  {
+    "cue": "BossHit",
+    "path": "Assets/Audio/SFX/Boss/BossHit.wav",
+    "volume": 0.48,
+    "priority": 90,
+    "interval": 0.12,
+    "concurrent": 2
+  },
+  {
+    "cue": "BossPhase",
+    "path": "Assets/Audio/SFX/Boss/BossPhase.wav",
+    "volume": 0.65,
+    "priority": 15,
+    "interval": 0.8,
+    "concurrent": 1
+  },
+  {
+    "cue": "BossDeath",
+    "path": "Assets/Audio/SFX/Boss/BossDeath.wav",
+    "volume": 0.7,
+    "priority": 10,
+    "interval": 1,
+    "concurrent": 1
+  },
+  {
+    "cue": "WhisperseedRecruit",
+    "path": "Assets/Audio/SFX/Blooms/WhisperseedRecruit.wav",
+    "volume": 0.35,
+    "priority": 130,
+    "interval": 0.3,
+    "concurrent": 2
+  },
+  {
+    "cue": "DryadRecruit",
+    "path": "Assets/Audio/SFX/Blooms/DryadRecruit.wav",
+    "volume": 0.35,
+    "priority": 130,
+    "interval": 0.3,
+    "concurrent": 2
+  },
+  {
+    "cue": "PetalbornRecruit",
+    "path": "Assets/Audio/SFX/Blooms/PetalbornRecruit.wav",
+    "volume": 0.35,
+    "priority": 130,
+    "interval": 0.3,
+    "concurrent": 2
+  },
+  {
+    "cue": "CrystalAppear",
+    "path": "Assets/Audio/SFX/Boss/CrystalAppear.wav",
+    "volume": 0.45,
+    "priority": 45,
+    "interval": 0.5,
+    "concurrent": 1
+  },
+  {
+    "cue": "CrystalTouch",
+    "path": "Assets/Audio/SFX/Boss/CrystalTouch.wav",
+    "volume": 0.45,
+    "priority": 40,
+    "interval": 0.5,
+    "concurrent": 1
+  },
+  {
+    "cue": "MenuFocus",
+    "path": "Assets/Audio/SFX/UI/MenuFocus.wav",
+    "volume": 0.2,
+    "priority": 140,
+    "interval": 0.12,
+    "concurrent": 2
+  },
+  {
+    "cue": "MenuClick",
+    "path": "Assets/Audio/SFX/UI/MenuClick.wav",
+    "volume": 0.35,
+    "priority": 60,
+    "interval": 0.15,
+    "concurrent": 2
+  },
+  {
+    "cue": "Pause",
+    "path": "Assets/Audio/SFX/UI/Pause.wav",
+    "volume": 0.35,
+    "priority": 55,
+    "interval": 0.3,
+    "concurrent": 1
+  },
+  {
+    "cue": "Resume",
+    "path": "Assets/Audio/SFX/UI/Resume.wav",
+    "volume": 0.35,
+    "priority": 55,
+    "interval": 0.3,
+    "concurrent": 1
+  }
+]

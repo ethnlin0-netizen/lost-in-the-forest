@@ -1,0 +1,1747 @@
+{
+  "preparation": "Trim active audio with 6ms lead/40ms tail; resample 44.1kHz; mix layers; 4ms edge fades for short effects; static peak normalization -6dBFS SFX/-12dBFS ambience; PCM16; no compression.",
+  "assets": [
+    {
+      "path": "Assets/Audio/SFX/Player/Footstep_1.wav",
+      "duration": 0.1983,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -25.28,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "51735423b812a7e849977dba2add54245e5690e5e72400edb549b0a02c94d34d",
+      "layers": [
+        [
+          "impact-sounds/Audio/footstep_grass_000.ogg",
+          1,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/Land_1.wav",
+      "duration": 0.1983,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -22.13,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "d0cc4b4f8369eef42d5d0ee2829c6c553e60f23b0ed2787d0adb3b8ce13f9eae",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactSoft_medium_000.ogg",
+          1,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/footstep_grass_000.ogg",
+          1,
+          0.45,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/Footstep_2.wav",
+      "duration": 0.1877,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -24.845,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "c086bc56d0b19018fcdb03e1942fe2b099ae92c265bc3b1b6386bf2bc854c4e7",
+      "layers": [
+        [
+          "impact-sounds/Audio/footstep_grass_001.ogg",
+          1,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/Land_2.wav",
+      "duration": 0.1877,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -21.855,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "90a0661c63e5cca2e26b746ea932740e546b6a7b4e8b7c8a75b8759548ccbc16",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactSoft_medium_001.ogg",
+          1,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/footstep_grass_001.ogg",
+          1,
+          0.45,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/Footstep_3.wav",
+      "duration": 0.1914,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -23.758,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "4a8857485b4870f63395557f014497aaa56d95974ac8e8dfda0a7ef37b57c8e1",
+      "layers": [
+        [
+          "impact-sounds/Audio/footstep_grass_002.ogg",
+          1,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/Land_3.wav",
+      "duration": 0.1914,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -22.139,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "79c055969c98dc248a6341cceb20502f75b94fee2018ff7ab8870b4cc4a24ecc",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactSoft_medium_002.ogg",
+          1,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/footstep_grass_002.ogg",
+          1,
+          0.45,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/Jump.wav",
+      "duration": 0.6313,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -27.352,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "a7120b91ac1bd074833f99c8c318fbf47a7e7560a05142a21f103c649be35648",
+      "layers": [
+        [
+          "swishes-sound-pack/swishes/swish-2.wav",
+          0.85,
+          1,
+          0,
+          null
+        ],
+        [
+          "rpg-audio/Audio/cloth1.ogg",
+          1,
+          0.25,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/DoubleJump.wav",
+      "duration": 0.5404,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -21.457,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "c669fa1377ed5a27cd0f4f5a9e56b7293b6af85b5d2395a637587e1eebf9aca5",
+      "layers": [
+        [
+          "swishes-sound-pack/swishes/swish-4.wav",
+          0.75,
+          1,
+          0,
+          null
+        ],
+        [
+          "swishes-sound-pack/swishes/swish-3.wav",
+          0.9,
+          0.8,
+          0.11,
+          null
+        ],
+        [
+          "rpg-audio/Audio/cloth2.ogg",
+          0.85,
+          0.25,
+          0.07,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/HardLand.wav",
+      "duration": 0.6957,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -23.053,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "3fc91e215e02c539440af01b1fa2973ef0369a7aec1b5e7484823430429bbf65",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactSoft_heavy_000.ogg",
+          0.9,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/impactMining_001.ogg",
+          1,
+          0.2,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/TailSweep_1.wav",
+      "duration": 0.5957,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -22.324,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "ee49746808c7de3f19eafb213df75c9b17fded48c6b40e1b0f27bd3e2a54e367",
+      "layers": [
+        [
+          "swishes-sound-pack/swishes/swish-7.wav",
+          0.65,
+          1,
+          0,
+          null
+        ],
+        [
+          "rpg-audio/Audio/cloth3.ogg",
+          0.8,
+          0.3,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/FireLaunch_1.wav",
+      "duration": 0.65,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -18.949,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "088ab83f8794b80ed9f3c15c2a5f867065b9f88891e67863789a027a28fb475b",
+      "layers": [
+        [
+          "105016__julien-matthey__jm-fx-fireball-01.wav",
+          1.0,
+          1,
+          0,
+          0.65
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/FireImpact_1.wav",
+      "duration": 0.6314,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -20.702,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "fccbf487d0d38310bf51848bc2b6dab3a5976b09bbdc3d03e227d7e54490e5f5",
+      "layers": [
+        [
+          "105016__julien-matthey__jm-fx-fireball-01.wav",
+          0.9,
+          0.55,
+          0,
+          0.6
+        ],
+        [
+          "impact-sounds/Audio/impactSoft_heavy_000.ogg",
+          0.8,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/TailSweep_2.wav",
+      "duration": 0.5957,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -23.608,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "809b648778c745bd85a7c876d48412bdb0a9731197ebd77933a8c1fa54c63dbe",
+      "layers": [
+        [
+          "swishes-sound-pack/swishes/swish-8.wav",
+          0.65,
+          1,
+          0,
+          null
+        ],
+        [
+          "rpg-audio/Audio/cloth3.ogg",
+          0.8,
+          0.3,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/FireLaunch_2.wav",
+      "duration": 0.65,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -18.743,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "4e3d644e6883695e6b4676558739c5eed66643b8241cdbbcd7ab47c1c5f87ba2",
+      "layers": [
+        [
+          "105016__julien-matthey__jm-fx-fireball-01.wav",
+          1.06,
+          1,
+          0,
+          0.65
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/FireImpact_2.wav",
+      "duration": 0.7151,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -20.982,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "e5b1764d7958a309b5bf6a8643c253b93da62a27e133ad804e90e4f9a6411c01",
+      "layers": [
+        [
+          "105016__julien-matthey__jm-fx-fireball-01.wav",
+          0.9,
+          0.55,
+          0,
+          0.6
+        ],
+        [
+          "impact-sounds/Audio/impactSoft_heavy_001.ogg",
+          0.8,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/PlayerHurt.wav",
+      "duration": 0.572,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -22.786,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "4d0a1a22ecac6529d9274f6cd9027f160f4d9539e6f717a58efd12ee8a49eea9",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactSoft_heavy_001.ogg",
+          1,
+          1,
+          0,
+          null
+        ],
+        [
+          "rpg-audio/Audio/cloth2.ogg",
+          0.9,
+          0.35,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Player/PlayerDeath.wav",
+      "duration": 0.8805,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -21.869,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "3a04c47466dcc03b0654961972fc0c454bd885740bc7130a610f94eb5fa70ccb",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactSoft_heavy_002.ogg",
+          0.65,
+          1,
+          0,
+          null
+        ],
+        [
+          "swishes-sound-pack/swishes/swish-7.wav",
+          0.65,
+          0.4,
+          0.12,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/ChomperWarn.wav",
+      "duration": 0.9789,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -24.4,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "d0a645613c4df135c7a0c85dd507c32ce26bea5316e48fa663914fe8b9ad9c86",
+      "layers": [
+        [
+          "leaves/LeavesTest001/LeavesTest001 003.flac",
+          0.8,
+          1,
+          0,
+          null
+        ],
+        [
+          "leaves/LeavesTest001/LeavesTest001 003.flac",
+          0.65,
+          0.65,
+          0.2,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/ChomperBite.wav",
+      "duration": 0.2402,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -25.072,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "3d6ba74b6142a3c3b58c1ab92f041124130c0d6761f21f5bfe995b999a47c717",
+      "layers": [
+        [
+          "rpg-audio/Audio/chop.ogg",
+          1,
+          1,
+          0,
+          null
+        ],
+        [
+          "leaves/LeavesTest001/LeavesTest001 010.flac",
+          0.9,
+          0.7,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/ChomperHit_1.wav",
+      "duration": 0.5063,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -26.797,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "784da3317aa9d9e79b9584f05ea38e22a02ef5a74f1dda785785bff9ab8e006d",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactSoft_medium_000.ogg",
+          1,
+          1,
+          0,
+          null
+        ],
+        [
+          "leaves/LeavesTest001/LeavesTest001 003.flac",
+          1,
+          0.45,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/ChomperHit_2.wav",
+      "duration": 0.1833,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -21.033,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "0d2eb12178b66f0539ba52f5080e81eafd9301aff950e423336ffd714eeaa6a5",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactSoft_medium_001.ogg",
+          1,
+          1,
+          0,
+          null
+        ],
+        [
+          "leaves/LeavesTest001/LeavesTest001 004.flac",
+          1,
+          0.45,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/ChomperDeath.wav",
+      "duration": 0.8627,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -21.278,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "4768dd89cab1a88da5b012fcd40267c4e615b85148217ce27112816178212899",
+      "layers": [
+        [
+          "leaves/LeavesTest001/LeavesTest001 003.flac",
+          0.65,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/impactSoft_heavy_001.ogg",
+          0.75,
+          0.5,
+          0.1,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/SporaWarn.wav",
+      "duration": 0.65,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -21.776,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "1d9f25a392815221f81690e3956c2348b44ce7bc62923256f3acacfce8783595",
+      "layers": [
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat05.mp3.flac",
+          0.85,
+          1,
+          0,
+          0.55
+        ],
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat02.mp3.flac",
+          0.7,
+          0.65,
+          0.2,
+          0.45
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/SporaLaunch_1.wav",
+      "duration": 0.25,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -20.446,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "b9234ed514bea0217d2976fc90c10802de247bad2e7da2c7e0992bea88095c7c",
+      "layers": [
+        [
+          "swishes-sound-pack/swishes/swish-5.wav",
+          0.7,
+          1,
+          0,
+          null
+        ],
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat07.mp3.flac",
+          1,
+          0.6,
+          0,
+          0.25
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/SporeImpact_1.wav",
+      "duration": 0.4643,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -23.463,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "fbd539fb8ca3190b4b57c382af32c41e7331c616b78b0f62b0f6a75045e30eb5",
+      "layers": [
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat07.mp3.flac",
+          1,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/SporaHit_1.wav",
+      "duration": 0.45,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -18.013,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "cff9507cc27bd065062622e6e86113f8974b35bda7064f4ca8a106f2256b57f3",
+      "layers": [
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat01.mp3.flac",
+          1,
+          1,
+          0,
+          0.45
+        ],
+        [
+          "impact-sounds/Audio/impactSoft_medium_000.ogg",
+          1,
+          0.3,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/SporaLaunch_2.wav",
+      "duration": 0.25,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -21.313,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "090d4031bfd6bf61d770cfa8e73be5b7755da302f355205cefb5e37a2ac52507",
+      "layers": [
+        [
+          "swishes-sound-pack/swishes/swish-6.wav",
+          0.7,
+          1,
+          0,
+          null
+        ],
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat08.mp3.flac",
+          1,
+          0.6,
+          0,
+          0.25
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/SporeImpact_2.wav",
+      "duration": 0.6456,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -27.731,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "367cf3942d7f7663af2940cea0ed3af6bf763ac3bf0d75abd67b3709452295cf",
+      "layers": [
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat08.mp3.flac",
+          1,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/SporaHit_2.wav",
+      "duration": 0.45,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -20.014,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "3b67a2fc32b3be9f82dff14d74d990777e7599c1286ddaeec6bd9887d9dded13",
+      "layers": [
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat02.mp3.flac",
+          1,
+          1,
+          0,
+          0.45
+        ],
+        [
+          "impact-sounds/Audio/impactSoft_medium_001.ogg",
+          1,
+          0.3,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/SporaDeath.wav",
+      "duration": 2.4376,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -24.94,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "146b423c090c06a7765d4a59e4beb40ddf6e35b26105cc7be15d369e66a2742b",
+      "layers": [
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat05.mp3.flac",
+          0.7,
+          1,
+          0,
+          null
+        ],
+        [
+          "leaves/LeavesTest001/LeavesTest001 003.flac",
+          0.9,
+          0.3,
+          0.15,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/RockStep_1.wav",
+      "duration": 0.8935,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -24.435,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "149079e3eac15d62dfa35f538355384b37e67d42d9a340de77fd4e0ca9febcd0",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactMining_000.ogg",
+          0.8,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/impactSoft_heavy_000.ogg",
+          0.7,
+          0.6,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/RockHit_1.wav",
+      "duration": 0.7115,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -24.206,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "197736a253ae1d0ee6715149d64e830192d28dda7b36864d4514088bad7a5e8b",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactMining_002.ogg",
+          0.85,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/impactSoft_medium_000.ogg",
+          1,
+          0.5,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/RockStep_2.wav",
+      "duration": 0.8696,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -25.027,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "d9f2ec5c858023e8f734caabd627892504008454d44fb248d2f268ace964c98c",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactMining_001.ogg",
+          0.8,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/impactSoft_heavy_001.ogg",
+          0.7,
+          0.6,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/RockHit_2.wav",
+      "duration": 0.8334,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -28.618,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "3e382d5342bb03b759f3fa07d7f392506fa8fbc22d974e42d3d90cfa6144410c",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactMining_003.ogg",
+          0.85,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/impactSoft_medium_001.ogg",
+          1,
+          0.5,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/RockWarn.wav",
+      "duration": 1.3398,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -24.575,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "12223583081c643eb5b9805fd5ee73a86ca129bb5c6c142e30d7d5fc763c8dc9",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactMining_001.ogg",
+          0.55,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/impactMining_003.ogg",
+          0.65,
+          0.55,
+          0.25,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/RockSlam.wav",
+      "duration": 1.071,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -24.285,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "baf92a48bc8d406b3280eed561479a7a48ba05f98558e98bf233b82eea21489f",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactMining_004.ogg",
+          0.65,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/impactSoft_heavy_003.ogg",
+          0.65,
+          0.8,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Enemies/RockDeath.wav",
+      "duration": 1.231,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -24.021,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "4f5f9be796fbd03ec818fd0fa489f2babdac399980674744490cc76be2836311",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactMining_002.ogg",
+          0.65,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/impactMining_004.ogg",
+          0.65,
+          0.8,
+          0.16,
+          null
+        ],
+        [
+          "leaves/LeavesTest001/LeavesTest001 003.flac",
+          0.75,
+          0.5,
+          0.3,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Boss/BossSlamWarn.wav",
+      "duration": 1.7167,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -24.154,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "891538586091bc63c702a83a82f83bf779d6e002124bcef8ae87aa526583d586",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactMining_001.ogg",
+          0.5,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/impactMining_003.ogg",
+          0.5,
+          0.9,
+          0.3,
+          null
+        ],
+        [
+          "leaves/LeavesTest001/LeavesTest001 003.flac",
+          0.7,
+          0.4,
+          0.45,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Boss/BossLungeWarn.wav",
+      "duration": 1.408,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -25.591,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "984f2be3d29016c8e6a4273dc52202efed5cb23553c65fa99106ddc4d3aee77f",
+      "layers": [
+        [
+          "leaves/LeavesTest001/LeavesTest001 003.flac",
+          0.65,
+          1,
+          0,
+          null
+        ],
+        [
+          "rpg-audio/Audio/creak2.ogg",
+          0.65,
+          0.55,
+          0.18,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Boss/BossSporeWarn.wav",
+      "duration": 0.75,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -20.217,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "b76c624fe56856bdddf94f5b4d6bc58072c6be0ea4f115bae28b4234660a4643",
+      "layers": [
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat05.mp3.flac",
+          0.6,
+          1,
+          0,
+          0.7
+        ],
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat02.mp3.flac",
+          0.55,
+          0.7,
+          0.2,
+          0.55
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Boss/BossSlam.wav",
+      "duration": 1.3923,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -24.077,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "c3ca3b5d379ff7c60d267c0805c6fda9c377876a8a78ceec4e3ca7b7f8a9ad60",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactMining_004.ogg",
+          0.5,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/impactSoft_heavy_003.ogg",
+          0.55,
+          1.2,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Boss/BossShockwave.wav",
+      "duration": 1.1806,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -23.845,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "004a962064188918b407b64e405276cf58331f5c66b38f605d026c7ef27e6afc",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactMining_003.ogg",
+          0.6,
+          1,
+          0,
+          null
+        ],
+        [
+          "swishes-sound-pack/swishes/swish-9.wav",
+          0.5,
+          0.8,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Boss/BossLunge.wav",
+      "duration": 0.6329,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -22.488,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "766d94badf8555c3580e1787920ba576eacc0aa6977c5f062944369c89cb92c2",
+      "layers": [
+        [
+          "swishes-sound-pack/swishes/swish-9.wav",
+          0.5,
+          1,
+          0,
+          null
+        ],
+        [
+          "rpg-audio/Audio/chop.ogg",
+          0.7,
+          0.6,
+          0.15,
+          null
+        ],
+        [
+          "leaves/LeavesTest001/LeavesTest001 003.flac",
+          0.8,
+          0.4,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Boss/BossVolley.wav",
+      "duration": 0.927,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -24.382,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "d2e2510f97f820a4f989535eb781fad5d43073278d215ba17c655029d8284f16",
+      "layers": [
+        [
+          "swishes-sound-pack/swishes/swish-8.wav",
+          0.6,
+          1,
+          0,
+          null
+        ],
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat07.mp3.flac",
+          0.7,
+          0.7,
+          0,
+          null
+        ],
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat08.mp3.flac",
+          0.8,
+          0.5,
+          0.12,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Boss/BossHit.wav",
+      "duration": 0.8639,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -25.992,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "da15bbe496d2b54d1c104bfcd2bf570fff15abd362a19f9aa75ebd23c22c2b41",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactMining_002.ogg",
+          0.7,
+          1,
+          0,
+          null
+        ],
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat07.mp3.flac",
+          0.8,
+          0.35,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Boss/BossPhase.wav",
+      "duration": 3.106,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -30.414,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "47dab85de2fbc1b43171561145fd0e760c23e5ee903e8c70080c65490bd2dda6",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactMining_003.ogg",
+          0.55,
+          1,
+          0,
+          null
+        ],
+        [
+          "magical_4.ogg",
+          0.6,
+          0.45,
+          0,
+          null
+        ],
+        [
+          "leaves/LeavesTest001/LeavesTest001 003.flac",
+          0.7,
+          0.4,
+          0.25,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Boss/BossDeath.wav",
+      "duration": 2.475,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -25.572,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "aef64f892682ff0b45e2d262c287053f6a30674687ccf4b27085b6c71a31b7fa",
+      "layers": [
+        [
+          "impact-sounds/Audio/impactMining_004.ogg",
+          0.55,
+          1,
+          0,
+          null
+        ],
+        [
+          "impact-sounds/Audio/impactMining_002.ogg",
+          0.55,
+          0.7,
+          0.25,
+          null
+        ],
+        [
+          "independent_nu_ljudbank-wet_squish_slurp_impacts/impsplat/impactsplat05.mp3.flac",
+          0.75,
+          0.35,
+          0.2,
+          null
+        ],
+        [
+          "leaves/LeavesTest001/LeavesTest001 003.flac",
+          0.65,
+          0.4,
+          0.6,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Blooms/WhisperseedRecruit.wav",
+      "duration": 1.1104,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -19.11,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "d2367e5ed48643d14f729d29615a8658ef6df5e8110e419de84e01273fd81572",
+      "layers": [
+        [
+          "magical_6_0.ogg",
+          1,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Blooms/DryadRecruit.wav",
+      "duration": 1.2069,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -19.141,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "26c9b353b1030e5ac6d953ade01235d2b6eabc06ed24bc98f7d314c004743751",
+      "layers": [
+        [
+          "magical_6_0.ogg",
+          0.92,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Blooms/PetalbornRecruit.wav",
+      "duration": 1.0281,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -18.929,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "9acd511a4e31689382893eb4e2a616d410b4677f231839ae818a561717cff839",
+      "layers": [
+        [
+          "magical_6_0.ogg",
+          1.08,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Boss/CrystalAppear.wav",
+      "duration": 2.0229,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -17.9,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "f34a2d176ffcc4c5fd61b07740406e17bd23ec6bb684a0441d8f8abd7cebfa8b",
+      "layers": [
+        [
+          "magical_3.ogg",
+          0.9,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/Boss/CrystalTouch.wav",
+      "duration": 1.0281,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -18.929,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "9acd511a4e31689382893eb4e2a616d410b4677f231839ae818a561717cff839",
+      "layers": [
+        [
+          "magical_6_0.ogg",
+          1.08,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/UI/MenuFocus.wav",
+      "duration": 0.1024,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -25.402,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "0f74d5e9a1d9ddaeb1020aa5b111e93aed63c0aa81fb159656141971923275d2",
+      "layers": [
+        [
+          "interface-sounds/Audio/pluck_001.ogg",
+          1,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/UI/MenuClick.wav",
+      "duration": 0.1646,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -24.969,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "aa868b3f4f6871ef9f7796990bcdf7403a341d2d32df4d7164d82c98a0a02168",
+      "layers": [
+        [
+          "interface-sounds/Audio/click_003.ogg",
+          1,
+          1,
+          0,
+          null
+        ],
+        [
+          "interface-sounds/Audio/pluck_002.ogg",
+          1,
+          0.4,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/UI/Pause.wav",
+      "duration": 0.1205,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -25.301,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "a12a5355a4f1499daba29f8d021a3242e58a501a6887ebfb1f7ba8b95fac8830",
+      "layers": [
+        [
+          "interface-sounds/Audio/pluck_001.ogg",
+          0.85,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/SFX/UI/Resume.wav",
+      "duration": 0.1496,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peakDbFS": -6.0,
+      "rmsDbFS": -22.494,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0,
+      "lastSampleMax": 0.0,
+      "sha256": "59fc3b7e2a485a859f62cd9d594048afc2eaf70e3b28011837a03ac8be721f36",
+      "layers": [
+        [
+          "interface-sounds/Audio/pluck_002.ogg",
+          1.1,
+          1,
+          0,
+          null
+        ]
+      ]
+    },
+    {
+      "path": "Assets/Audio/Ambience/Prismbloom_Ambience.wav",
+      "duration": 22.8372,
+      "sampleRate": 44100,
+      "channels": 2,
+      "peakDbFS": -12.0,
+      "rmsDbFS": -25.171,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.057037353515625,
+      "lastSampleMax": 0.056854248046875,
+      "sha256": "106ec7d713978a7861c90bd315dfbb33902dd7c2562ccfece958526c8768c59c",
+      "layers": [
+        [
+          "wind woosh loop.ogg",
+          1,
+          "stereo loop overlap 250ms"
+        ],
+        [
+          "LeavesTest001 003.flac",
+          "sparse overlay"
+        ]
+      ],
+      "seamDifference": 0.00016340014058299074
+    },
+    {
+      "path": "Assets/Audio/Ambience/Gloamthorne_Ambience.wav",
+      "duration": 24.9099,
+      "sampleRate": 44100,
+      "channels": 2,
+      "peakDbFS": -12.0,
+      "rmsDbFS": -25.153,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.0103759765625,
+      "lastSampleMax": 0.00885009765625,
+      "sha256": "6aa74dab88a22cef4be3facf3b7bba0c11c2d9857e7b6fa4cab64b3ab8bc1295",
+      "layers": [
+        [
+          "wind woosh loop.ogg",
+          0.92,
+          "stereo loop overlap 250ms"
+        ],
+        [
+          "LeavesTest001 003.flac",
+          "sparse overlay"
+        ]
+      ],
+      "seamDifference": 0.003996151565762429
+    },
+    {
+      "path": "Assets/Audio/Ambience/Ashpetal_Ambience.wav",
+      "duration": 27.0437,
+      "sampleRate": 44100,
+      "channels": 2,
+      "peakDbFS": -12.0,
+      "rmsDbFS": -25.154,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.037017822265625,
+      "lastSampleMax": 0.035797119140625,
+      "sha256": "b9d6a72bd17ee72750870bd43a7155deaa943bcb220f94759eb525ba6ae39c07",
+      "layers": [
+        [
+          "wind woosh loop.ogg",
+          0.85,
+          "stereo loop overlap 250ms"
+        ],
+        [
+          "LeavesTest001 003.flac",
+          "sparse overlay"
+        ]
+      ],
+      "seamDifference": 0.002277185643155346
+    },
+    {
+      "path": "Assets/Audio/Ambience/Boss_Ambience.wav",
+      "duration": 30.7829,
+      "sampleRate": 44100,
+      "channels": 2,
+      "peakDbFS": -12.0,
+      "rmsDbFS": -25.138,
+      "clippedSamples": 0,
+      "firstSampleMax": 0.056640625,
+      "lastSampleMax": 0.058380126953125,
+      "sha256": "708d5da3e3a1dce811a4a37400718917c76c46274c2061a20931a27a8b7a9de2",
+      "layers": [
+        [
+          "wind woosh loop.ogg",
+          0.75,
+          "stereo loop overlap 250ms"
+        ],
+        [
+          "LeavesTest001 003.flac",
+          "none"
+        ]
+      ],
+      "seamDifference": 0.002829853187435397
+    }
+  ],
+  "sources": [
+    {
+      "pack": "KenneyRPG",
+      "creator": "Kenney (Kenney Vleugels)",
+      "url": "https://kenney.nl/assets/rpg-audio",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "files": [
+        {
+          "name": "kenney_rpg-audio.zip",
+          "sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b"
+        }
+      ]
+    },
+    {
+      "pack": "KenneyImpacts",
+      "creator": "Kenney (Kenney Vleugels)",
+      "url": "https://kenney.nl/assets/impact-sounds",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "files": [
+        {
+          "name": "kenney_impact-sounds.zip",
+          "sha256": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8"
+        }
+      ]
+    },
+    {
+      "pack": "KenneyInterface",
+      "creator": "Kenney (Kenney Vleugels)",
+      "url": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "files": [
+        {
+          "name": "kenney_interface-sounds.zip",
+          "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232"
+        }
+      ]
+    },
+    {
+      "pack": "Swishes",
+      "creator": "artisticdude",
+      "url": "https://opengameart.org/content/swishes-sound-pack",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "files": [
+        {
+          "name": "swishes.zip",
+          "sha256": "7980215241b739a787dcf26f660ce510bb237900968789395a86911619795693"
+        }
+      ]
+    },
+    {
+      "pack": "WetSquish",
+      "creator": "Independent.nu",
+      "url": "https://opengameart.org/content/8-wet-squish-slurp-impacts",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "files": [
+        {
+          "name": "independent_nu_ljudbank-wet_squish_slurp_impacts.7z",
+          "sha256": "81fba6009d1b3e48c258b122eef735ed27e86a2dcace9b6a2c93d05b80c83515"
+        }
+      ]
+    },
+    {
+      "pack": "Leaves",
+      "creator": "Tim Mortimer",
+      "url": "https://opengameart.org/content/leaves-cracking-and-crumbling",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "files": [
+        {
+          "name": "leaves.7z",
+          "sha256": "2b4e6ae992d45530b95e1e7b0c08505f45af30fd5c6fb9e419f365d0e5f3aa43"
+        }
+      ]
+    },
+    {
+      "pack": "Fireball",
+      "creator": "Julien Matthey",
+      "url": "https://opengameart.org/content/fireball-1",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "files": [
+        {
+          "name": "105016__julien-matthey__jm-fx-fireball-01.wav",
+          "sha256": "3992598c814de25c318780e506aeda673a7e410b7b3c4f0793883483ff9766b8"
+        }
+      ]
+    },
+    {
+      "pack": "Magic",
+      "creator": "JaggedStone",
+      "url": "https://opengameart.org/content/magic-spell-sfx",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "files": [
+        {
+          "name": "magical_6_0.ogg",
+          "sha256": "0a18ee3460cf3fd79c3771bbf94c20c26d34b65ab60d0b0e15694ffcad815955"
+        },
+        {
+          "name": "magical_3.ogg",
+          "sha256": "9fac648a1de869cf9ca2f4b3f1cd47f1766a3ee9d2fdec45831234401d7b2392"
+        },
+        {
+          "name": "magical_4.ogg",
+          "sha256": "b7862d109b4013dfb2a389a10f8917203beb0efc458444bc5a1b8ada605cc118"
+        }
+      ]
+    },
+    {
+      "pack": "Wind",
+      "creator": "SketchMan3",
+      "url": "https://opengameart.org/content/wind-whoosh-loop",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "files": [
+        {
+          "name": "wind woosh loop.ogg",
+          "sha256": "0cfdbd3f21ed449689a9024264edf267d0037a6495813a7010827672ec191dac"
+        }
+      ]
+    }
+  ]
+}

@@ -31,6 +31,9 @@ public class Movement : MonoBehaviour
     public Vector2 AimDirection { get; private set; } = Vector2.right;
     public bool IsGrounded { get; private set; }
     public event System.Action DoubleJumped;
+    public event System.Action Jumped;
+    public event System.Action<float> Landed;
+    private float fallSpeedForLanding;
 
     private void Awake()
     {
@@ -82,7 +85,14 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        bool wasGrounded = IsGrounded;
+        fallSpeedForLanding = Mathf.Max(fallSpeedForLanding, -body.linearVelocity.y);
         IsGrounded = CheckGrounded();
+        if (IsGrounded)
+        {
+            if (!wasGrounded && fallSpeedForLanding > 0f) Landed?.Invoke(fallSpeedForLanding);
+            fallSpeedForLanding = 0f;
+        }
         if (IsGrounded) airJumpAvailable = true;
 
         var velocity = body.linearVelocity;
@@ -93,6 +103,7 @@ public class Movement : MonoBehaviour
             {
                 velocity.y = jumpSpeed;
                 IsGrounded = false;
+                Jumped?.Invoke();
             }
             else if (airJumpAvailable)
             {

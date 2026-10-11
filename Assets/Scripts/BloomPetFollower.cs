@@ -102,6 +102,7 @@ public sealed class BloomPetFollower : MonoBehaviour
         group.Register(this);
         seenJumpRevision = group.JumpRevision;
         flashRemaining = recruitmentFlashDuration;
+        GetComponent<GameplaySfx>()?.Recruit();
     }
 
     private void FixedUpdate()

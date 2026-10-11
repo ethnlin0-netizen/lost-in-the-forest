@@ -25,6 +25,7 @@ public sealed class BossCrystalExit : MonoBehaviour
         if (menu != null)
         {
             returningToMenu = menu.ReturnToMainMenu();
+            if (returningToMenu) GameAudioController.Instance?.PlayTransition(GameSound.CrystalTouch, this);
             return;
         }
 
@@ -35,6 +36,7 @@ public sealed class BossCrystalExit : MonoBehaviour
             return;
         }
         returningToMenu = true;
+        GameAudioController.Instance?.PlayTransition(GameSound.CrystalTouch, this);
         Time.timeScale = 1f;
         AudioListener.pause = false;
         if (SceneManager.LoadSceneAsync(TitleMenu.TitleSceneName, LoadSceneMode.Single) == null)

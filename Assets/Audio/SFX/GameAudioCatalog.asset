@@ -1,0 +1,372 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 690e9dab5b03ac14ab6fc91a68049c5c, type: 3}
+  m_Name: GameAudioCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudioCatalog
+  cues:
+  - sound: 0
+    clips:
+    - {fileID: 8300000, guid: d7fd88af7282245458e9213a15ee1a09, type: 3}
+    - {fileID: 8300000, guid: c2a7a21eeb065914688e8826506ff19c, type: 3}
+    - {fileID: 8300000, guid: ab22cb4b849d3004dbe269756eae8289, type: 3}
+    volume: 0.24
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.17
+    priority: 180
+    maximumConcurrent: 3
+  - sound: 3
+    clips:
+    - {fileID: 8300000, guid: e88e730ba7047374ba02304e4a8d6bfb, type: 3}
+    - {fileID: 8300000, guid: afc62764758ce804e9a0446c5b1fd941, type: 3}
+    - {fileID: 8300000, guid: 2f108a19f623efb448b151ccd64c1005, type: 3}
+    volume: 0.35
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.12
+    priority: 160
+    maximumConcurrent: 3
+  - sound: 1
+    clips:
+    - {fileID: 8300000, guid: c6a83992d0ba0964cb1c4bdcb8d5946c, type: 3}
+    volume: 0.38
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.09
+    priority: 140
+    maximumConcurrent: 3
+  - sound: 2
+    clips:
+    - {fileID: 8300000, guid: de7c74ddc98e83740b9ba3bb4b166355, type: 3}
+    volume: 0.4
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.09
+    priority: 130
+    maximumConcurrent: 3
+  - sound: 4
+    clips:
+    - {fileID: 8300000, guid: 561a4b7f0779d2048979c4e1a8bb0203, type: 3}
+    volume: 0.5
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.09
+    priority: 140
+    maximumConcurrent: 3
+  - sound: 5
+    clips:
+    - {fileID: 8300000, guid: 95a0432a7ce1d0b49b0f4641df0cf295, type: 3}
+    - {fileID: 8300000, guid: 587b76e49b0f6f94abb7f92d2941e73c, type: 3}
+    volume: 0.53
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.08
+    priority: 100
+    maximumConcurrent: 3
+  - sound: 6
+    clips:
+    - {fileID: 8300000, guid: e95a9d029beb7fa4f9c0fc3ab4e07d71, type: 3}
+    - {fileID: 8300000, guid: 61470f0fe1d92fc478e9a16d71e418ad, type: 3}
+    volume: 0.45
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.12
+    priority: 100
+    maximumConcurrent: 3
+  - sound: 7
+    clips:
+    - {fileID: 8300000, guid: 6ea802453721c8c4c991def4eeb7ee04, type: 3}
+    - {fileID: 8300000, guid: 17f23a243d7f58346a92fefee1892ade, type: 3}
+    volume: 0.5
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.14
+    priority: 110
+    maximumConcurrent: 3
+  - sound: 8
+    clips:
+    - {fileID: 8300000, guid: 8427eb06b84a9544fa9f86e8fe5a45fb, type: 3}
+    volume: 0.5
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.2
+    priority: 70
+    maximumConcurrent: 1
+  - sound: 9
+    clips:
+    - {fileID: 8300000, guid: f3f3b15b9ef3cbf44a2d847773181bf5, type: 3}
+    volume: 0.55
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.5
+    priority: 40
+    maximumConcurrent: 1
+  - sound: 10
+    clips:
+    - {fileID: 8300000, guid: 0e6541bd9be9604478bedf1eff95d452, type: 3}
+    volume: 0.52
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.2
+    priority: 35
+    maximumConcurrent: 3
+  - sound: 11
+    clips:
+    - {fileID: 8300000, guid: 91f756240188d7e43bd2e3dc54324ea8, type: 3}
+    volume: 0.6
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.15
+    priority: 80
+    maximumConcurrent: 3
+  - sound: 12
+    clips:
+    - {fileID: 8300000, guid: 145ce125c78b02d4a998674e5d15e74f, type: 3}
+    - {fileID: 8300000, guid: 8e90c4030b829bf4382c20b9a867b753, type: 3}
+    volume: 0.42
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.1
+    priority: 115
+    maximumConcurrent: 3
+  - sound: 13
+    clips:
+    - {fileID: 8300000, guid: f18826fdf1ad4ec4593076e475d6d20f, type: 3}
+    volume: 0.58
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.4
+    priority: 45
+    maximumConcurrent: 2
+  - sound: 14
+    clips:
+    - {fileID: 8300000, guid: 1436c0d97893dbd49b8e5a5be3fd262e, type: 3}
+    volume: 0.48
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.2
+    priority: 35
+    maximumConcurrent: 3
+  - sound: 15
+    clips:
+    - {fileID: 8300000, guid: ef6c62bf726d4e043856594a4f0c8c5b, type: 3}
+    - {fileID: 8300000, guid: db78a2f85c9f4c647ae01022cb809f10, type: 3}
+    volume: 0.48
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.2
+    priority: 90
+    maximumConcurrent: 3
+  - sound: 16
+    clips:
+    - {fileID: 8300000, guid: 650e4ba50c437e34bb45aadfb468c5fa, type: 3}
+    - {fileID: 8300000, guid: c51169f4ff5a28a4381ea71556302274, type: 3}
+    volume: 0.42
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.16
+    priority: 120
+    maximumConcurrent: 3
+  - sound: 17
+    clips:
+    - {fileID: 8300000, guid: 41101d381c0fd584bb364537b31f8f83, type: 3}
+    - {fileID: 8300000, guid: 4931789891eb9ac4096e740775ebcd9a, type: 3}
+    volume: 0.4
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.1
+    priority: 115
+    maximumConcurrent: 3
+  - sound: 18
+    clips:
+    - {fileID: 8300000, guid: ae76abce87a25054cab16e1d9a9a30db, type: 3}
+    volume: 0.5
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.4
+    priority: 45
+    maximumConcurrent: 2
+  - sound: 19
+    clips:
+    - {fileID: 8300000, guid: 33dce61a5eb3fb8428f119c94aac1fa9, type: 3}
+    - {fileID: 8300000, guid: 1e0357aec350f384880b02da8d83d697, type: 3}
+    volume: 0.4
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.25
+    priority: 175
+    maximumConcurrent: 2
+  - sound: 22
+    clips:
+    - {fileID: 8300000, guid: 071f6bcfa07296342aa3da5bfa5167e1, type: 3}
+    - {fileID: 8300000, guid: 632795c6fbc4a654b9eaf8a8a51af44b, type: 3}
+    volume: 0.45
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.12
+    priority: 110
+    maximumConcurrent: 3
+  - sound: 20
+    clips:
+    - {fileID: 8300000, guid: 816f5219c9a446a40908acc9b3a7f16e, type: 3}
+    volume: 0.58
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.25
+    priority: 30
+    maximumConcurrent: 3
+  - sound: 21
+    clips:
+    - {fileID: 8300000, guid: f26dc5e08faa51041bd0b7ab43a985b6, type: 3}
+    volume: 0.65
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.25
+    priority: 70
+    maximumConcurrent: 2
+  - sound: 23
+    clips:
+    - {fileID: 8300000, guid: 677e6fe030c864a4ebf3544d7f72b4ae, type: 3}
+    volume: 0.6
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.4
+    priority: 40
+    maximumConcurrent: 2
+  - sound: 24
+    clips:
+    - {fileID: 8300000, guid: 500637cef63362a4e849cd2ba03f69bc, type: 3}
+    volume: 0.65
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.3
+    priority: 20
+    maximumConcurrent: 1
+  - sound: 25
+    clips:
+    - {fileID: 8300000, guid: edc02a21cc5a29d48bc1387644a1cb17, type: 3}
+    volume: 0.62
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.3
+    priority: 20
+    maximumConcurrent: 1
+  - sound: 26
+    clips:
+    - {fileID: 8300000, guid: 33b3667164c055546a9d3e27f24e84eb, type: 3}
+    volume: 0.65
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.3
+    priority: 20
+    maximumConcurrent: 1
+  - sound: 27
+    clips:
+    - {fileID: 8300000, guid: 07a213d8048016d4196b963e6605cd94, type: 3}
+    volume: 0.7
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.2
+    priority: 40
+    maximumConcurrent: 1
+  - sound: 28
+    clips:
+    - {fileID: 8300000, guid: c5502e87c65494748afb2f9015ba8f26, type: 3}
+    volume: 0.45
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.25
+    priority: 75
+    maximumConcurrent: 2
+  - sound: 29
+    clips:
+    - {fileID: 8300000, guid: ab6687cbad0e0ae4486f8b03ead612b3, type: 3}
+    volume: 0.65
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.3
+    priority: 40
+    maximumConcurrent: 1
+  - sound: 30
+    clips:
+    - {fileID: 8300000, guid: fa56ee758ca509f4283e57c9f8fd5d90, type: 3}
+    volume: 0.55
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.3
+    priority: 40
+    maximumConcurrent: 1
+  - sound: 31
+    clips:
+    - {fileID: 8300000, guid: 311b6b836175aad479a77b43d78a00ec, type: 3}
+    volume: 0.48
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.12
+    priority: 90
+    maximumConcurrent: 2
+  - sound: 32
+    clips:
+    - {fileID: 8300000, guid: 637b8a3445b4c174786d0722c09009f3, type: 3}
+    volume: 0.65
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.8
+    priority: 15
+    maximumConcurrent: 1
+  - sound: 33
+    clips:
+    - {fileID: 8300000, guid: 2ad70ea085fc75847be3a2a20a2aecd0, type: 3}
+    volume: 0.7
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 1
+    priority: 10
+    maximumConcurrent: 1
+  - sound: 34
+    clips:
+    - {fileID: 8300000, guid: 34e63a6f7efcc9b4581350a7a33c747f, type: 3}
+    volume: 0.35
+    pitch: {x: 1, y: 1}
+    minimumInterval: 0.3
+    priority: 130
+    maximumConcurrent: 2
+  - sound: 35
+    clips:
+    - {fileID: 8300000, guid: 6f841a54e82650847bb18050cabc40d0, type: 3}
+    volume: 0.35
+    pitch: {x: 1, y: 1}
+    minimumInterval: 0.3
+    priority: 130
+    maximumConcurrent: 2
+  - sound: 36
+    clips:
+    - {fileID: 8300000, guid: f3968ed8937b42f4d97de83d632a6e60, type: 3}
+    volume: 0.35
+    pitch: {x: 1, y: 1}
+    minimumInterval: 0.3
+    priority: 130
+    maximumConcurrent: 2
+  - sound: 37
+    clips:
+    - {fileID: 8300000, guid: e19bf332b1dd89941ad732f5c96f7d81, type: 3}
+    volume: 0.45
+    pitch: {x: 1, y: 1}
+    minimumInterval: 0.5
+    priority: 45
+    maximumConcurrent: 1
+  - sound: 38
+    clips:
+    - {fileID: 8300000, guid: 78f601552b9f6fb46935e6f423efd83f, type: 3}
+    volume: 0.45
+    pitch: {x: 1, y: 1}
+    minimumInterval: 0.5
+    priority: 40
+    maximumConcurrent: 1
+  - sound: 39
+    clips:
+    - {fileID: 8300000, guid: e52cb66478106ad4e89bf909d542ecb7, type: 3}
+    volume: 0.2
+    pitch: {x: 1, y: 1}
+    minimumInterval: 0.12
+    priority: 140
+    maximumConcurrent: 2
+  - sound: 40
+    clips:
+    - {fileID: 8300000, guid: d6b6fb2902f1d124098789fa85c063a2, type: 3}
+    volume: 0.35
+    pitch: {x: 1, y: 1}
+    minimumInterval: 0.15
+    priority: 60
+    maximumConcurrent: 2
+  - sound: 41
+    clips:
+    - {fileID: 8300000, guid: c4c4b662edbb7d242aee6cc74014e347, type: 3}
+    volume: 0.35
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.3
+    priority: 55
+    maximumConcurrent: 1
+  - sound: 42
+    clips:
+    - {fileID: 8300000, guid: cfdd2395e2150ed49a238f53514204f1, type: 3}
+    volume: 0.35
+    pitch: {x: 0.97, y: 1.03}
+    minimumInterval: 0.3
+    priority: 55
+    maximumConcurrent: 1

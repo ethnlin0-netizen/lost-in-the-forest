@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 51724841}
   - component: {fileID: 51724840}
   - component: {fileID: 51724842}
+  - component: {fileID: 51724845}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -268,6 +269,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &51724845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51724839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcdba6555ef45084a944121a233a62a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuButtonSfx
 --- !u!1 &78770666
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,6 +431,7 @@ GameObject:
   - component: {fileID: 160868996}
   - component: {fileID: 160868998}
   - component: {fileID: 160868995}
+  - component: {fileID: 160868999}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -554,6 +568,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &160868999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160868993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcdba6555ef45084a944121a233a62a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuButtonSfx
 --- !u!1 &261736199
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +592,7 @@ GameObject:
   - component: {fileID: 261736202}
   - component: {fileID: 261736201}
   - component: {fileID: 261736200}
+  - component: {fileID: 261736204}
   m_Layer: 5
   m_Name: CreditsButton
   m_TagString: Untagged
@@ -686,6 +713,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &261736204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261736199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcdba6555ef45084a944121a233a62a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuButtonSfx
 --- !u!1 &286254985
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +737,7 @@ GameObject:
   - component: {fileID: 286254989}
   - component: {fileID: 286254988}
   - component: {fileID: 286254987}
+  - component: {fileID: 286254990}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -818,6 +858,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286254985}
   m_CullTransparentMesh: 1
+--- !u!114 &286254990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286254985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcdba6555ef45084a944121a233a62a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuButtonSfx
 --- !u!1 &288499514
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,6 +907,57 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &500400097
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 500400099}
+  - component: {fileID: 500400098}
+  m_Layer: 0
+  m_Name: GameAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &500400098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500400097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae98e5f3641b85b408d61ce48ce687cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudioController
+  catalog: {fileID: 11400000, guid: 12c2972f51316c447b8d6b7b621878d0, type: 2}
+  music: {fileID: 0}
+  ambience: {fileID: 0}
+  musicVolume: 0.6
+  effectsVolume: 0.8
+  ambienceVolume: 0.12
+  voiceLimit: 24
+--- !u!4 &500400099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500400097}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &780502098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,6 +1315,7 @@ GameObject:
   - component: {fileID: 907907350}
   - component: {fileID: 907907349}
   - component: {fileID: 907907348}
+  - component: {fileID: 907907352}
   m_Layer: 5
   m_Name: ControlsButton
   m_TagString: Untagged
@@ -1332,6 +1436,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &907907352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907907347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcdba6555ef45084a944121a233a62a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuButtonSfx
 --- !u!1 &928304710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1556,6 +1672,7 @@ GameObject:
   - component: {fileID: 1079513218}
   - component: {fileID: 1079513217}
   - component: {fileID: 1079513219}
+  - component: {fileID: 1079513220}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -1676,6 +1793,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1079513220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079513215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcdba6555ef45084a944121a233a62a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuButtonSfx
 --- !u!1 &1234435815
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,7 +2001,27 @@ MonoBehaviour:
     Matthew Mirfield - AI Programmer
 
 
-    Ethan Lin - Level Designer'
+    Ethan Lin - Level Designer
+
+
+    Music by Scott Buckley
+
+    Echoes Of Home, Moonlight, Reverie, Decoherence
+
+    www.scottbuckley.com.au
+
+    CC BY 4.0 - creativecommons.org/licenses/by/4.0/
+
+    Adapted: excerpts, loop crossfades and volume adjustment.
+
+
+    Leaf effects by Tim Mortimer (OpenGameArt)
+
+    opengameart.org/content/leaves-cracking-and-crumbling
+
+    CC BY 3.0 - creativecommons.org/licenses/by/3.0/
+
+    Adapted: trimming, pitch, layering and volume adjustment.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1902,9 +2051,9 @@ MonoBehaviour:
   m_fontSize: 29
   m_fontSizeBase: 29
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 10
+  m_fontSizeMax: 29
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -2821,3 +2970,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1487472585}
   - {fileID: 1234435816}
+  - {fileID: 500400099}

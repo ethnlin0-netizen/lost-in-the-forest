@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9175158209976387829}
   - component: {fileID: 6608690224802830015}
   - component: {fileID: 620650242566220165}
+  - component: {fileID: 921032141140030444}
   m_Layer: 0
   m_Name: PlaceholderProjectile
   m_TagString: Untagged
@@ -169,7 +170,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f5eef40d54e4c7f9b425308d9b4fd58, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlaceholderProjectile
 --- !u!114 &620650242566220165
 MonoBehaviour:
@@ -181,7 +182,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0d450fef481f9d468fd5be9469c809f, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireballAnimation
   frames:
   - {fileID: 974546548, guid: ebf365dac7e047b4593b4bd4d4d2147a, type: 3}
@@ -189,3 +190,18 @@ MonoBehaviour:
   - {fileID: 654960987, guid: ebf365dac7e047b4593b4bd4d4d2147a, type: 3}
   - {fileID: 1558871825, guid: ebf365dac7e047b4593b4bd4d4d2147a, type: 3}
   framesPerSecond: 16
+--- !u!114 &921032141140030444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764452908000173437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ed93eefb5368647be66d2b504b5bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplaySfx
+  role: 8
+  volume: 1
+  stepDistance: 1.7

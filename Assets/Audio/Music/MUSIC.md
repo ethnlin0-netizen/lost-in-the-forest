@@ -1,6 +1,6 @@
 # Lost in the Forest — biome music
 
-Six cinematic fantasy selections matched to the six forest backgrounds, progressing from luminous woodland to ominous corruption. These are edited excerpts of existing music by Scott Buckley, not original compositions for this game. No scenes, prefabs, gameplay scripts, mixers, UI or project settings were edited or saved. Music playback integration is a separate task.
+Six cinematic fantasy selections matched to the six forest backgrounds, progressing from luminous woodland to ominous corruption. These are edited excerpts of existing music by Scott Buckley, not original compositions for this game. The initial asset preparation did not edit scenes or gameplay. The GameLoop scenes now include music playback as described below.
 
 ## Selections and measured results
 
@@ -34,7 +34,24 @@ Exact durations, gain, excerpt boundaries, source/output hashes and measurements
 
 ## Unity import
 
-Prepared loops and retained sources use stereo (Force To Mono off), Streaming, Vorbis, quality 80%, Preserve Sample Rate (44,100 Hz), Load In Background on and Preload Audio Data off. The running Unity Editor creates and preserves all `.meta` files. No AudioSource or playback code is added. Select a loop in the Project window and use its AudioClip Inspector preview with looping enabled to audition it without entering Play mode or opening a scene.
+Prepared loops and retained sources use stereo (Force To Mono off), Streaming, Vorbis, quality 80%, Preserve Sample Rate (44,100 Hz), Load In Background on and Preload Audio Data off. The running Unity Editor creates and preserves all `.meta` files. Select a loop in the Project window and use its AudioClip Inspector preview with looping enabled to audition it.
+
+## GameLoop playback
+
+| Scene under Assets/Scenes/GameLoop | Prepared loop |
+| --- | --- |
+| PrismbloomLevel01 | PrismbloodForest_Loop.wav |
+| GloamthorneLevel02 | GloamthornCanopy_Loop.wav |
+| Level03 | AshpetalForest_Loop.wav |
+| Boss | DreadcrownForest_Loop.wav |
+
+Each scene has one `LevelMusic` object with an AudioSource set to Play On Awake, Loop, 2D (Spatial Blend 0), volume 0.6 and pitch 1. No persistent music object or additional listener is created; unloading a scene removes its source. The existing menu's AudioListener pause also pauses music. Music follows scene changes directly, without crossfading. No mixer exists in the project, so output uses the default audio bus.
+
+`Tools/ConfigureGameLoopMusic.cs` is an Editor setup snippet for Unity CLI eval_file, not a runtime gameplay script. It updates the scene-owned sources idempotently. Scene geometry, player and enemy components, and clip import settings remain unchanged. The game's existing credits panel includes the creator, titles, website, license URL and adaptation notice for these four selections.
+
+Verified in Unity 6000.6.1f1 Play mode on October 10, 2026 with `Tools/VerifyGameLoopMusic.cs`: all four scenes loaded their assigned clip, automatically played with an advancing audio cursor, had one source and one enabled listener, paused/resumed with AudioListener.pause, wrapped after a seek near the clip end, and removed the previous scene's music source on a single-scene load. The checks used normal Unity and audio callbacks; the pause check allows queued audio to settle before measuring. Scenes were loaded through the Editor's Play-mode scene API, including Boss, which is not currently in the build scene list. This does not verify progression through the full game or add Boss to that list.
+
+The existing title credits panel was opened in Play mode: the music credit was active and TextMeshPro reported no overflow at the current Game view size. Automatic text sizing was enabled for the longer credit. Scene-file comparison found only the added music objects/root references plus Unity's automatic serialization of two default fields in PrismbloomLevel01; no gameplay objects were removed or repositioned. Listening was unavailable: advancing playback and loop wrapping do not establish audible quality, seamless phrases, volume balance during combat, or three full heard repetitions.
 
 ## Checks and listening limitations
 
@@ -59,4 +76,4 @@ Suggested game credit block:
 
 The composer’s usage guidance also requests synchronization with a media project rather than isolated music resale/streaming reuploads, and excludes registration with audio-fingerprinting/Content ID services. These files are prepared for later integration into Lost in the Forest.
 
-These music assets are prepared for later scene integration. Listening acceptance remains pending.
+The four GameLoop scenes use the selections listed above. Listening acceptance remains pending.

@@ -33,7 +33,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         for (int i = 0; i < renderers.Length; i++) colors[i] = renderers[i].color;
     }
 
-    public void TakeDamage(float amount, Vector2 direction, float knockbackImpulse)
+    public virtual void TakeDamage(float amount, Vector2 direction, float knockbackImpulse)
     {
         if (IsDead || amount <= 0f) return;
         CurrentHealth = Mathf.Max(0f, CurrentHealth - amount);

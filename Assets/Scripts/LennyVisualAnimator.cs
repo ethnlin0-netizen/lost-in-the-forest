@@ -9,6 +9,8 @@ public sealed class LennyVisualAnimator : MonoBehaviour
     [SerializeField] private SpriteRenderer artwork;
     [SerializeField] private Material artworkMaterial;
     [SerializeField] private Rect visiblePixels;
+    [Tooltip("Optional separated body artwork when wings and tail are animated by LennyAnimation.")]
+    [SerializeField] private Texture2D separatedBodyTexture;
     private Movement movement;
     private PlayerCombat combat;
     private PlayerHealth health;
@@ -56,6 +58,7 @@ public sealed class LennyVisualAnimator : MonoBehaviour
         artwork.enabled = false;
         IsReady = true;
         Pose();
+        rig.gameObject.SetActive(enabled);
     }
 
     private void BuildMesh()
@@ -172,6 +175,13 @@ public sealed class LennyVisualAnimator : MonoBehaviour
         mesh.vertices = vertices;
         rig.localScale = new Vector3(movement.FacingDirection, 1, 1);
         properties.SetColor("_Tint", Color.Lerp(artwork.color, new Color(1, .85f, .5f), charge * .25f));
+        if (separatedBodyTexture != null)
+        {
+            properties.SetTexture("_MainTex", separatedBodyTexture);
+            // The separate wings and tail inherit the same hit/death tint as the body mesh.
+            var bodyVisual = GetComponent<SpriteRenderer>();
+            if (bodyVisual != null) bodyVisual.color = artwork.color;
+        }
         meshRenderer.SetPropertyBlock(properties);
     }
 

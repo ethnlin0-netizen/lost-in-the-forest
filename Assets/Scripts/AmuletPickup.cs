@@ -16,14 +16,15 @@ public class AmuletPickup : MonoBehaviour
         if (loading || other.attachedRigidbody == null ||
             other.attachedRigidbody.GetComponent<Movement>() == null) return;
         // Keep the amulet available while the next level is still being built.
-        if (string.IsNullOrWhiteSpace(nextScene) || !Application.CanStreamedLevelBeLoaded(nextScene))
+        string destination = StoryRunSession.Destination(nextScene);
+        if (string.IsNullOrWhiteSpace(destination) || !Application.CanStreamedLevelBeLoaded(destination))
         {
-            Debug.LogWarning("Amulet " + amuletNumber + ": add " + nextScene +
+            Debug.LogWarning("Amulet " + amuletNumber + ": add " + destination +
                 " to the build scene list to enable progression.", this);
             return;
         }
         loading = true;
-        var operation = SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Single);
+        var operation = SceneManager.LoadSceneAsync(destination, LoadSceneMode.Single);
         if (operation == null) loading = false;
     }
 }

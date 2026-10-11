@@ -91,6 +91,7 @@ public sealed class TitleMenu : MonoBehaviour
 
     private void Update()
     {
+        if (StoryRunSession.BlocksGameplay) return;
         var keyboard = Keyboard.current;
         if (keyboard == null || !keyboard.escapeKey.wasPressedThisFrame || loading) return;
 
@@ -125,6 +126,7 @@ public sealed class TitleMenu : MonoBehaviour
 
     private IEnumerator ReturnToTitleScreen()
     {
+        StoryRunSession.EndRun();
         RestorePausedState();
         loading = true;
         HasStartedRun = false;
@@ -147,9 +149,10 @@ public sealed class TitleMenu : MonoBehaviour
 
     private IEnumerator StartFreshRun()
     {
-        if (!Application.CanStreamedLevelBeLoaded(firstBiomeScene))
+        string startScene = StoryRunSession.FirstScene(firstBiomeScene);
+        if (!Application.CanStreamedLevelBeLoaded(startScene))
         {
-            Debug.LogError($"First biome '{firstBiomeScene}' is missing from the build scene list.", this);
+            Debug.LogError($"First biome '{startScene}' is missing from the build scene list.", this);
             yield break;
         }
 
@@ -157,7 +160,8 @@ public sealed class TitleMenu : MonoBehaviour
         playButton.interactable = false;
         Time.timeScale = 1f;
         AudioListener.pause = false;
-        var operation = SceneManager.LoadSceneAsync(firstBiomeScene, LoadSceneMode.Single);
+        StoryRunSession.BeginNewGame(startScene == StoryRunSession.IntroductionScenePath);
+        var operation = SceneManager.LoadSceneAsync(startScene, LoadSceneMode.Single);
         if (operation == null)
         {
             loading = false;
@@ -174,7 +178,7 @@ public sealed class TitleMenu : MonoBehaviour
 
     public void PauseGame()
     {
-        if (!HasStartedRun || IsPaused || loading) return;
+        if (!HasStartedRun || IsPaused || loading || StoryRunSession.BlocksGameplay) return;
         previousTimeScale = Time.timeScale;
         previousAudioPause = AudioListener.pause;
         previousCursorVisible = Cursor.visible;
@@ -266,6 +270,7 @@ public sealed class TitleMenu : MonoBehaviour
 
     public void QuitGame()
     {
+        StoryRunSession.EndRun();
         RestorePausedState();
         HasStartedRun = false;
         // No save file or PlayerPrefs progress is written when leaving a run.

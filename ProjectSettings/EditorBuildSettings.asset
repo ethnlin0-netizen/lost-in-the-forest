@@ -26,5 +26,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameLoop/Boss.unity
     guid: 42ca732679a265a458e1e9f70c6914e7
+  - enabled: 1
+    path: Assets/Scenes/GameLoop/PrismbloomLevel01Story.unity
+    guid: ff48c8909839d4b4a8d75f95c3d97962
+  - enabled: 1
+    path: Assets/Scenes/GameLoop/BossStory.unity
+    guid: 51e167a411bb7e54ba849b1811c06beb
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

@@ -15,7 +15,7 @@ public sealed class BossCrystalExit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (returningToMenu || reward == null || !reward.Revealed) return;
+        if (returningToMenu || StoryRunSession.BlocksGameplay || reward == null || !reward.Revealed) return;
         var player = other.GetComponentInParent<Movement>();
         if (player == null || !player.isActiveAndEnabled) return;
         var health = player.GetComponent<PlayerHealth>();

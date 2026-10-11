@@ -63,7 +63,33 @@ data.FindProperty("artworkMaterial").objectReferenceValue = material;
 data.FindProperty("visiblePixels").rectValue = crop;
 data.ApplyModifiedPropertiesWithoutUndo();
 var inheritedAnimator = player.GetComponent<LennyAnimation>();
-if (inheritedAnimator != null) inheritedAnimator.enabled = false;
+if (inheritedAnimator == null) throw new System.InvalidOperationException("Lenny's separate tail rig is missing.");
+var bodySprite = player.GetComponent<UnityEngine.SpriteRenderer>().sprite;
+data.FindProperty("separatedBodyTexture").objectReferenceValue = bodySprite.texture;
+data.ApplyModifiedPropertiesWithoutUndo();
+var parts = new UnityEditor.SerializedObject(inheritedAnimator);
+UnityEngine.Transform FindPart(string name)
+{
+    foreach (var child in player.GetComponentsInChildren<UnityEngine.Transform>(true))
+        if (child.name == name) return child;
+    throw new System.InvalidOperationException("Missing Lenny part: " + name);
+}
+var facing = FindPart("Lenny Artwork");
+float pixelsToWorld = scale / artwork.sprite.pixelsPerUnit;
+facing.localScale = UnityEngine.Vector3.one * (pixelsToWorld * bodySprite.pixelsPerUnit);
+facing.localPosition = new UnityEngine.Vector3(
+    shape.offset.x + (bodySprite.pivot.x - crop.center.x) * pixelsToWorld,
+    shape.offset.y - shape.size.y * .5f + (bodySprite.pivot.y - crop.y) * pixelsToWorld, 0);
+facing.gameObject.SetActive(true);
+parts.FindProperty("facingRoot").objectReferenceValue = facing;
+parts.FindProperty("leftWing").objectReferenceValue = FindPart("Left Wing");
+parts.FindProperty("rightWing").objectReferenceValue = FindPart("Right Wing");
+parts.FindProperty("tail").objectReferenceValue = FindPart("Lenny Tail");
+parts.ApplyModifiedPropertiesWithoutUndo();
+FindPart("Double Jump Wings").gameObject.SetActive(true);
+foreach (var name in new[] { "Left Wing", "Right Wing", "Lenny Tail" })
+    FindPart(name).GetComponent<UnityEngine.SpriteRenderer>().enabled = true;
+inheritedAnimator.enabled = true;
 if (colliderBefore != UnityEditor.EditorJsonUtility.ToJson(shape) || movementBefore != UnityEditor.EditorJsonUtility.ToJson(player))
     throw new System.InvalidOperationException("Player movement or collider changed.");
 UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(scene);

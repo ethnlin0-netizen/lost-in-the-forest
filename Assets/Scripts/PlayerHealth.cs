@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField, Min(0.1f)] private float knockbackRecovery = 20f;
     [SerializeField, Min(0f)] private float invulnerabilityDuration = 0.65f;
     [SerializeField] private SpriteRenderer bodyVisual;
+    [SerializeField, Min(0f)] private float deathRespawnDelay = 0.75f;
     private Rigidbody2D body;
     private Movement movement;
     private PlayerCombat combat;
@@ -47,6 +48,21 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         knockbackSpeed = 0f;
         body.linearVelocity = Vector2.zero;
         body.simulated = false;
+        StartCoroutine(RespawnCurrentBiome());
+    }
+
+    private System.Collections.IEnumerator RespawnCurrentBiome()
+    {
+        // Keep the death reaction visible, then restart this biome at its authored spawn.
+        var biome = gameObject.scene;
+        yield return new WaitForSeconds(deathRespawnDelay);
+        if (!biome.IsValid() || !biome.isLoaded) yield break;
+        if (biome.buildIndex < 0)
+        {
+            Debug.LogWarning("Add " + biome.name + " to the build scene list to enable death respawning.", this);
+            yield break;
+        }
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(biome.buildIndex);
     }
 
     private void FixedUpdate()

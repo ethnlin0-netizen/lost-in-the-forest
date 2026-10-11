@@ -23,6 +23,24 @@ public sealed class BlightBossHazard : MonoBehaviour
     {
         owner = source; direction = aim.normalized; speed = travelSpeed;
         remaining = duration; damage = amount;
+        var effects = source.GetComponent<CrimsonBossEffects>();
+        if (effects != null && effects.effectMaterial != null)
+        {
+            var sprite = GetComponent<SpriteRenderer>();
+            if (sprite != null) sprite.enabled = false;
+            var line = gameObject.AddComponent<LineRenderer>();
+            line.sharedMaterial = effects.effectMaterial; line.useWorldSpace = false;
+            line.sortingOrder = 10; line.widthMultiplier = followsGround ? .09f : .055f;
+            line.positionCount = 5;
+            line.SetPositions(followsGround ? new[]{new Vector3(-.4f,-.2f),new Vector3(-.1f,.45f),new Vector3(.4f,-.2f),new Vector3(0,.15f),new Vector3(-.4f,-.2f)} :
+                new[]{new Vector3(-.22f,0),new Vector3(0,.16f),new Vector3(.3f,0),new Vector3(0,-.16f),new Vector3(-.22f,0)});
+            line.startColor = line.endColor = followsGround ? new Color(1,.65f,.3f) : new Color(1,.4f,.8f);
+            var trail = gameObject.AddComponent<TrailRenderer>();
+            trail.sharedMaterial = effects.effectMaterial; trail.time = .16f; trail.minVertexDistance = .04f;
+            trail.startWidth = followsGround ? .22f : .14f; trail.endWidth = 0; trail.sortingOrder = 9;
+            trail.startColor = line.startColor; trail.endColor = new Color(1,.1f,.25f,0);
+            if (!followsGround) transform.rotation = Quaternion.Euler(0,0,Mathf.Atan2(direction.y,direction.x)*Mathf.Rad2Deg);
+        }
     }
     private void Awake()
     {

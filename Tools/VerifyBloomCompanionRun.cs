@@ -1,9 +1,9 @@
 // Run with Unity eval_file in Play mode. Runtime-only changes; no assets are saved.
 if (!UnityEditor.EditorApplication.isPlaying) throw new System.Exception("Play mode required.");
 var paths = new[] {
-    "PrismbloomLevel01", "GloamthorneLevel02", "Ashpetal Level 03", "Veinroot Level04",
-    "Wraithglass Barrens Level 05", "BossStory", "PrismbloomLevel01", "PrismbloomLevel01",
-    "PrismbloomLevel01", "GloamthorneLevel02", "Ashpetal Level 03", "Veinroot Level04",
+    "PrismbloomLevel01Story", "GloamthorneLevel02", "Ashpetal Level 03", "Veinroot Level04",
+    "Wraithglass Barrens Level 05", "Boss", "PrismbloomLevel01Story", "PrismbloomLevel01Story",
+    "PrismbloomLevel01Story", "GloamthorneLevel02", "Ashpetal Level 03", "Veinroot Level04",
     "Veinroot Level04", "GloamthorneLevel02", "Ashpetal Level 03", "PrismbloomLevel01Story", "TitleScreen"
 };
 var results = new System.Collections.Generic.List<string>();
@@ -17,6 +17,8 @@ bool oldBackground = UnityEngine.Application.runInBackground;
 UnityEngine.Application.runInBackground = true;
 UnityEngine.Physics2D.simulationMode = UnityEngine.SimulationMode2D.Script;
 BloomCompanionSession.ResetCollected();
+StoryRunSession.BeginNewGame(true);
+StoryRunSession.MarkIntroductionPlayed();
 int index = 0; bool pending = false, done = false; double ready = 0, deadline = 0;
 UnityEditor.EditorApplication.CallbackFunction tick = null;
 UnityEngine.Events.UnityAction<UnityEngine.SceneManagement.Scene,UnityEngine.SceneManagement.LoadSceneMode> onLoaded = null;

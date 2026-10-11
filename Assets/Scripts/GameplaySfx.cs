@@ -67,8 +67,8 @@ public sealed class GameplaySfx : MonoBehaviour
     }
     private void EnemyWarning() => BeginWarning(role == Role.Chomper ? GameSound.ChomperWarn : role == Role.Spora ? GameSound.SporaWarn : GameSound.RockWarn);
     private void EnemyAttack() { StopWarning(); Play(role == Role.Chomper ? GameSound.ChomperBite : role == Role.Spora ? GameSound.SporaLaunch : GameSound.RockSlam); }
-    private void BossWarning(BlightBoss.AttackKind attack) => BeginWarning(attack == BlightBoss.AttackKind.Slam ? GameSound.BossSlamWarn : attack == BlightBoss.AttackKind.Lunge ? GameSound.BossLungeWarn : GameSound.BossSporeWarn);
-    private void BossAttack(BlightBoss.AttackKind attack) { StopWarning(); Play(attack == BlightBoss.AttackKind.Slam ? GameSound.BossSlam : attack == BlightBoss.AttackKind.Lunge ? GameSound.BossLunge : GameSound.BossVolley); if (attack == BlightBoss.AttackKind.Slam) Play(GameSound.BossShockwave); }
+    private void BossWarning(BlightBoss.AttackKind attack) => BeginWarning(attack == BlightBoss.AttackKind.Slam ? GameSound.BossSlamWarn : attack == BlightBoss.AttackKind.Lunge ? GameSound.BossLungeWarn : attack == BlightBoss.AttackKind.Thorns ? GameSound.BossThornWarn : GameSound.BossSporeWarn);
+    private void BossAttack(BlightBoss.AttackKind attack) { StopWarning(); Play(attack == BlightBoss.AttackKind.Slam ? GameSound.BossSlam : attack == BlightBoss.AttackKind.Lunge ? GameSound.BossLunge : attack == BlightBoss.AttackKind.Thorns ? GameSound.BossThorns : GameSound.BossVolley); if (attack == BlightBoss.AttackKind.Slam) Play(GameSound.BossShockwave); }
     private void Phase() { StopWarning(); Play(GameSound.BossPhase); }
 
     private void FixedUpdate()

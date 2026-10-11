@@ -4,7 +4,7 @@
 
 The three regular levels were randomly selected once during development. These saved prefab instances do not reroll on new games or deaths:
 
-- **Petalborn:** `Assets/Scenes/GameLoop/PrismbloomLevel01.unity`, feet at `(2.882, -1.460)`. The same placement exists in `PrismbloomLevel01Story.unity` so the title-screen story route includes it.
+- **Petalborn:** `Assets/Scenes/GameLoop/PrismbloomLevel01Story.unity`, feet at `(2.882, -1.460)`. This is the playable Level 1 scene used by the title-screen story route; main removed the older standalone Level 1 scene.
 - **Whisperseed:** `Assets/Scenes/GameLoop/GloamthorneLevel02.unity`, feet at `(1.691, 11.040)`.
 - **Dryad:** `Assets/Scenes/GameLoop/Ashpetal Level 03.unity`, feet at `(0.017, -1.960)`.
 
@@ -16,7 +16,7 @@ Each companion stands on the entrance platform, a short clear walk away from Len
 
 Recruited companions stay recruited after health death or lethal acid/thorn contact. The existing level restart recreates all collected companions at safe, separate positions beside the new Lenny. A collected companion's authored pickup is reused as its follower when its own level restarts, preventing duplicate pickups or followers. Uncollected companions remain at their fixed scene placements. New Game, return to title, and quit clear recruitment for a fresh run. Nothing is written to a saved game or PlayerPrefs.
 
-The story introduction pauses and restores the existing follower components. Companions also carry into BossStory; its existing ending pauses them with the rest of gameplay. Source art, player prefabs, navigation algorithms, enemy placement, and scene progression are unchanged.
+The story introduction pauses and restores the existing follower components. Companions also carry into Boss and BossStory; their existing ending pauses them with the rest of gameplay. The current story route uses Boss and its victory crystal ending. Source art, player prefabs, navigation algorithms, enemy placement, and scene progression are unchanged by the companion feature.
 
 ## Preview
 

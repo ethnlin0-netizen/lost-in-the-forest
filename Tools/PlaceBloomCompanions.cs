@@ -6,7 +6,7 @@ for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCount; i++)
     if (UnityEngine.SceneManagement.SceneManager.GetSceneAt(i).isDirty)
         throw new System.Exception("Save your open scene edits first.");
 var setup = UnityEditor.SceneManagement.EditorSceneManager.GetSceneManagerSetup();
-var levels = new[] { "PrismbloomLevel01", "GloamthorneLevel02", "Ashpetal Level 03",
+var levels = new[] { "PrismbloomLevel01Story", "GloamthorneLevel02", "Ashpetal Level 03",
     "Veinroot Level04", "Wraithglass Barrens Level 05" };
 var names = new[] { "Whisperseed", "Dryad", "Petalborn" };
 var output = new System.Collections.Generic.List<string>();
@@ -89,16 +89,6 @@ try {
         UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(scene);
         if (!UnityEditor.SceneManagement.EditorSceneManager.SaveScene(scene)) throw new System.Exception("Save failed: " + path);
         output.Add(names[i] + " | " + path + " | feet=" + spawn.ToString("F3"));
-        if (levels[i] == "PrismbloomLevel01") {
-            var story = UnityEditor.SceneManagement.EditorSceneManager.OpenScene(StoryRunSession.IntroductionScenePath);
-            var storyInstance = (UnityEngine.GameObject)UnityEditor.PrefabUtility.InstantiatePrefab(prefab, story);
-            storyInstance.name = names[i] + " Companion";
-            storyInstance.transform.position = new UnityEngine.Vector3(spawn.x, spawn.y, 0);
-            UnityEditor.PrefabUtility.RecordPrefabInstancePropertyModifications(storyInstance.transform);
-            UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(story);
-            UnityEditor.SceneManagement.EditorSceneManager.SaveScene(story);
-            output.Add("Matching placement in " + StoryRunSession.IntroductionScenePath);
-        }
     }
     UnityEditor.AssetDatabase.SaveAssets();
 } finally { UnityEditor.SceneManagement.EditorSceneManager.RestoreSceneManagerSetup(setup); }

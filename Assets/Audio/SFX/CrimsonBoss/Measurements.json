@@ -1,0 +1,62 @@
+[
+  {
+    "sound": "BossSlamWarn",
+    "seconds": 0.8,
+    "peak": 0.65
+  },
+  {
+    "sound": "BossLungeWarn",
+    "seconds": 0.65,
+    "peak": 0.65
+  },
+  {
+    "sound": "BossSporeWarn",
+    "seconds": 0.85,
+    "peak": 0.65
+  },
+  {
+    "sound": "BossSlam",
+    "seconds": 0.7,
+    "peak": 0.65
+  },
+  {
+    "sound": "BossShockwave",
+    "seconds": 0.85,
+    "peak": 0.65
+  },
+  {
+    "sound": "BossLunge",
+    "seconds": 0.5,
+    "peak": 0.65
+  },
+  {
+    "sound": "BossVolley",
+    "seconds": 0.55,
+    "peak": 0.65
+  },
+  {
+    "sound": "BossHit",
+    "seconds": 0.23,
+    "peak": 0.65
+  },
+  {
+    "sound": "BossPhase",
+    "seconds": 1.25,
+    "peak": 0.65
+  },
+  {
+    "sound": "BossDeath",
+    "seconds": 1.1,
+    "peak": 0.65
+  },
+  {
+    "sound": "BossThornWarn",
+    "seconds": 0.9,
+    "peak": 0.65
+  },
+  {
+    "sound": "BossThorns",
+    "seconds": 0.65,
+    "peak": 0.65
+  }
+]

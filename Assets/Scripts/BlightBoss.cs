@@ -5,7 +5,7 @@ using UnityEngine;
 public sealed class BlightBoss : MonoBehaviour
 {
     public enum BossState { Waiting, Pursuit, Windup, Lunge, Recovery, PhaseTransition, Dead }
-    public enum AttackKind { Slam, Lunge, Spores }
+    public enum AttackKind { Slam, Lunge, Spores, Thorns }
     [Header("Pursuit")]
     [SerializeField, Min(0f)] private float movementSpeed = 1.2f;
     [SerializeField, Min(0f)] private float phaseTwoMovementSpeed = 1.6f;
@@ -41,6 +41,13 @@ public sealed class BlightBoss : MonoBehaviour
     [SerializeField, Min(0.1f)] private float projectileLifetime = 3.2f;
     [SerializeField, Range(10f, 45f)] private float projectileSpread = 22f;
     [SerializeField] private BlightBossHazard sporePrefab;
+    [Header("Crimson thorn eruption")]
+    [SerializeField] private bool thornAttackEnabled;
+    [SerializeField, Min(0.1f)] private float thornRange = 16f;
+    [SerializeField, Min(0.1f)] private float thornWindup = 1.15f;
+    [SerializeField, Min(0.1f)] private float thornRecovery = 1.1f;
+    [SerializeField, Min(0.1f)] private float thornCooldown = 4f;
+    [SerializeField, Min(0f)] private float thornDamage = 20f;
     [Header("Timing and phase")]
     [SerializeField, Range(0.2f, 0.9f)] private float directionLockFraction = 0.6f;
     [SerializeField, Range(0.1f, 0.9f)] private float phaseThreshold = 0.5f;
@@ -57,6 +64,7 @@ public sealed class BlightBoss : MonoBehaviour
     private readonly Collider2D[] overlaps = new Collider2D[32];
     private readonly HashSet<IDamageable> struck = new HashSet<IDamageable>();
     private readonly List<BlightBossHazard> hazards = new List<BlightBossHazard>();
+    private readonly List<CrimsonBossThorn> thorns = new List<CrimsonBossThorn>();
     private Rigidbody2D body;
     private BoxCollider2D shape;
     private BlightBossHealth health;
@@ -69,6 +77,7 @@ public sealed class BlightBoss : MonoBehaviour
     private float windupDuration;
     private int facing = -1, cycle, slamCount;
     private Vector2 lockedAim;
+    private Vector2 lockedTarget;
     private bool directionLocked, queuedVolley;
     public event System.Action<AttackKind> AttackWindup, AttackPerformed;
     public event System.Action AttackCanceled, PhaseChanged;
@@ -84,7 +93,9 @@ public sealed class BlightBoss : MonoBehaviour
     public int VolleysPerformed { get; private set; }
     public int Facing => facing;
     public bool DirectionLocked => directionLocked;
-    public int ActiveHazards => hazards.FindAll(h => h != null && !h.Spent).Count;
+    public int ThornBurstsPerformed { get; private set; }
+    public float WindupProgress => State == BossState.Windup ? Mathf.Clamp01(1f - timer / windupDuration) : 0f;
+    public int ActiveHazards => hazards.FindAll(h => h != null && !h.Spent).Count + thorns.FindAll(t => t != null).Count;
     public Vector2 Feet => new Vector2(shape.bounds.center.x, shape.bounds.min.y);
     private void Awake()
     {
@@ -124,6 +135,8 @@ public sealed class BlightBoss : MonoBehaviour
     {
         if (!LivePlayer || !Grounded) return false;
         if (Vector2.Distance(playerShape.bounds.center, shape.bounds.center) > detectionRange) return false;
+        if (attack == AttackKind.Thorns)
+            return thornAttackEnabled && Vector2.Distance(Feet, playerShape.bounds.center) <= thornRange;
         if (attack == AttackKind.Spores)
             return Vector2.Distance(ShotOrigin, playerShape.bounds.center) <= projectileRange && HasLineOfSight(ShotOrigin, playerShape.bounds.center);
         return SameHeight && Gap <= (attack == AttackKind.Slam ? slamRange : lungeRange) &&
@@ -134,11 +147,12 @@ public sealed class BlightBoss : MonoBehaviour
         float dx = playerShape.bounds.center.x - shape.bounds.center.x;
         if (Mathf.Abs(dx) > 0.05f) facing = dx > 0f ? 1 : -1;
         lockedAim = ((Vector2)playerShape.bounds.center - ShotOrigin).normalized;
+        lockedTarget = playerShape.bounds.center;
     }
     private void BeginAttack(AttackKind attack)
     {
         CurrentAttack = attack; State = BossState.Windup; struck.Clear(); directionLocked = false; Aim();
-        windupDuration = attack == AttackKind.Slam ? slamWindup : attack == AttackKind.Lunge ? lungeWindup : projectileWindup;
+        windupDuration = attack == AttackKind.Slam ? slamWindup : attack == AttackKind.Lunge ? lungeWindup : attack == AttackKind.Thorns ? thornWindup : projectileWindup;
         timer = windupDuration;
         AttackWindup?.Invoke(attack);
     }
@@ -192,7 +206,7 @@ public sealed class BlightBoss : MonoBehaviour
                 Aim();
                 if (cooldown <= 0f)
                 {
-                    AttackKind choice = queuedVolley ? AttackKind.Spores : (AttackKind)(cycle % 3);
+                    AttackKind choice = queuedVolley ? AttackKind.Spores : (AttackKind)(cycle % (thornAttackEnabled ? 4 : 3));
                     if (!CanAttack(choice)) choice = SameHeight && Gap <= slamRange ? AttackKind.Slam :
                         SameHeight && Gap <= lungeRange ? AttackKind.Lunge : AttackKind.Spores;
                     if (CanAttack(choice)) { BeginAttack(choice); queuedVolley = false; cycle++; }
@@ -216,7 +230,12 @@ public sealed class BlightBoss : MonoBehaviour
         int count = shape.Cast(Vector2.right * direction, filter, hits, allowed + 0.04f);
         for (int i = 0; i < count; i++)
             if (hits[i].collider != null && hits[i].rigidbody != body && Vector2.Dot(hits[i].normal, Vector2.right * direction) < -0.5f)
+            {
+                // One-way escape shelves do not become invisible side walls.
+                var effector = hits[i].collider.GetComponent<PlatformEffector2D>();
+                if (hits[i].collider.usedByEffector && effector != null && effector.useOneWay) continue;
                 allowed = Mathf.Min(allowed, Mathf.Max(0f, hits[i].distance - 0.04f));
+            }
         return allowed;
     }
     private void ExecuteAttack()
@@ -237,7 +256,30 @@ public sealed class BlightBoss : MonoBehaviour
             AttackPerformed?.Invoke(AttackKind.Lunge);
             LungesPerformed++; State = BossState.Lunge; lungeRemaining = lungeDistance;
         }
+        else if (CurrentAttack == AttackKind.Thorns) { RaiseThorns(); Recover(true); }
         else { FireVolley(); Recover(false); }
+    }
+    private void RaiseThorns()
+    {
+        ThornBurstsPerformed++;
+        AttackPerformed?.Invoke(AttackKind.Thorns);
+        int count = PhaseTwo ? 5 : 3;
+        for (int i = 0; i < count; i++)
+        {
+            float x = Mathf.Clamp(lockedTarget.x + (i - (count - 1) * 0.5f) * 2.1f, arenaLeft + 0.6f, arenaRight - 0.6f);
+            int found = Physics2D.Raycast(new Vector2(x, Feet.y + 0.6f), Vector2.down, filter, hits, 1.2f);
+            for (int h = 0; h < found; h++)
+                if (Terrain(hits[h]) && hits[h].normal.y > 0.5f)
+                {
+                    var root = new GameObject("CrimsonThornEruption");
+                    root.transform.position = new Vector3(x, hits[h].point.y + 0.015f, 0f);
+                    var thorn = root.AddComponent<CrimsonBossThorn>();
+                    thorn.Initialize(this, GetComponent<CrimsonBossEffects>() != null ? .48f + Mathf.Abs(i - (count - 1) * .5f) * .075f : .8f, thornDamage);
+                    thorns.Add(thorn);
+                    break;
+                }
+        }
+        thorns.RemoveAll(t => t == null);
     }
     private void FireVolley()
     {
@@ -270,9 +312,9 @@ public sealed class BlightBoss : MonoBehaviour
     {
         AttackCanceled?.Invoke();
         State = BossState.Recovery;
-        timer = CurrentAttack == AttackKind.Slam ? slamRecovery : CurrentAttack == AttackKind.Lunge ? lungeRecovery : projectileRecovery;
+        timer = CurrentAttack == AttackKind.Slam ? slamRecovery : CurrentAttack == AttackKind.Lunge ? lungeRecovery : CurrentAttack == AttackKind.Thorns ? thornRecovery : projectileRecovery;
         cooldown = queuedVolley ? timer + comboDelay : CurrentAttack == AttackKind.Slam ? slamCooldown :
-            CurrentAttack == AttackKind.Lunge ? lungeCooldown : projectileCooldown;
+            CurrentAttack == AttackKind.Lunge ? lungeCooldown : CurrentAttack == AttackKind.Thorns ? thornCooldown : projectileCooldown;
         vulnerability = expose ? Mathf.Min(vulnerabilityDuration, timer) : 0f;
     }
     private void CheckPhase()
@@ -315,7 +357,7 @@ public sealed class BlightBoss : MonoBehaviour
     }
     // Health's normal Update owns hit flashing; cues must remain visible after it.
     private void LateUpdate() { if (!IsDead) RefreshVisuals(); }
-    private void CancelHazards() { foreach (var h in hazards) if (h != null) h.Cancel(); hazards.Clear(); }
+    private void CancelHazards() { foreach (var h in hazards) if (h != null) h.Cancel(); hazards.Clear(); foreach (var t in thorns) if (t != null) t.Cancel(); thorns.Clear(); }
     private void Die()
     {
         State = BossState.Dead; vulnerability = 0f; queuedVolley = false; CancelHazards();

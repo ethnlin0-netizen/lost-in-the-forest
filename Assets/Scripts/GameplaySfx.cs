@@ -17,12 +17,14 @@ public sealed class GameplaySfx : MonoBehaviour
     private Rigidbody2D body;
     private Collider2D shape;
     private EnemyNavigator2D navigator;
+    private Level02ThornRespawn hazardRespawn;
     private float lastHealth, distance;
     private Vector2 previousPosition;
     private int warning;
     private GameAudioController warningController;
     private readonly RaycastHit2D[] ground = new RaycastHit2D[8];
-    public int Play(GameSound sound) => GameAudioController.Instance == null ? 0 : GameAudioController.Instance.Play(sound, this, volume);
+    public int Play(GameSound sound) => GameAudioController.Instance == null ? 0 : GameAudioController.Instance.Play(sound, this, volume,
+        sound == GameSound.BossDeath || sound == GameSound.CrystalAppear);
     public void Impact() => Play(role == Role.Fireball ? GameSound.FireImpact : role == Role.Shockwave ? GameSound.BossShockwave : GameSound.SporeImpact);
     public void Recruit() => Play(role == Role.Whisperseed ? GameSound.WhisperseedRecruit : role == Role.Dryad ? GameSound.DryadRecruit : GameSound.PetalbornRecruit);
     public void BeginWarning(GameSound sound)
@@ -38,6 +40,8 @@ public sealed class GameplaySfx : MonoBehaviour
         previousPosition = transform.position; distance = 0;
         movement = GetComponent<Movement>(); combat = GetComponent<PlayerCombat>();
         playerHealth = GetComponent<PlayerHealth>(); enemyHealth = GetComponent<EnemyHealth>();
+        hazardRespawn = GetComponent<Level02ThornRespawn>();
+        if (role == Role.Player && hazardRespawn != null) hazardRespawn.ReturnedToEntrance += HazardDeath;
         enemy = GetComponent<BlightEnemy>(); boss = GetComponent<BlightBoss>();
         if (movement != null) { movement.Jumped += Jump; movement.DoubleJumped += DoubleJump; movement.Landed += Land; }
         if (combat != null) { combat.MeleePerformed += Melee; combat.RangedPerformed += Fire; }
@@ -52,6 +56,12 @@ public sealed class GameplaySfx : MonoBehaviour
     private void Land(float speed) { if (speed > 1.5f) Play(speed > 12f ? GameSound.HardLand : GameSound.Land); }
     private void Melee(bool charged, int direction, float duration, float reach) => Play(GameSound.TailSweep);
     private void Fire() => Play(GameSound.FireLaunch);
+    private void HazardDeath()
+    {
+        // Hazard reloads are immediate, so their death tail must outlive the old scene.
+        if (playerHealth == null || !playerHealth.IsDead)
+            GameAudioController.Instance?.PlayTransition(GameSound.PlayerDeath, this);
+    }
     private void HealthChanged()
     {
         float health = playerHealth != null ? playerHealth.CurrentHealth : enemyHealth.CurrentHealth;
@@ -95,6 +105,7 @@ public sealed class GameplaySfx : MonoBehaviour
         if (movement != null) { movement.Jumped -= Jump; movement.DoubleJumped -= DoubleJump; movement.Landed -= Land; }
         if (combat != null) { combat.MeleePerformed -= Melee; combat.RangedPerformed -= Fire; }
         if (playerHealth != null) playerHealth.HealthChanged -= HealthChanged;
+        if (hazardRespawn != null) hazardRespawn.ReturnedToEntrance -= HazardDeath;
         if (enemyHealth != null) enemyHealth.HealthChanged -= HealthChanged;
         if (enemy != null) { enemy.WindupStarted -= EnemyWarning; enemy.AttackExecuted -= EnemyAttack; enemy.AttackCanceled -= StopWarning; }
         if (boss != null) { boss.AttackWindup -= BossWarning; boss.AttackPerformed -= BossAttack; boss.AttackCanceled -= StopWarning; boss.PhaseChanged -= Phase; }

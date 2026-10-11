@@ -1,0 +1,707 @@
+October 11, 2026 — programmatic Play-mode playback checks, not listening or a manual level playthrough.
+Runtime fixture placements and damage settings are temporary; scenes are not saved during tests. Hazard and amulet trigger methods are invoked repeatedly for controlled duplicate-contact checks.
+
+Temp/sfx-work/gameplay-test.txt
+PASS: Fixture settles on a real platform
+PASS: Native grounded movement produces distance-based footsteps
+PASS: Normal jump plays once with upward physics
+PASS: Wing-assisted double jump plays once
+PASS: Airborne-to-grounded landing produces one impact
+PASS: Existing X tail sweep produces one whoosh
+PASS: Existing F creates a projectile and one launch sound
+PASS: Swept fireball collision produces one impact
+PASS: Only accepted damage produces hurt feedback; invulnerable duplicate rejected
+PASS: Chomper detects player, winds up, then executes with audio
+PASS: Chomper accepted hit has creature-specific feedback
+PASS: Chomper hit interruption stops its warning
+PASS: Chomper death plays once and cancels AI
+PASS: Chomper death voice belongs to controller rather than destroyed actor
+PASS: Spora detects player, winds up, then executes with audio
+PASS: Spora accepted hit has creature-specific feedback
+PASS: Spora hit interruption stops its warning
+PASS: Spora death plays once and cancels AI
+PASS: Spora death voice belongs to controller rather than destroyed actor
+PASS: Collusus detects player, winds up, then executes with audio
+PASS: Collusus accepted hit has creature-specific feedback
+PASS: Collusus hit interruption stops its warning
+PASS: Collusus death plays once and cancels AI
+PASS: Collusus death voice belongs to controller rather than destroyed actor
+PASS: Whisperseed contact recruitment chimes once across Enter/Stay callbacks
+PASS: Dryad contact recruitment chimes once across Enter/Stay callbacks
+PASS: Petalborn contact recruitment chimes once across Enter/Stay callbacks
+PASS: Basic melee damages multi-collider target once with one hit sound
+PASS: Charged tail damage remains unchanged
+PASS: Player projectile retains 15 damage while impact audio fires
+PASS: Boss slam has distinct warning, execution and shockwave cues
+PASS: Boss lunge warning and execution follow existing windup
+PASS: Boss volley emits one launch cue for its three projectiles
+PASS: Boss half-health phase emits one transition cue
+PASS: Repeated phase-two damage does not repeat transition
+PASS: Boss defeat cue fires once and stops attacks/hazards
+PASS: Visible spore swept collision produces one impact
+PASS: Existing pause system remains intact
+PASS: Paused gameplay rejects new sound requests
+PASS: Menu and pause voices remain playable while listener is paused
+PASS: Pause feedback is emitted
+PASS: Resume restores gameplay and emits UI feedback
+PASS: Player death plays once and keeps existing disabled movement/combat
+PASS: Simultaneous effect voices are bounded to 24
+PASS: High-priority boss warning can preempt a full decorative pool
+PASS: Warning cancellation stops a reserved voice
+
+
+Temp/GameLoopAudioCoverageResults.txt
+PASS PrismbloomLevel01: controller and licensed sound catalog present
+PASS PrismbloomLevel01: one scene audio controller
+PASS PrismbloomLevel01: one music source after scene load
+PASS PrismbloomLevel01: original music clip and gain preserved
+PASS PrismbloomLevel01: music is playing and looping
+PASS PrismbloomLevel01: one enabled listener
+PASS PrismbloomLevel01: native walking plays footsteps
+PASS PrismbloomLevel01: music cursor advances during gameplay
+PASS PrismbloomLevel01: native jump plays once
+PASS PrismbloomLevel01: native double jump plays once
+PASS PrismbloomLevel01: one landing impact
+PASS PrismbloomLevel01: basic melee emits one sweep
+PASS PrismbloomLevel01: charged tail sweep emits one sweep
+PASS PrismbloomLevel01: native ranged attack emits one launch
+PASS PrismbloomLevel01: physical projectile collision emits one impact
+PASS PrismbloomLevel01: accepted damage sounds once; invulnerability rejects overlapping damage
+PASS PrismbloomLevel01: Chomper native AI windup and attack produce sound
+PASS PrismbloomLevel01: Chomper damage feedback
+PASS PrismbloomLevel01: Chomper duplicate death damage produces one cue
+PASS PrismbloomLevel01: Spora native AI windup and attack produce sound
+PASS PrismbloomLevel01: Spora damage feedback
+PASS PrismbloomLevel01: Spora duplicate death damage produces one cue
+PASS PrismbloomLevel01: Collusus native AI windup and attack produce sound
+PASS PrismbloomLevel01: Collusus damage feedback
+PASS PrismbloomLevel01: Collusus duplicate death damage produces one cue
+PASS PrismbloomLevel01: one health-death cue
+PASS PrismbloomLevel01: reload creates a fresh scene audio controller
+PASS PrismbloomLevel01: reload restores player HP
+PASS PrismbloomLevel01: one restart cue on the new level
+PASS PrismbloomLevel01: restart cue was observed playing during its short lifetime
+PASS PrismbloomLevel01: one music source after scene load
+PASS PrismbloomLevel01: original music clip and gain preserved
+PASS PrismbloomLevel01: music is playing and looping
+PASS PrismbloomLevel01: one enabled listener
+PASS PrismbloomLevel01: repeated amulet contacts produce one collection/transition cue
+PASS PrismbloomLevel01: amulet retains the original next-level destination
+PASS PrismbloomLevel01: one music source after scene load
+PASS PrismbloomLevel01: original music clip and gain preserved
+PASS PrismbloomLevel01: music is playing and looping
+PASS PrismbloomLevel01: one enabled listener
+PASS PrismbloomLevel01Story: controller and licensed sound catalog present
+PASS PrismbloomLevel01Story: one scene audio controller
+PASS PrismbloomLevel01Story: one music source after scene load
+PASS PrismbloomLevel01Story: original music clip and gain preserved
+PASS PrismbloomLevel01Story: music is playing and looping
+PASS PrismbloomLevel01Story: one enabled listener
+PASS PrismbloomLevel01Story: native walking plays footsteps
+PASS PrismbloomLevel01Story: music cursor advances during gameplay
+PASS PrismbloomLevel01Story: native jump plays once
+PASS PrismbloomLevel01Story: native double jump plays once
+PASS PrismbloomLevel01Story: one landing impact
+PASS PrismbloomLevel01Story: basic melee emits one sweep
+PASS PrismbloomLevel01Story: charged tail sweep emits one sweep
+PASS PrismbloomLevel01Story: native ranged attack emits one launch
+PASS PrismbloomLevel01Story: physical projectile collision emits one impact
+PASS PrismbloomLevel01Story: accepted damage sounds once; invulnerability rejects overlapping damage
+PASS PrismbloomLevel01Story: Chomper native AI windup and attack produce sound
+PASS PrismbloomLevel01Story: Chomper damage feedback
+PASS PrismbloomLevel01Story: Chomper duplicate death damage produces one cue
+PASS PrismbloomLevel01Story: Spora native AI windup and attack produce sound
+PASS PrismbloomLevel01Story: Spora damage feedback
+PASS PrismbloomLevel01Story: Spora duplicate death damage produces one cue
+PASS PrismbloomLevel01Story: Collusus native AI windup and attack produce sound
+PASS PrismbloomLevel01Story: Collusus damage feedback
+PASS PrismbloomLevel01Story: Collusus duplicate death damage produces one cue
+PASS PrismbloomLevel01Story: one health-death cue
+PASS PrismbloomLevel01Story: reload creates a fresh scene audio controller
+PASS PrismbloomLevel01Story: reload restores player HP
+PASS PrismbloomLevel01Story: one restart cue on the new level
+PASS PrismbloomLevel01Story: restart cue was observed playing during its short lifetime
+PASS PrismbloomLevel01Story: one music source after scene load
+PASS PrismbloomLevel01Story: original music clip and gain preserved
+PASS PrismbloomLevel01Story: music is playing and looping
+PASS PrismbloomLevel01Story: one enabled listener
+PASS PrismbloomLevel01Story: repeated amulet contacts produce one collection/transition cue
+PASS PrismbloomLevel01Story: amulet retains the original next-level destination
+PASS PrismbloomLevel01Story: one music source after scene load
+PASS PrismbloomLevel01Story: original music clip and gain preserved
+PASS PrismbloomLevel01Story: music is playing and looping
+PASS PrismbloomLevel01Story: one enabled listener
+PASS GloamthorneLevel02: controller and licensed sound catalog present
+PASS GloamthorneLevel02: one scene audio controller
+PASS GloamthorneLevel02: one music source after scene load
+PASS GloamthorneLevel02: original music clip and gain preserved
+PASS GloamthorneLevel02: music is playing and looping
+PASS GloamthorneLevel02: one enabled listener
+PASS GloamthorneLevel02: native walking plays footsteps
+PASS GloamthorneLevel02: music cursor advances during gameplay
+PASS GloamthorneLevel02: native jump plays once
+PASS GloamthorneLevel02: native double jump plays once
+PASS GloamthorneLevel02: one landing impact
+PASS GloamthorneLevel02: basic melee emits one sweep
+PASS GloamthorneLevel02: charged tail sweep emits one sweep
+PASS GloamthorneLevel02: native ranged attack emits one launch
+PASS GloamthorneLevel02: physical projectile collision emits one impact
+PASS GloamthorneLevel02: accepted damage sounds once; invulnerability rejects overlapping damage
+PASS GloamthorneLevel02: Chomper native AI windup and attack produce sound
+PASS GloamthorneLevel02: Chomper damage feedback
+PASS GloamthorneLevel02: Chomper duplicate death damage produces one cue
+PASS GloamthorneLevel02: Spora native AI windup and attack produce sound
+PASS GloamthorneLevel02: Spora damage feedback
+PASS GloamthorneLevel02: Spora duplicate death damage produces one cue
+PASS GloamthorneLevel02: Collusus native AI windup and attack produce sound
+PASS GloamthorneLevel02: Collusus damage feedback
+PASS GloamthorneLevel02: Collusus duplicate death damage produces one cue
+PASS GloamthorneLevel02: one health-death cue
+PASS GloamthorneLevel02: reload creates a fresh scene audio controller
+PASS GloamthorneLevel02: reload restores player HP
+PASS GloamthorneLevel02: one restart cue on the new level
+PASS GloamthorneLevel02: restart cue was observed playing during its short lifetime
+PASS GloamthorneLevel02: one music source after scene load
+PASS GloamthorneLevel02: original music clip and gain preserved
+PASS GloamthorneLevel02: music is playing and looping
+PASS GloamthorneLevel02: one enabled listener
+PASS GloamthorneLevel02: repeated lethal hazard callbacks emit one death tail
+PASS GloamthorneLevel02: reload creates a fresh scene audio controller
+PASS GloamthorneLevel02: reload restores player HP
+PASS GloamthorneLevel02: one restart cue on the new level
+PASS GloamthorneLevel02: restart cue was observed playing during its short lifetime
+PASS GloamthorneLevel02: one music source after scene load
+PASS GloamthorneLevel02: original music clip and gain preserved
+PASS GloamthorneLevel02: music is playing and looping
+PASS GloamthorneLevel02: one enabled listener
+PASS GloamthorneLevel02: repeated amulet contacts produce one collection/transition cue
+PASS GloamthorneLevel02: amulet retains the original next-level destination
+PASS GloamthorneLevel02: one music source after scene load
+PASS GloamthorneLevel02: original music clip and gain preserved
+PASS GloamthorneLevel02: music is playing and looping
+PASS GloamthorneLevel02: one enabled listener
+PASS Ashpetal Level 03: controller and licensed sound catalog present
+PASS Ashpetal Level 03: one scene audio controller
+PASS Ashpetal Level 03: one music source after scene load
+PASS Ashpetal Level 03: original music clip and gain preserved
+PASS Ashpetal Level 03: music is playing and looping
+PASS Ashpetal Level 03: one enabled listener
+PASS Ashpetal Level 03: native walking plays footsteps
+PASS Ashpetal Level 03: music cursor advances during gameplay
+PASS Ashpetal Level 03: native jump plays once
+PASS Ashpetal Level 03: native double jump plays once
+PASS Ashpetal Level 03: one landing impact
+PASS Ashpetal Level 03: basic melee emits one sweep
+PASS Ashpetal Level 03: charged tail sweep emits one sweep
+PASS Ashpetal Level 03: native ranged attack emits one launch
+PASS Ashpetal Level 03: physical projectile collision emits one impact
+PASS Ashpetal Level 03: accepted damage sounds once; invulnerability rejects overlapping damage
+PASS Ashpetal Level 03: Chomper native AI windup and attack produce sound
+PASS Ashpetal Level 03: Chomper damage feedback
+PASS Ashpetal Level 03: Chomper duplicate death damage produces one cue
+PASS Ashpetal Level 03: Spora native AI windup and attack produce sound
+PASS Ashpetal Level 03: Spora damage feedback
+PASS Ashpetal Level 03: Spora duplicate death damage produces one cue
+PASS Ashpetal Level 03: Collusus native AI windup and attack produce sound
+PASS Ashpetal Level 03: Collusus damage feedback
+PASS Ashpetal Level 03: Collusus duplicate death damage produces one cue
+PASS Ashpetal Level 03: one health-death cue
+PASS Ashpetal Level 03: reload creates a fresh scene audio controller
+PASS Ashpetal Level 03: reload restores player HP
+PASS Ashpetal Level 03: one restart cue on the new level
+PASS Ashpetal Level 03: restart cue was observed playing during its short lifetime
+PASS Ashpetal Level 03: one music source after scene load
+PASS Ashpetal Level 03: original music clip and gain preserved
+PASS Ashpetal Level 03: music is playing and looping
+PASS Ashpetal Level 03: one enabled listener
+PASS Ashpetal Level 03: repeated amulet contacts produce one collection/transition cue
+PASS Ashpetal Level 03: amulet retains the original next-level destination
+PASS Ashpetal Level 03: one music source after scene load
+PASS Ashpetal Level 03: original music clip and gain preserved
+PASS Ashpetal Level 03: music is playing and looping
+PASS Ashpetal Level 03: one enabled listener
+PASS Veinroot Level04: controller and licensed sound catalog present
+PASS Veinroot Level04: one scene audio controller
+PASS Veinroot Level04: one music source after scene load
+PASS Veinroot Level04: original music clip and gain preserved
+PASS Veinroot Level04: music is playing and looping
+PASS Veinroot Level04: one enabled listener
+PASS Veinroot Level04: native walking plays footsteps
+PASS Veinroot Level04: music cursor advances during gameplay
+PASS Veinroot Level04: native jump plays once
+PASS Veinroot Level04: native double jump plays once
+PASS Veinroot Level04: one landing impact
+PASS Veinroot Level04: basic melee emits one sweep
+PASS Veinroot Level04: charged tail sweep emits one sweep
+PASS Veinroot Level04: native ranged attack emits one launch
+PASS Veinroot Level04: physical projectile collision emits one impact
+PASS Veinroot Level04: accepted damage sounds once; invulnerability rejects overlapping damage
+PASS Veinroot Level04: Chomper native AI windup and attack produce sound
+PASS Veinroot Level04: Chomper damage feedback
+PASS Veinroot Level04: Chomper duplicate death damage produces one cue
+PASS Veinroot Level04: Spora native AI windup and attack produce sound
+PASS Veinroot Level04: Spora damage feedback
+PASS Veinroot Level04: Spora duplicate death damage produces one cue
+PASS Veinroot Level04: one health-death cue
+PASS Veinroot Level04: reload creates a fresh scene audio controller
+PASS Veinroot Level04: reload restores player HP
+PASS Veinroot Level04: one restart cue on the new level
+PASS Veinroot Level04: restart cue was observed playing during its short lifetime
+PASS Veinroot Level04: one music source after scene load
+PASS Veinroot Level04: original music clip and gain preserved
+PASS Veinroot Level04: music is playing and looping
+PASS Veinroot Level04: one enabled listener
+PASS Veinroot Level04: repeated lethal hazard callbacks emit one death tail
+PASS Veinroot Level04: reload creates a fresh scene audio controller
+PASS Veinroot Level04: reload restores player HP
+PASS Veinroot Level04: one restart cue on the new level
+PASS Veinroot Level04: restart cue was observed playing during its short lifetime
+PASS Veinroot Level04: one music source after scene load
+PASS Veinroot Level04: original music clip and gain preserved
+PASS Veinroot Level04: music is playing and looping
+PASS Veinroot Level04: one enabled listener
+PASS Veinroot Level04: repeated amulet contacts produce one collection/transition cue
+PASS Veinroot Level04: amulet retains the original next-level destination
+PASS Veinroot Level04: one music source after scene load
+PASS Veinroot Level04: original music clip and gain preserved
+PASS Veinroot Level04: music is playing and looping
+PASS Veinroot Level04: one enabled listener
+PASS Wraithglass Barrens Level 05: controller and licensed sound catalog present
+PASS Wraithglass Barrens Level 05: one scene audio controller
+PASS Wraithglass Barrens Level 05: one music source after scene load
+PASS Wraithglass Barrens Level 05: original music clip and gain preserved
+PASS Wraithglass Barrens Level 05: music is playing and looping
+PASS Wraithglass Barrens Level 05: one enabled listener
+PASS Wraithglass Barrens Level 05: native walking plays footsteps
+PASS Wraithglass Barrens Level 05: music cursor advances during gameplay
+PASS Wraithglass Barrens Level 05: native jump plays once
+PASS Wraithglass Barrens Level 05: native double jump plays once
+PASS Wraithglass Barrens Level 05: one landing impact
+PASS Wraithglass Barrens Level 05: basic melee emits one sweep
+PASS Wraithglass Barrens Level 05: charged tail sweep emits one sweep
+PASS Wraithglass Barrens Level 05: native ranged attack emits one launch
+PASS Wraithglass Barrens Level 05: physical projectile collision emits one impact
+PASS Wraithglass Barrens Level 05: accepted damage sounds once; invulnerability rejects overlapping damage
+PASS Wraithglass Barrens Level 05: Chomper native AI windup and attack produce sound
+PASS Wraithglass Barrens Level 05: Chomper damage feedback
+PASS Wraithglass Barrens Level 05: Chomper duplicate death damage produces one cue
+PASS Wraithglass Barrens Level 05: Spora native AI windup and attack produce sound
+PASS Wraithglass Barrens Level 05: Spora damage feedback
+PASS Wraithglass Barrens Level 05: Spora duplicate death damage produces one cue
+PASS Wraithglass Barrens Level 05: Collusus native AI windup and attack produce sound
+PASS Wraithglass Barrens Level 05: Collusus damage feedback
+PASS Wraithglass Barrens Level 05: Collusus duplicate death damage produces one cue
+PASS Wraithglass Barrens Level 05: one health-death cue
+PASS Wraithglass Barrens Level 05: reload creates a fresh scene audio controller
+PASS Wraithglass Barrens Level 05: reload restores player HP
+PASS Wraithglass Barrens Level 05: one restart cue on the new level
+PASS Wraithglass Barrens Level 05: restart cue was observed playing during its short lifetime
+PASS Wraithglass Barrens Level 05: one music source after scene load
+PASS Wraithglass Barrens Level 05: original music clip and gain preserved
+PASS Wraithglass Barrens Level 05: music is playing and looping
+PASS Wraithglass Barrens Level 05: one enabled listener
+PASS Wraithglass Barrens Level 05: repeated lethal hazard callbacks emit one death tail
+PASS Wraithglass Barrens Level 05: reload creates a fresh scene audio controller
+PASS Wraithglass Barrens Level 05: reload restores player HP
+PASS Wraithglass Barrens Level 05: one restart cue on the new level
+PASS Wraithglass Barrens Level 05: restart cue was observed playing during its short lifetime
+PASS Wraithglass Barrens Level 05: one music source after scene load
+PASS Wraithglass Barrens Level 05: original music clip and gain preserved
+PASS Wraithglass Barrens Level 05: music is playing and looping
+PASS Wraithglass Barrens Level 05: one enabled listener
+PASS Wraithglass Barrens Level 05: repeated amulet contacts produce one collection/transition cue
+PASS Wraithglass Barrens Level 05: amulet retains the original next-level destination
+PASS Wraithglass Barrens Level 05: one music source after scene load
+PASS Wraithglass Barrens Level 05: original music clip and gain preserved
+PASS Wraithglass Barrens Level 05: music is playing and looping
+PASS Wraithglass Barrens Level 05: one enabled listener
+PASS Boss: controller and licensed sound catalog present
+PASS Boss: one scene audio controller
+PASS Boss: one music source after scene load
+PASS Boss: original music clip and gain preserved
+PASS Boss: music is playing and looping
+PASS Boss: one enabled listener
+PASS Boss: native walking plays footsteps
+PASS Boss: music cursor advances during gameplay
+PASS Boss: native jump plays once
+PASS Boss: native double jump plays once
+PASS Boss: one landing impact
+PASS Boss: basic melee emits one sweep
+PASS Boss: charged tail sweep emits one sweep
+PASS Boss: native ranged attack emits one launch
+PASS Boss: physical projectile collision emits one impact
+PASS Boss: accepted damage sounds once; invulnerability rejects overlapping damage
+PASS Boss: Chomper native AI windup and attack produce sound
+PASS Boss: Chomper damage feedback
+PASS Boss: Chomper duplicate death damage produces one cue
+PASS Boss: Collusus native AI windup and attack produce sound
+PASS Boss: Collusus damage feedback
+PASS Boss: Collusus duplicate death damage produces one cue
+PASS Boss: one health-death cue
+PASS Boss: reload creates a fresh scene audio controller
+PASS Boss: reload restores player HP
+PASS Boss: one restart cue on the new level
+PASS Boss: restart cue was observed playing during its short lifetime
+PASS Boss: one music source after scene load
+PASS Boss: original music clip and gain preserved
+PASS Boss: music is playing and looping
+PASS Boss: one enabled listener
+PASS BossStory: controller and licensed sound catalog present
+PASS BossStory: one scene audio controller
+PASS BossStory: one music source after scene load
+PASS BossStory: original music clip and gain preserved
+PASS BossStory: music is playing and looping
+PASS BossStory: one enabled listener
+PASS BossStory: native walking plays footsteps
+PASS BossStory: music cursor advances during gameplay
+PASS BossStory: native jump plays once
+PASS BossStory: native double jump plays once
+PASS BossStory: one landing impact
+PASS BossStory: basic melee emits one sweep
+PASS BossStory: charged tail sweep emits one sweep
+PASS BossStory: native ranged attack emits one launch
+PASS BossStory: physical projectile collision emits one impact
+PASS BossStory: accepted damage sounds once; invulnerability rejects overlapping damage
+PASS BossStory: Chomper native AI windup and attack produce sound
+PASS BossStory: Chomper damage feedback
+PASS BossStory: Chomper duplicate death damage produces one cue
+PASS BossStory: Collusus native AI windup and attack produce sound
+PASS BossStory: Collusus damage feedback
+PASS BossStory: Collusus duplicate death damage produces one cue
+PASS BossStory: one health-death cue
+PASS BossStory: reload creates a fresh scene audio controller
+PASS BossStory: reload restores player HP
+PASS BossStory: one restart cue on the new level
+PASS BossStory: restart cue was observed playing during its short lifetime
+PASS BossStory: one music source after scene load
+PASS BossStory: original music clip and gain preserved
+PASS BossStory: music is playing and looping
+PASS BossStory: one enabled listener
+PASS all 8 GameLoop gameplay scenes
+
+
+Temp/BossSceneAudioResults.txt
+PASS Boss: native slam windup, hit and shockwave cues
+PASS Boss: lunge windup and execution cues
+PASS Boss: spore windup and volley cues
+PASS Boss: phase transition cue
+PASS Boss: one boss defeat cue
+PASS Boss: one crystal appearance cue
+PASS Boss: defeat voice starts and can survive a cutscene pause
+PASS Boss: boss defeat audio cursor advances after defeat, including story pause
+PASS Boss: one return-to-title transition cue
+PASS Boss: original title transition preserved
+PASS Boss: title retains Wraithglass music at 60 percent
+PASS Boss: only title music loops after return
+PASS Boss: transition tail cleans itself up
+PASS BossStory: native slam windup, hit and shockwave cues
+PASS BossStory: lunge windup and execution cues
+PASS BossStory: spore windup and volley cues
+PASS BossStory: phase transition cue
+PASS BossStory: one boss defeat cue
+PASS BossStory: one crystal appearance cue
+PASS BossStory: defeat voice starts and can survive a cutscene pause
+PASS BossStory: existing ending starts its story pause
+PASS BossStory: boss defeat audio cursor advances after defeat, including story pause
+PASS BossStory: existing celebration completes
+PASS BossStory: one return-to-title transition cue
+PASS BossStory: original title transition preserved
+PASS BossStory: title retains Wraithglass music at 60 percent
+PASS BossStory: only title music loops after return
+PASS BossStory: transition tail cleans itself up
+PASS both boss scenes and title returns
+
+POST-MERGE 720d05a: playback smoke checks (not listening)
+PASS Assets/Scenes/GameLoop/Ashpetal Level 03.unity: music advancing; collection/restart/thorn cues accepted; effect voices playing
+PASS Assets/Scenes/GameLoop/BossStory.unity: music advancing; collection/restart/thorn cues accepted; effect voices playing
+PASS Assets/Scenes/GameLoop/GloamthorneLevel02.unity: music advancing; collection/restart/thorn cues accepted; effect voices playing
+PASS Assets/Scenes/GameLoop/PrismbloomLevel01Story.unity: music advancing; collection/restart/thorn cues accepted; effect voices playing
+PASS Assets/Scenes/GameLoop/Veinroot Level04.unity: music advancing; collection/restart/thorn cues accepted; effect voices playing
+PASS Assets/Scenes/GameLoop/Wraithglass Barrens Level 05.unity: music advancing; collection/restart/thorn cues accepted; effect voices playing
+PASS Assets/Scenes/GameLoop/Boss.unity: music advancing; collection/restart/thorn cues accepted; effect voices playing
+PASS merged GameLoop startup/music/cue playback
+
+PASS updated Boss crystal/ending regression (Tools/VerifyBossEnding.cs).
+
+PUBLICATION: six current gameplay scenes (249 playback/logic checks)
+PASS PrismbloomLevel01Story: controller and licensed sound catalog present
+PASS PrismbloomLevel01Story: one scene audio controller
+PASS PrismbloomLevel01Story: one music source after scene load
+PASS PrismbloomLevel01Story: original music clip and gain preserved
+PASS PrismbloomLevel01Story: music is playing and looping
+PASS PrismbloomLevel01Story: one enabled listener
+PASS PrismbloomLevel01Story: native walking plays footsteps
+PASS PrismbloomLevel01Story: music cursor advances during gameplay
+PASS PrismbloomLevel01Story: native jump plays once
+PASS PrismbloomLevel01Story: native double jump plays once
+PASS PrismbloomLevel01Story: one landing impact
+PASS PrismbloomLevel01Story: basic melee emits one sweep
+PASS PrismbloomLevel01Story: charged tail sweep emits one sweep
+PASS PrismbloomLevel01Story: native ranged attack emits one launch
+PASS PrismbloomLevel01Story: physical projectile collision emits one impact
+PASS PrismbloomLevel01Story: accepted damage sounds once; invulnerability rejects overlapping damage
+PASS PrismbloomLevel01Story: Chomper native AI windup and attack produce sound
+PASS PrismbloomLevel01Story: Chomper damage feedback
+PASS PrismbloomLevel01Story: Chomper duplicate death damage produces one cue
+PASS PrismbloomLevel01Story: Spora native AI windup and attack produce sound
+PASS PrismbloomLevel01Story: Spora damage feedback
+PASS PrismbloomLevel01Story: Spora duplicate death damage produces one cue
+PASS PrismbloomLevel01Story: Collusus native AI windup and attack produce sound
+PASS PrismbloomLevel01Story: Collusus damage feedback
+PASS PrismbloomLevel01Story: Collusus duplicate death damage produces one cue
+PASS PrismbloomLevel01Story: one health-death cue
+PASS PrismbloomLevel01Story: reload creates a fresh scene audio controller
+PASS PrismbloomLevel01Story: reload restores player HP
+PASS PrismbloomLevel01Story: one restart cue on the new level
+PASS PrismbloomLevel01Story: restart cue was observed playing during its short lifetime
+PASS PrismbloomLevel01Story: one music source after scene load
+PASS PrismbloomLevel01Story: original music clip and gain preserved
+PASS PrismbloomLevel01Story: music is playing and looping
+PASS PrismbloomLevel01Story: one enabled listener
+PASS PrismbloomLevel01Story: repeated amulet contacts produce one collection/transition cue
+PASS PrismbloomLevel01Story: amulet retains the original next-level destination
+PASS PrismbloomLevel01Story: one music source after scene load
+PASS PrismbloomLevel01Story: original music clip and gain preserved
+PASS PrismbloomLevel01Story: music is playing and looping
+PASS PrismbloomLevel01Story: one enabled listener
+PASS GloamthorneLevel02: controller and licensed sound catalog present
+PASS GloamthorneLevel02: one scene audio controller
+PASS GloamthorneLevel02: one music source after scene load
+PASS GloamthorneLevel02: original music clip and gain preserved
+PASS GloamthorneLevel02: music is playing and looping
+PASS GloamthorneLevel02: one enabled listener
+PASS GloamthorneLevel02: native walking plays footsteps
+PASS GloamthorneLevel02: music cursor advances during gameplay
+PASS GloamthorneLevel02: native jump plays once
+PASS GloamthorneLevel02: native double jump plays once
+PASS GloamthorneLevel02: one landing impact
+PASS GloamthorneLevel02: basic melee emits one sweep
+PASS GloamthorneLevel02: charged tail sweep emits one sweep
+PASS GloamthorneLevel02: native ranged attack emits one launch
+PASS GloamthorneLevel02: physical projectile collision emits one impact
+PASS GloamthorneLevel02: accepted damage sounds once; invulnerability rejects overlapping damage
+PASS GloamthorneLevel02: Chomper native AI windup and attack produce sound
+PASS GloamthorneLevel02: Chomper damage feedback
+PASS GloamthorneLevel02: Chomper duplicate death damage produces one cue
+PASS GloamthorneLevel02: Spora native AI windup and attack produce sound
+PASS GloamthorneLevel02: Spora damage feedback
+PASS GloamthorneLevel02: Spora duplicate death damage produces one cue
+PASS GloamthorneLevel02: Collusus native AI windup and attack produce sound
+PASS GloamthorneLevel02: Collusus damage feedback
+PASS GloamthorneLevel02: Collusus duplicate death damage produces one cue
+PASS GloamthorneLevel02: one health-death cue
+PASS GloamthorneLevel02: reload creates a fresh scene audio controller
+PASS GloamthorneLevel02: reload restores player HP
+PASS GloamthorneLevel02: one restart cue on the new level
+PASS GloamthorneLevel02: restart cue was observed playing during its short lifetime
+PASS GloamthorneLevel02: one music source after scene load
+PASS GloamthorneLevel02: original music clip and gain preserved
+PASS GloamthorneLevel02: music is playing and looping
+PASS GloamthorneLevel02: one enabled listener
+PASS GloamthorneLevel02: repeated lethal hazard callbacks emit one death tail
+PASS GloamthorneLevel02: reload creates a fresh scene audio controller
+PASS GloamthorneLevel02: reload restores player HP
+PASS GloamthorneLevel02: one restart cue on the new level
+PASS GloamthorneLevel02: restart cue was observed playing during its short lifetime
+PASS GloamthorneLevel02: one music source after scene load
+PASS GloamthorneLevel02: original music clip and gain preserved
+PASS GloamthorneLevel02: music is playing and looping
+PASS GloamthorneLevel02: one enabled listener
+PASS GloamthorneLevel02: repeated amulet contacts produce one collection/transition cue
+PASS GloamthorneLevel02: amulet retains the original next-level destination
+PASS GloamthorneLevel02: one music source after scene load
+PASS GloamthorneLevel02: original music clip and gain preserved
+PASS GloamthorneLevel02: music is playing and looping
+PASS GloamthorneLevel02: one enabled listener
+PASS Ashpetal Level 03: controller and licensed sound catalog present
+PASS Ashpetal Level 03: one scene audio controller
+PASS Ashpetal Level 03: one music source after scene load
+PASS Ashpetal Level 03: original music clip and gain preserved
+PASS Ashpetal Level 03: music is playing and looping
+PASS Ashpetal Level 03: one enabled listener
+PASS Ashpetal Level 03: native walking plays footsteps
+PASS Ashpetal Level 03: music cursor advances during gameplay
+PASS Ashpetal Level 03: native jump plays once
+PASS Ashpetal Level 03: native double jump plays once
+PASS Ashpetal Level 03: one landing impact
+PASS Ashpetal Level 03: basic melee emits one sweep
+PASS Ashpetal Level 03: charged tail sweep emits one sweep
+PASS Ashpetal Level 03: native ranged attack emits one launch
+PASS Ashpetal Level 03: physical projectile collision emits one impact
+PASS Ashpetal Level 03: accepted damage sounds once; invulnerability rejects overlapping damage
+PASS Ashpetal Level 03: Chomper native AI windup and attack produce sound
+PASS Ashpetal Level 03: Chomper damage feedback
+PASS Ashpetal Level 03: Chomper duplicate death damage produces one cue
+PASS Ashpetal Level 03: Spora native AI windup and attack produce sound
+PASS Ashpetal Level 03: Spora damage feedback
+PASS Ashpetal Level 03: Spora duplicate death damage produces one cue
+PASS Ashpetal Level 03: Collusus native AI windup and attack produce sound
+PASS Ashpetal Level 03: Collusus damage feedback
+PASS Ashpetal Level 03: Collusus duplicate death damage produces one cue
+PASS Ashpetal Level 03: one health-death cue
+PASS Ashpetal Level 03: reload creates a fresh scene audio controller
+PASS Ashpetal Level 03: reload restores player HP
+PASS Ashpetal Level 03: one restart cue on the new level
+PASS Ashpetal Level 03: restart cue was observed playing during its short lifetime
+PASS Ashpetal Level 03: one music source after scene load
+PASS Ashpetal Level 03: original music clip and gain preserved
+PASS Ashpetal Level 03: music is playing and looping
+PASS Ashpetal Level 03: one enabled listener
+PASS Ashpetal Level 03: repeated amulet contacts produce one collection/transition cue
+PASS Ashpetal Level 03: amulet retains the original next-level destination
+PASS Ashpetal Level 03: one music source after scene load
+PASS Ashpetal Level 03: original music clip and gain preserved
+PASS Ashpetal Level 03: music is playing and looping
+PASS Ashpetal Level 03: one enabled listener
+PASS Veinroot Level04: controller and licensed sound catalog present
+PASS Veinroot Level04: one scene audio controller
+PASS Veinroot Level04: one music source after scene load
+PASS Veinroot Level04: original music clip and gain preserved
+PASS Veinroot Level04: music is playing and looping
+PASS Veinroot Level04: one enabled listener
+PASS Veinroot Level04: native walking plays footsteps
+PASS Veinroot Level04: music cursor advances during gameplay
+PASS Veinroot Level04: native jump plays once
+PASS Veinroot Level04: native double jump plays once
+PASS Veinroot Level04: one landing impact
+PASS Veinroot Level04: basic melee emits one sweep
+PASS Veinroot Level04: charged tail sweep emits one sweep
+PASS Veinroot Level04: native ranged attack emits one launch
+PASS Veinroot Level04: physical projectile collision emits one impact
+PASS Veinroot Level04: accepted damage sounds once; invulnerability rejects overlapping damage
+PASS Veinroot Level04: Chomper native AI windup and attack produce sound
+PASS Veinroot Level04: Chomper damage feedback
+PASS Veinroot Level04: Chomper duplicate death damage produces one cue
+PASS Veinroot Level04: Spora native AI windup and attack produce sound
+PASS Veinroot Level04: Spora damage feedback
+PASS Veinroot Level04: Spora duplicate death damage produces one cue
+PASS Veinroot Level04: one health-death cue
+PASS Veinroot Level04: reload creates a fresh scene audio controller
+PASS Veinroot Level04: reload restores player HP
+PASS Veinroot Level04: one restart cue on the new level
+PASS Veinroot Level04: restart cue was observed playing during its short lifetime
+PASS Veinroot Level04: one music source after scene load
+PASS Veinroot Level04: original music clip and gain preserved
+PASS Veinroot Level04: music is playing and looping
+PASS Veinroot Level04: one enabled listener
+PASS Veinroot Level04: repeated lethal hazard callbacks emit one death tail
+PASS Veinroot Level04: reload creates a fresh scene audio controller
+PASS Veinroot Level04: reload restores player HP
+PASS Veinroot Level04: one restart cue on the new level
+PASS Veinroot Level04: restart cue was observed playing during its short lifetime
+PASS Veinroot Level04: one music source after scene load
+PASS Veinroot Level04: original music clip and gain preserved
+PASS Veinroot Level04: music is playing and looping
+PASS Veinroot Level04: one enabled listener
+PASS Veinroot Level04: repeated amulet contacts produce one collection/transition cue
+PASS Veinroot Level04: amulet retains the original next-level destination
+PASS Veinroot Level04: one music source after scene load
+PASS Veinroot Level04: original music clip and gain preserved
+PASS Veinroot Level04: music is playing and looping
+PASS Veinroot Level04: one enabled listener
+PASS Wraithglass Barrens Level 05: controller and licensed sound catalog present
+PASS Wraithglass Barrens Level 05: one scene audio controller
+PASS Wraithglass Barrens Level 05: one music source after scene load
+PASS Wraithglass Barrens Level 05: original music clip and gain preserved
+PASS Wraithglass Barrens Level 05: music is playing and looping
+PASS Wraithglass Barrens Level 05: one enabled listener
+PASS Wraithglass Barrens Level 05: native walking plays footsteps
+PASS Wraithglass Barrens Level 05: music cursor advances during gameplay
+PASS Wraithglass Barrens Level 05: native jump plays once
+PASS Wraithglass Barrens Level 05: native double jump plays once
+PASS Wraithglass Barrens Level 05: one landing impact
+PASS Wraithglass Barrens Level 05: basic melee emits one sweep
+PASS Wraithglass Barrens Level 05: charged tail sweep emits one sweep
+PASS Wraithglass Barrens Level 05: native ranged attack emits one launch
+PASS Wraithglass Barrens Level 05: physical projectile collision emits one impact
+PASS Wraithglass Barrens Level 05: accepted damage sounds once; invulnerability rejects overlapping damage
+PASS Wraithglass Barrens Level 05: Chomper native AI windup and attack produce sound
+PASS Wraithglass Barrens Level 05: Chomper damage feedback
+PASS Wraithglass Barrens Level 05: Chomper duplicate death damage produces one cue
+PASS Wraithglass Barrens Level 05: Spora native AI windup and attack produce sound
+PASS Wraithglass Barrens Level 05: Spora damage feedback
+PASS Wraithglass Barrens Level 05: Spora duplicate death damage produces one cue
+PASS Wraithglass Barrens Level 05: Collusus native AI windup and attack produce sound
+PASS Wraithglass Barrens Level 05: Collusus damage feedback
+PASS Wraithglass Barrens Level 05: Collusus duplicate death damage produces one cue
+PASS Wraithglass Barrens Level 05: one health-death cue
+PASS Wraithglass Barrens Level 05: reload creates a fresh scene audio controller
+PASS Wraithglass Barrens Level 05: reload restores player HP
+PASS Wraithglass Barrens Level 05: one restart cue on the new level
+PASS Wraithglass Barrens Level 05: restart cue was observed playing during its short lifetime
+PASS Wraithglass Barrens Level 05: one music source after scene load
+PASS Wraithglass Barrens Level 05: original music clip and gain preserved
+PASS Wraithglass Barrens Level 05: music is playing and looping
+PASS Wraithglass Barrens Level 05: one enabled listener
+PASS Wraithglass Barrens Level 05: repeated lethal hazard callbacks emit one death tail
+PASS Wraithglass Barrens Level 05: reload creates a fresh scene audio controller
+PASS Wraithglass Barrens Level 05: reload restores player HP
+PASS Wraithglass Barrens Level 05: one restart cue on the new level
+PASS Wraithglass Barrens Level 05: restart cue was observed playing during its short lifetime
+PASS Wraithglass Barrens Level 05: one music source after scene load
+PASS Wraithglass Barrens Level 05: original music clip and gain preserved
+PASS Wraithglass Barrens Level 05: music is playing and looping
+PASS Wraithglass Barrens Level 05: one enabled listener
+PASS Wraithglass Barrens Level 05: repeated amulet contacts produce one collection/transition cue
+PASS Wraithglass Barrens Level 05: amulet retains the original next-level destination
+PASS Wraithglass Barrens Level 05: one music source after scene load
+PASS Wraithglass Barrens Level 05: original music clip and gain preserved
+PASS Wraithglass Barrens Level 05: music is playing and looping
+PASS Wraithglass Barrens Level 05: one enabled listener
+PASS Boss: controller and licensed sound catalog present
+PASS Boss: one scene audio controller
+PASS Boss: one music source after scene load
+PASS Boss: original music clip and gain preserved
+PASS Boss: music is playing and looping
+PASS Boss: one enabled listener
+PASS Boss: native walking plays footsteps
+PASS Boss: music cursor advances during gameplay
+PASS Boss: native jump plays once
+PASS Boss: native double jump plays once
+PASS Boss: one landing impact
+PASS Boss: basic melee emits one sweep
+PASS Boss: charged tail sweep emits one sweep
+PASS Boss: native ranged attack emits one launch
+PASS Boss: physical projectile collision emits one impact
+PASS Boss: accepted damage sounds once; invulnerability rejects overlapping damage
+PASS Boss: one health-death cue
+PASS Boss: reload creates a fresh scene audio controller
+PASS Boss: reload restores player HP
+PASS Boss: one restart cue on the new level
+PASS Boss: restart cue was observed playing during its short lifetime
+PASS Boss: one music source after scene load
+PASS Boss: original music clip and gain preserved
+PASS Boss: music is playing and looping
+PASS Boss: one enabled listener
+PASS all 2 GameLoop gameplay scenes
+
+PUBLICATION: current Crimson Boss and title return
+PASS Boss: native slam windup, hit and shockwave cues
+PASS Boss: lunge windup and execution cues
+PASS Boss: spore windup and volley cues
+PASS Boss: thorn windup and execution cues
+PASS Boss: phase transition cue
+PASS Boss: one boss defeat cue
+PASS Boss: one crystal appearance cue
+PASS Boss: defeat voice starts and can survive a cutscene pause
+PASS Boss: existing ending starts its story pause
+PASS Boss: boss defeat audio cursor advances after defeat, including story pause
+PASS Boss: existing celebration completes
+PASS Boss: one return-to-title transition cue
+PASS Boss: original title transition preserved
+PASS Boss: title retains Wraithglass music at 60 percent
+PASS Boss: only title music loops after return
+PASS Boss: transition tail cleans itself up
+PASS Boss scene and title return
+
+AFTER MAIN 1e5ea0b: companion audio checks
+PASS GloamthorneLevel02: player trigger recruits once and emits one WhisperseedRecruit cue
+PASS GloamthorneLevel02: recruitment voice playing
+PASS GloamthorneLevel02: recruited companion restores without duplicate recruitment sound
+PASS Ashpetal Level 03: player trigger recruits once and emits one DryadRecruit cue
+PASS Ashpetal Level 03: recruitment voice playing
+PASS Ashpetal Level 03: recruited companion restores without duplicate recruitment sound
+PASS PrismbloomLevel01Story: player trigger recruits once and emits one PetalbornRecruit cue
+PASS PrismbloomLevel01Story: recruitment voice playing
+PASS PrismbloomLevel01Story: recruited companion restores without duplicate recruitment sound
+PASS companion audio integration after latest main merge

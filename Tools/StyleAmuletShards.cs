@@ -58,8 +58,8 @@ if(material==null)
     UnityEditor.AssetDatabase.CreateAsset(material,materialPath);
 }
 
-var names=new[]{"PrismbloomLevel01","GloamthorneLevel02","Ashpetal Level 03","Veinroot Level04","Wraithglass Barrens Level 05","Boss","PrismbloomLevel01Story","BossStory"};
-var levelNumbers=new[]{1,2,3,4,5,6,1,6};
+var names=new[]{"PrismbloomLevel01Story","GloamthorneLevel02","Ashpetal Level 03","Veinroot Level04","Wraithglass Barrens Level 05","Boss"};
+var levelNumbers=new[]{1,2,3,4,5,6};
 var colorNames=new[]{"red","orange","yellow","green","blue","purple"};
 var colors=new[]{
     new UnityEngine.Color(1f,.16f,.22f),new UnityEngine.Color(1f,.5f,.10f),

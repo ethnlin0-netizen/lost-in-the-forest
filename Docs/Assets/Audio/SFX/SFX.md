@@ -1,5 +1,77 @@
 # Gameplay sound effects — Lost in the Forest
 
+## GameLoop coverage repair — October 11, 2026
+
+The saved-scene audit found sound adapters on every player and enemy, with valid
+licensed clips in the existing catalog. Veinroot Level04 and Wraithglass Barrens
+Level 05 lacked a GameAudioController, so their adapters silently rejected sound
+requests. Both scenes now have a scene-owned controller using the existing catalog,
+24 effect voices, and 0.8 master effects gain. Their original music clips and 0.6
+music gains are preserved. No ambience, actor placement, physics, health, enemy
+navigation, or shared prefab changes were needed.
+
+| Scene | Audit and repair |
+| --- | --- |
+| PrismbloomLevel01 and PrismbloomLevel01Story | Existing controller and adapters retained. Shared amulet/restart feedback added. |
+| GloamthorneLevel02 | Existing controller retained. Shared amulet, hazard-death and restart feedback added. |
+| Ashpetal Level 03 | Existing controller retained. Shared amulet/restart feedback added. |
+| Veinroot Level04 | Added missing controller. Existing actor adapters now play; shared interactions also work. |
+| Wraithglass Barrens Level 05 | Added missing controller. Existing actor adapters now play; shared interactions also work. |
+| Boss and BossStory | Existing audio retained. Boss defeat and crystal appearance voices can finish during the story pause. Story return to title uses existing transition feedback. |
+| TitleScreen | Preserved WraithglassBarrens_Loop, looping automatically at 0.6 gain. |
+
+AmuletCollect reuses the existing licensed CrystalTouch clip at 0.4 cue gain;
+LevelRestart reuses Resume at 0.3 cue gain. Both have a 0.5-second minimum interval,
+one concurrent pooled voice, fixed pitch, and priority 45. The new enum values are
+appended, preserving every old serialized cue ID. Successful collection plays one
+short tail across the scene transition. Restart requests queue one cue on the
+replacement scene's controller, rather than preserving old music or audio managers.
+Lethal hazard callbacks use the PlayerDeath clip as a short transition tail so an
+immediate reload cannot cut it off. Health-death timing remains unchanged.
+
+Transition requests now respect their cue's emitter cooldown and remain limited to
+four temporary voices. Existing gameplay effects keep their per-emitter intervals,
+per-cue concurrency, and 24-voice pool. Attack warning cancellation is preserved.
+Only boss defeat and crystal appearance presentation are exempted from the story's
+listener pause; ordinary attacks and movement remain silent while paused.
+
+`Tools/AuditGameLoopAudio.cs` reads all nine saved GameLoop scenes through preview
+scenes. `Tools/ConfigureGameplayAudioScenes.cs` repairs missing controllers/adapters
+in all of them without rewriting existing music or ambience settings. Repeating
+the setup produced no additional scene changes. `Tools/ConfigureGameplaySfx.cs`
+also retains the two new cue aliases when rebuilding the catalog.
+
+### Verification for this repair
+
+- 46 native-frame gameplay checks passed in the repaired Level04 using temporary
+  prefab fixtures: walking, jump/double jump/landing, melee and projectiles, all
+  three Blights, hit/death feedback, all three Bloom recruitment cues, boss attacks
+  and phase feedback, pause/resume, warning cancellation, and bounded voices.
+- `Tools/VerifyGameLoopAudioCoverage.cs` passed 327 checks across all eight saved
+  gameplay scenes. Each scene exercised native player movement and ranged input,
+  controlled basic/charged melee execution, physical projectile impacts, native
+  Blight windups/attacks, damage/death cues, real health-death reloads, and unchanged
+  music playback. Scenes with hazards and amulets also exercised repeated trigger
+  callbacks and verified one cue, proper reload feedback, and original destinations.
+  The short restart cue was sampled during its lifetime. Temporary input settings
+  and synthetic devices were restored after the run.
+- `Tools/VerifyBossSceneAudio.cs` passed 29 checks covering both authored boss scenes:
+  slam/lunge/spore/phase cues, defeat and crystal reveal, advancing defeat audio
+  during the actual story pause, normal crystal collision and story return to title,
+  one title music loop, and transition-tail cleanup.
+- Measured PCM checks found zero clipped samples in all 56 prepared effects;
+  maximum magnitude was 16,423/32,768 (approximately -6 dBFS). Every effect retained
+  its matching metadata. No effect or music waveform was changed.
+
+Detailed results are in [GameLoopVerification.txt](GameLoopVerification.txt).
+The checks use actual Play-mode frames and audio playback state/cursors, plus
+controlled runtime positions and selected private-method calls. Enemy damage was
+temporarily suppressed in attack fixtures; hazard/amulet callbacks were invoked
+directly for repeat-contact checks. This is not a manual full-level playthrough.
+No listening check was performed, so perceived balance and subjective sound quality
+remain to be reviewed by a person. No Blooms are authored in these GameLoop scenes;
+their existing prefab recruitment integration was verified with temporary fixtures.
+
 Prepared and integrated on `codex/music-assets`, 2026-10-10, using the running Unity 6000.6.1f1 Editor. These are adaptations of existing licensed recordings/effects, **not original recordings or generated compositions**.
 
 ## Delivered assets and scope
@@ -93,3 +165,40 @@ Programmatic checks ran with normal Unity/audio callbacks in Play mode, not mere
 **Listening checks: unavailable.** No monitored audio output was available to judge timbre, clicks, warning clarity, fatigue, or perceived balance against music. Native playback cursor checks are not a substitute for listening. Audition the four encounters before treating these gains as a final mix. No device build, full gameplay run or mixed-output clipping measurement was performed.
 
 During initial testing Boss was absent from the build list, so tests opened it by asset path. The subsequent main update enabled Boss and connected Level 5; those upstream changes were preserved. The existing move of TitleScreen and other local music work were preserved. The user subsequently requested committing, pushing and merging this work.
+
+## Compatibility after merging main (720d05a)
+
+Main adds the Crimson boss arena, its catalog and thorn sounds, removes the old
+PrismbloomLevel01 duplicate, and routes the crystal through the story ending.
+The earlier verification above describes the pre-merge scene set. Both catalogs
+now preserve BossThornWarn/BossThorns IDs 43/44 and use IDs 45/46 for
+AmuletCollect/LevelRestart. Existing boss clip assignments and its new 0.5
+music gain are retained. Setup scripts retain the thorn cues on regeneration.
+
+After merging, Unity compiled successfully. All eight remaining saved GameLoop
+scenes have a controller and all 47 cues assigned. Play-mode smoke checks passed
+in all seven gameplay scenes: music cursors advance and collection, restart and
+thorn requests produce playing effect voices. The updated boss-ending regression
+passed defeat gating, crystal collection, duplicate-trigger rejection, story pause
+and return to title. These are playback/logic checks, not listening checks or a
+repeat of the earlier full combat suite.
+
+## Publication checks and final scene set
+
+The obsolete BossStory scene and metadata are removed. Build settings, ending
+constants and verification tools use the current Boss scene. The GameLoop folder
+contains six gameplay scenes plus TitleScreen. Boss retains its victory-crystal
+ending and the prompt "Enter: Return to menu". Lenny uses the existing walking
+animator, with the local Boss visual scale/alignment retained.
+
+The publication pass completed 249 playback/logic checks across the six current
+gameplay scenes and 16 Boss attack/cutscene/title-return checks, including thorn
+windup and execution. A music assertion was corrected to compare playback with
+the owning controller gain; Boss correctly uses 0.5 even though its AudioSource
+serialized gain is 0.6. Fixtures neutralize boss claw damage while checking audio.
+All 69 present PCM sound clips have matching metadata and no clipped samples.
+Listening checks and a standalone build were not performed.
+
+After incorporating main 1e5ea0b, all three newly placed Blooms were checked through
+the player trigger: one recruitment sound each, a playing effect voice, and silent
+companion restoration after scene reload. These nine integration checks passed.

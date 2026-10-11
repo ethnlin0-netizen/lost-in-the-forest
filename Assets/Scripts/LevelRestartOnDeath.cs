@@ -56,6 +56,7 @@ public sealed class LevelRestartOnDeath : MonoBehaviour
         if (menu != null && menu.IsPaused) menu.StartGame();
         Time.timeScale = 1f;
         AudioListener.pause = false;
+        GameAudioController.QueueLevelRestart(scene.path);
         // Reload the saved scene, not just the player: enemies and pickups are recreated.
         AsyncOperation operation;
 #if UNITY_EDITOR

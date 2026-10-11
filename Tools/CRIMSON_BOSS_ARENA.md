@@ -65,7 +65,7 @@ Backups of the open scene's edits are retained under `.local-backups`.
 Run `Tools/ConnectBossEnding.cs` after rebuilding to copy the original
 `BossStory` scene's Story Sequence hierarchy into Boss and rebind its boss/player
 references. `waitForCrystal` makes it wait for collection rather than boss death.
-`BossStory` remains unchanged as a standalone scene. Story progression now routes
+The obsolete standalone `BossStory` copy has been removed; Boss owns the ending. Story progression now routes
 to the updated Boss arena. `Tools/VerifyBossEnding.cs` verifies defeat, collection,
 the waking/celebration sequence and return to TitleScreen with pause restored.
 

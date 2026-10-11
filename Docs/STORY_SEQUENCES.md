@@ -1,12 +1,12 @@
 # T.K. story sequences
 
-Work is on `friend-and-enemy-sprites`.
+Current ending: the Crimson boss arena and story sequence share `Assets/Scenes/GameLoop/Boss.unity`. The obsolete BossStory copy has been removed.
 
 ## Scenes and route
 
-- `Assets/Scenes/GameLoop/PrismbloomLevel01Story.unity` uses the latest `Assets/Scenes/GameLoop/PrismbloomLevel01.unity`, with sleeping T.K. and an introduction.
-- `Assets/Scenes/GameLoop/BossStory.unity` uses the latest `Assets/Scenes/GameLoop/Boss.unity`, with a defeat-triggered ending.
-- Both copies are enabled in the build scene list. Original scenes, character prefabs, artwork, and level geometry are preserved.
+- `Assets/Scenes/GameLoop/PrismbloomLevel01Story.unity` contains the first biome, sleeping T.K., and the introduction.
+- `Assets/Scenes/GameLoop/Boss.unity` contains the final fight. Boss defeat reveals the crystal; collecting it starts the ending.
+- The introduction and Boss scenes are enabled in the build scene list.
 
 Open `Assets/Scenes/GameLoop/TitleScreen.unity` and press Play, then select the game's Play button. The connected route is:
 
@@ -15,14 +15,14 @@ Open `Assets/Scenes/GameLoop/TitleScreen.unity` and press Play, then select the 
 3. `Assets/Scenes/GameLoop/Ashpetal Level 03.unity`
 4. `Assets/Scenes/GameLoop/Veinroot Level04.unity`
 5. `Assets/Scenes/GameLoop/Wraithglass Barrens Level 05.unity`
-6. `Assets/Scenes/GameLoop/BossStory.unity`
+6. `Assets/Scenes/GameLoop/Boss.unity`
 7. `Assets/Scenes/GameLoop/TitleScreen.unity` after the ending is dismissed.
 
-`TitleMenu` starts the story introduction. During a story run, `AmuletPickup` asks `StoryRunSession.Destination` for an exact scene path. This selects the finished GameLoop scenes and changes the existing Wraithglass crystal's Boss destination to `BossStory`, without changing the original scene assets. The obsolete Level06 bridge has been removed. Outside a story run, amulet destinations retain their existing behavior.
+`TitleMenu` starts the story introduction. During a story run, `AmuletPickup` asks `StoryRunSession.Destination` for an exact scene path. This selects the finished GameLoop scenes, including the Wraithglass crystal's destination of `Assets/Scenes/GameLoop/Boss.unity`. The obsolete Level06 bridge has been removed. Outside a story run, amulet destinations retain their existing behavior.
 
-The enabled Ashpetal build entry now points to its GameLoop scene, rather than the older copy directly under Scenes. Both story scene GUIDs and their existing story UI, sprite references, and timing settings are retained. The refreshed copies include the current source scenes' audio setup and gameplay.
+The enabled Ashpetal build entry now points to its GameLoop scene, rather than the older copy directly under Scenes. The retained story UI, sprite references, and timing settings are used by the introduction and final boss scene.
 
-You can also open either story copy directly in the editor to preview its sequence. Playing the intro directly starts a story run; playing the boss directly shows the ending when its final boss dies.
+You can also preview the introduction or Boss scene directly. Playing the intro starts a story run; the Boss ending waits for victory crystal collection.
 
 ## Introduction
 
@@ -36,17 +36,17 @@ The introduction flag belongs to the current run in memory. Death and scene rest
 
 ## Ending
 
-`StoryEnding` subscribes to the final boss's existing `EnemyHealth.Died` event. Nonlethal hits do not trigger it; boss death still reveals the original crystal reward and runs the original defeat handlers.
+`StoryEnding` subscribes to the final boss's existing `EnemyHealth.Died` event. Nonlethal hits do not trigger it; boss death reveals the crystal reward and runs the existing defeat handlers. Collect the revealed crystal to start the ending.
 
-The story overlay shows the existing T.K. and Lenny sprites, with T.K. horizontal. T.K. rotates upright over **0.5 seconds**, then both sprites bounce **three times over two seconds**. Afterward the dialogue says **“T.K. is awake!”**. Press **Enter** to return to the title. Space does not dismiss the ending. Existing gameplay HUD canvases are hidden during the ending; the story overlay remains visible.
+The story overlay shows the existing T.K. and Lenny sprites, with T.K. horizontal. T.K. rotates upright over **0.5 seconds**, then both sprites bounce **three times over two seconds**. Afterward the dialogue says **“T.K. is awake!”**. The prompt reads **“Enter: Return to menu”**. Press **Enter** to return to the main menu. Space does not dismiss the ending. Existing gameplay HUD canvases are hidden during the ending; the story overlay remains visible.
 
 `StoryGameplayPause` suspends active input and AI, pauses game time and audio, and suspends player physics. It restores the state it owns on scene exit, without re-enabling dead characters. `TitleMenu` and the original boss crystal exit respect the story lock so they cannot interrupt the sequence.
 
 ## Inspector adjustments
 
-Select **Story Sequence** in either copy. `StoryIntroduction` exposes the walk distance and duration. `StoryEnding` exposes wake duration, celebration duration, bounce count, and bounce height (UI pixels). `StoryDialogue` holds the canvas, text, and original sprite references. **T.K. Sleeping** is the intro's visual prefab instance; adjust its transform to reposition or resize him.
+Select **Story Sequence** in the introduction or Boss scene. `StoryIntroduction` exposes the walk distance and duration. `StoryEnding` exposes wake duration, celebration duration, bounce count, and bounce height (UI pixels). `StoryDialogue` holds the canvas, text, and original sprite references. **T.K. Sleeping** is the intro's visual prefab instance; adjust its transform to reposition or resize him.
 
-## Verification
+## Historical verification
 
 Controlled Unity Play mode checks covered both dismissal keys, held-key protection, the two-unit walk, restored arrow movement, first and stronger wing-assisted second jump, one tail sweep per X press, and F fireballs. The existing health-death coroutine was allowed to reload the scene; the intro remained skipped and the player restored. Scene restart also skipped it.
 

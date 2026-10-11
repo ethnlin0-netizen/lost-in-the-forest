@@ -6,6 +6,7 @@ public class Level02ThornRespawn : MonoBehaviour
     public Transform entrance;
     private Rigidbody2D body;
     private float lastReturn = float.NegativeInfinity;
+    public event System.Action ReturnedToEntrance;
 
     private void Awake() { body = GetComponent<Rigidbody2D>(); }
 
@@ -17,5 +18,6 @@ public class Level02ThornRespawn : MonoBehaviour
         body.angularVelocity = 0;
         body.position = entrance.position;
         transform.position = entrance.position;
+        ReturnedToEntrance?.Invoke();
     }
 }

@@ -18,7 +18,7 @@ public sealed class TitleMenu : MonoBehaviour
         "Matthew Mirfield - AI Programmer\n\n" +
         "Ethan Lin - Level Designer\n\n" +
         "Music by Scott Buckley\n" +
-        "Echoes Of Home, Moonlight, Reverie, Decoherence\n" +
+        "The Long Dark, Moonlight, Reverie, Decoherence\n" +
         "www.scottbuckley.com.au\n" +
         "CC BY 4.0 - creativecommons.org/licenses/by/4.0/\n" +
         "Adapted: excerpts, loop crossfades and volume adjustment.\n\n" +

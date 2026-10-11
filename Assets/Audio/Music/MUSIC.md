@@ -40,7 +40,7 @@ Prepared loops and retained sources use stereo (Force To Mono off), Streaming, V
 
 | Scene under Assets/Scenes/GameLoop | Prepared loop |
 | --- | --- |
-| PrismbloomLevel01 | PrismbloodForest_Loop.wav |
+| PrismbloomLevel01 | VeinrootHollow_Loop.wav |
 | GloamthorneLevel02 | GloamthornCanopy_Loop.wav |
 | Level03 | AshpetalForest_Loop.wav |
 | Boss | DreadcrownForest_Loop.wav |

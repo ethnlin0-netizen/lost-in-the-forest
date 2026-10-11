@@ -21,6 +21,17 @@ public sealed class BossCrystalExit : MonoBehaviour
         var health = player.GetComponent<PlayerHealth>();
         if (health != null && health.IsDead) return;
 
+        // The updated arena owns the same ending UI as BossStory; do not load
+        // that scene's older boss fight or return to the menu before the ending.
+        foreach (var root in gameObject.scene.GetRootGameObjects())
+        {
+            var ending = root.GetComponentInChildren<StoryEnding>(true);
+            if (ending == null || !ending.waitForCrystal) continue;
+            returningToMenu = ending.PlayAfterCrystal();
+            if (returningToMenu) GameAudioController.Instance?.PlayTransition(GameSound.CrystalTouch, this);
+            return;
+        }
+
         var menu = FindAnyObjectByType<TitleMenu>();
         if (menu != null)
         {

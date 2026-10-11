@@ -9,7 +9,7 @@ public enum GameSound
     RockSlam, RockHit, RockDeath, BossSlamWarn, BossLungeWarn, BossSporeWarn,
     BossSlam, BossShockwave, BossLunge, BossVolley, BossHit, BossPhase, BossDeath,
     WhisperseedRecruit, DryadRecruit, PetalbornRecruit, CrystalAppear, CrystalTouch,
-    MenuFocus, MenuClick, Pause, Resume
+    MenuFocus, MenuClick, Pause, Resume, BossThornWarn, BossThorns
 }
 
 [CreateAssetMenu(menuName = "Lost in the Forest/Audio catalog")]

@@ -52,7 +52,8 @@ public static class StoryRunSession
             case "Veinroot Level04":
                 return "Assets/Scenes/GameLoop/Veinroot Level04.unity";
             case "Boss":
-                return EndingScenePath;
+                // Boss now includes the ending, triggered by its victory crystal.
+                return "Assets/Scenes/GameLoop/Boss.unity";
             default:
                 return original;
         }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6398897535267691276}
   - component: {fileID: 5156929098806855005}
   - component: {fileID: 7577046036308737450}
+  - component: {fileID: 7023158341784013637}
   m_Layer: 0
   m_Name: SporeProjectile
   m_TagString: Untagged
@@ -170,3 +171,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5eef40d54e4c7f9b425308d9b4fd58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlaceholderProjectile
+--- !u!114 &7023158341784013637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2438834138754097806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ed93eefb5368647be66d2b504b5bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplaySfx
+  role: 9
+  volume: 1
+  stepDistance: 1.7

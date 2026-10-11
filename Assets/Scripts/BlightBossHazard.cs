@@ -65,6 +65,7 @@ public sealed class BlightBossHazard : MonoBehaviour
             var player = hit.collider.GetComponentInParent<Movement>();
             if (player != null && player.isActiveAndEnabled && owner.HasLineOfSight(body.position, hit.point))
                 DamageUtility.Find(player)?.TakeDamage(damage, direction, followsGround ? 2f : 0.5f);
+            GetComponent<GameplaySfx>()?.Impact();
             Cancel(); return;
         }
         body.MovePosition(body.position + delta);

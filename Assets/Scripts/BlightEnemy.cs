@@ -55,6 +55,7 @@ public class BlightEnemy : MonoBehaviour
     private readonly HashSet<IDamageable> struck = new HashSet<IDamageable>();
     public BehaviourState State { get; private set; }
     public int AttacksPerformed { get; private set; }
+    public event System.Action WindupStarted, AttackExecuted, AttackCanceled;
     public BlightType Kind => kind;
     public int Facing => facing;
     public float WindupProgress => State == BehaviourState.Windup ? Mathf.Clamp01((Time.time - windupStarted) / windup) : 0f;
@@ -78,6 +79,7 @@ public class BlightEnemy : MonoBehaviour
     }
     private void OnDisable()
     {
+        AttackCanceled?.Invoke();
         if (navigator != null) navigator.Stop();
         move = 0f; useNavigation = holdingMeleeDistance = false; impactUntil = 0f;
         if (attackVisual != null) attackVisual.SetActive(false);
@@ -134,6 +136,7 @@ public class BlightEnemy : MonoBehaviour
     }
     private void StartRecovery()
     {
+        AttackCanceled?.Invoke();
         State = BehaviourState.Recovery; stateUntil = Time.time + recovery;
         nextAttack = Time.time + Mathf.Max(cooldown, recovery);
     }
@@ -156,6 +159,7 @@ public class BlightEnemy : MonoBehaviour
         useNavigation = false;
         if (health.LastHitTime > observedHitTime)
         {
+            AttackCanceled?.Invoke();
             observedHitTime = health.LastHitTime;
             navigator.Interrupt(); holdingMeleeDistance = false; impactUntil = 0f;
             State = BehaviourState.Recovery;
@@ -194,6 +198,7 @@ public class BlightEnemy : MonoBehaviour
             {
                 State = BehaviourState.Windup; windupStarted = Time.time; stateUntil = Time.time + windup;
                 attackDirectionLocked = false; navigator.Stop();
+                WindupStarted?.Invoke();
             }
             else if (kind != BlightType.Spora)
             {
@@ -309,8 +314,10 @@ public class BlightEnemy : MonoBehaviour
             float clearance = shape.bounds.extents.magnitude + 0.25f;
             var projectile = Instantiate(sporePrefab, (Vector2)shape.bounds.center + direction * clearance, Quaternion.identity);
             projectile.Launch(direction, projectileSpeed, projectileRange, body, damage, target.transform);
+            AttackExecuted?.Invoke();
             return;
         }
+        AttackExecuted?.Invoke();
         Vector2 center = (Vector2)shape.bounds.center + Vector2.right * facing * attackRange * 0.5f;
         var filter = new ContactFilter2D { useTriggers = false };
         int count = Physics2D.OverlapBox(center, new Vector2(attackRange + shape.bounds.size.x, verticalTolerance * 2f), 0f, filter, overlaps);

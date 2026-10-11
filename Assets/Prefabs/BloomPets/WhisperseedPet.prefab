@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6250442789352836825}
   - component: {fileID: 584590199677763985}
   - component: {fileID: 6285910078774220775}
+  - component: {fileID: 3406502580794207189}
   m_Layer: 0
   m_Name: WhisperseedPet
   m_TagString: Untagged
@@ -160,6 +161,21 @@ MonoBehaviour:
   routeRefreshInterval: 0.3
   stuckTimeout: 1
   showRoute: 0
+--- !u!114 &3406502580794207189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5575866009483077064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ed93eefb5368647be66d2b504b5bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplaySfx
+  role: 5
+  volume: 1
+  stepDistance: 1.7
 --- !u!1001 &1796877544716126843
 PrefabInstance:
   m_ObjectHideFlags: 0

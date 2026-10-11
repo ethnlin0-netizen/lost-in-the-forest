@@ -122,6 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779def98ed4a47345a3565911561069b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BloomPetFollower
+  companionId: 3
+  companionCatalog: {fileID: 11400000, guid: dce34e8c2caa04f468e7eec734bccabb, type: 2}
   movementSpeed: 6
   catchUpSpeed: 8
   catchUpDistance: 4

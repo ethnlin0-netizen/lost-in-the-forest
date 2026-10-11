@@ -10,7 +10,7 @@ public static class RefineLevel04
     {
         if(EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Stop Play mode first.");
         EditorSceneManager.SaveOpenScenes();
-        var scene=EditorSceneManager.OpenScene("Assets/Scenes/Level04.unity");
+        var scene=EditorSceneManager.OpenScene("Assets/Scenes/GameLoop/Level04.unity");
         EditorSceneManager.SaveScene(scene,"Assets/Scenes/Backups/Level04-before-refinement-"+DateTime.Now.ToString("yyyyMMdd-HHmmss")+".unity",true);
         Physics2D.SyncTransforms();
         var root=GameObject.Find("Level04Route").transform;

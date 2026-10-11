@@ -9,7 +9,7 @@ using UnityEngine;
 /// <summary>Styles only Level04. Original assets and gameplay components stay intact.</summary>
 public static class StyleLevel04Visuals
 {
-    public const string ScenePath = "Assets/Scenes/Level04.unity";
+    public const string ScenePath = "Assets/Scenes/GameLoop/Level04.unity";
     private const string MaterialFolder = "Assets/Materials/VeinrootHollow";
     private const string VisualPrefix = "VeinrootVisual_";
 

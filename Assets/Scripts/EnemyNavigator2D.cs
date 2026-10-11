@@ -5,8 +5,9 @@ using UnityEngine;
 public class EnemyNavigator2D : MonoBehaviour
 {
     [SerializeField, Min(0f)] private float jumpSpeed = 10f;
-    [SerializeField, Range(0.5f, 2f)] private float jumpHorizontalSpeedMultiplier = 1f;
-    [SerializeField, Min(0f)] private float maximumDropDistance = 4f;
+    [Tooltip("Air speed relative to ground speed. Slow walkers may need more air speed to cross platform gaps.")]
+    [SerializeField, Range(0.5f, 4f)] private float jumpHorizontalSpeedMultiplier = 1f;
+    [SerializeField, Min(0f)] private float maximumDropDistance = 6.5f;
     [SerializeField, Min(0.1f)] private float routeRefreshInterval = 0.35f;
     [SerializeField, Min(0.2f)] private float stuckTimeout = 1f;
     [SerializeField] private bool showRoute = true;
@@ -26,9 +27,14 @@ public class EnemyNavigator2D : MonoBehaviour
     private bool routeNeedsRefresh = true;
     private float graphSpeed, graphJump, graphGravity, graphDrop;
     private float graphAirMultiplier;
+    private bool leavingDrop;
+    private float dropDepartureX, dropWalkVelocity;
     private Vector2 graphSize;
     public bool GoalReachable { get; private set; }
     public bool IsTraversing => traversing;
+    // A planned walk-off can yield to combat while the center is still safely
+    // supported. Airborne jumps and drops must finish before attacking.
+    public bool CanStopForAttack => !traversing || leavingDrop && IsGrounded;
     public int RoutesCalculated { get; private set; }
     public int JumpsPerformed { get; private set; }
     public int DropsPerformed { get; private set; }
@@ -48,7 +54,7 @@ public class EnemyNavigator2D : MonoBehaviour
     }
     public void Stop()
     {
-        hasDestination = traversing = leftGround = false;
+        hasDestination = traversing = leftGround = leavingDrop = false;
         route.Clear(); routeIndex = 0; lastGoalSupport = null; refreshRemaining = 0f;
         lastPlannedGoal = -1; routeNeedsRefresh = true; stuckElapsed = 0f;
     }
@@ -62,6 +68,13 @@ public class EnemyNavigator2D : MonoBehaviour
         if (traversing)
         {
             traversalElapsed += deltaTime;
+            if (leavingDrop)
+            {
+                float distance = (dropDepartureX - Feet.x) * Mathf.Sign(dropWalkVelocity);
+                if (distance > 0.005f && traversalElapsed <= traversalLimit)
+                    return Mathf.Sign(dropWalkVelocity) * Mathf.Min(Mathf.Abs(dropWalkVelocity), distance / deltaTime);
+                leavingDrop = false;
+            }
             if (!IsGrounded) leftGround = true;
             if (leftGround && IsGrounded && traversalElapsed > 0.08f)
             {
@@ -107,8 +120,9 @@ public class EnemyNavigator2D : MonoBehaviour
             var support = world.SupportAt(Feet);
             if (GoalReachable && support != null && goalSupport == support)
             {
-                float finalX = Mathf.Clamp(destination.x, support.bounds.min.x + size.x * 0.5f + 0.08f,
-                    support.bounds.max.x - size.x * 0.5f - 0.08f);
+                float left = support.bounds.min.x + size.x * 0.5f + 0.08f;
+                float right = support.bounds.max.x - size.x * 0.5f - 0.08f;
+                float finalX = right < left ? support.bounds.center.x : Mathf.Clamp(destination.x, left, right);
                 bool needsMovement = Mathf.Abs(finalX - Feet.x) > 0.18f;
                 float velocity = needsMovement && world.ClearSegment(Feet, new Vector2(finalX, Feet.y), size) ? SafeWalk(finalX, speed) : 0f;
                 return TrackProgress(velocity, needsMovement, deltaTime);
@@ -125,23 +139,39 @@ public class EnemyNavigator2D : MonoBehaviour
         {
             intended = SafeWalk(to.feet.x, speed);
         }
-        else if (Mathf.Abs(from.feet.x - Feet.x) > 0.09f)
+        // Tight wall jumps need the planned takeoff position. A loose tolerance
+        // can repeatedly reject the same arc without ever closing that gap.
+        else if (Mathf.Abs(from.feet.x - Feet.x) > (link.type == PlatformNavigation2D.LinkType.Jump ? 0.01f : 0.09f))
             intended = SafeWalk(from.feet.x, speed);
         else
         {
             float velocity = link.velocityX, duration = link.duration, delay = link.horizontalDelay;
             if (link.type == PlatformNavigation2D.LinkType.Jump)
             {
-                var actual = from; actual.feet = new Vector2(Feet.x, from.feet.y);
-                if (!world.TryJump(actual, to, size, speed * jumpHorizontalSpeedMultiplier, jumpSpeed, gravity, maximumDropDistance, out velocity, out duration, out delay))
+                var actual = from; actual.feet = Feet;
+                if (!world.TryJump(actual, to, size, speed * jumpHorizontalSpeedMultiplier, jumpSpeed, gravity, maximumDropDistance, out velocity, out float upwardVelocity, out duration, out delay))
                 { graph = null; retryRemaining = routeRefreshInterval; return 0f; }
-                body.linearVelocity = new Vector2(delay > 0f ? 0f : velocity, jumpSpeed); JumpsPerformed++;
+                body.linearVelocity = new Vector2(delay > 0f ? 0f : velocity, upwardVelocity); JumpsPerformed++;
             }
-            else DropsPerformed++;
+            else
+            {
+                var actual = from; actual.feet = new Vector2(Feet.x, from.feet.y);
+                int direction = link.dropDepartureX > Feet.x ? 1 : -1;
+                if (!world.TryDrop(actual, direction, size, speed, gravity, maximumDropDistance,
+                    out var landing, out var landingFeet, out duration, out velocity) || landing != to.surface)
+                { graph = null; retryRemaining = routeRefreshInterval; return 0f; }
+                // The validated fall begins only once the entire collider is
+                // clear of the source platform. Never apply ordinary edge
+                // safety here, since this edge crossing has a landing route.
+                dropDepartureX = link.dropDepartureX;
+                dropWalkVelocity = Mathf.Sign(dropDepartureX - Feet.x) * speed;
+                leavingDrop = true;
+                DropsPerformed++;
+            }
             traversing = true; leftGround = false; traversalElapsed = 0f;
             traversalVelocity = velocity; traversalLimit = duration + 0.75f;
             traversalDelay = delay;
-            stuckElapsed = 0f; return delay > 0f ? 0f : velocity;
+            stuckElapsed = 0f; return leavingDrop ? dropWalkVelocity : delay > 0f ? 0f : velocity;
         }
         return TrackProgress(intended, Mathf.Abs(to.feet.x - Feet.x) > 0.18f, deltaTime);
     }
@@ -178,9 +208,18 @@ public class EnemyNavigator2D : MonoBehaviour
     private float SafeWalk(float destinationX, float speed)
     {
         int direction = destinationX > Feet.x ? 1 : -1;
-        Vector2 leading = Feet + Vector2.right * direction * (shape.bounds.extents.x + 0.12f);
-        if (world.SupportAt(leading, 0.3f) == null || !world.ClearSegment(Feet, Feet + Vector2.right * direction * 0.15f, shape.bounds.size)) return 0f;
-        return direction * Mathf.Min(speed, Mathf.Abs(destinationX - Feet.x) / Time.fixedDeltaTime);
+        float velocity = direction * Mathf.Min(speed, Mathf.Abs(destinationX - Feet.x) / Time.fixedDeltaTime);
+        Vector2 nextFeet = Feet + Vector2.right * velocity * Time.fixedDeltaTime;
+        // Match the graph's 0.04-unit inset instead of stopping before its
+        // takeoff node. Check the actual next step rather than a long lookahead.
+        var support = world.SupportAt(Feet);
+        // Center-supported narrow tops cannot satisfy a full-width leading
+        // probe. Allow centering there while still requiring support under
+        // the next position; only traversal links can cross the edge.
+        bool narrowTop = support != null && support.bounds.size.x < shape.bounds.size.x + 0.08f;
+        Vector2 leading = narrowTop ? nextFeet : nextFeet + Vector2.right * direction * (shape.bounds.extents.x + 0.02f);
+        if (world.SupportAt(leading, 0.3f) == null || !world.ClearSegment(Feet, nextFeet, shape.bounds.size)) return 0f;
+        return velocity;
     }
     private void OnDrawGizmosSelected()
     {

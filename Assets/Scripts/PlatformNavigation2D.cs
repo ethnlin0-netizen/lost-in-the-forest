@@ -11,7 +11,8 @@ public class PlatformNavigation2D : MonoBehaviour
     {
         public int from, to;
         public LinkType type;
-        public float velocityX, duration, horizontalDelay, cost;
+        public float velocityX, velocityY, duration, horizontalDelay, cost;
+        public float dropDepartureX;
     }
     public class Graph
     {
@@ -146,7 +147,19 @@ public class PlatformNavigation2D : MonoBehaviour
             Bounds b = surface.bounds;
             float left = b.min.x + size.x * 0.5f + Skin;
             float right = b.max.x - size.x * 0.5f - Skin;
-            if (right < left) continue;
+            if (right < left)
+            {
+                // A broad actor can stand on a narrow wall with its center
+                // supported. Edge and center samples let it land near the
+                // approaching edge, then walk across before its next jump.
+                if (b.size.x < size.x * 0.5f + Skin * 2f) continue;
+                for (int i = 0; i < 3; i++)
+                {
+                    var feet = new Vector2(Mathf.Lerp(b.min.x + Skin * 2f, b.max.x - Skin * 2f, i * 0.5f), b.max.y + Skin);
+                    if (Clear(feet, size)) points.Add(new Node { feet = feet, surface = surface });
+                }
+                continue;
+            }
             int intervals = Mathf.Max(1, Mathf.CeilToInt((right - left) / nodeSpacing));
             var samples = new List<float>();
             for (int i = 0; i <= intervals; i++) samples.Add(Mathf.Lerp(left, right, (float)i / intervals));
@@ -184,8 +197,8 @@ public class PlatformNavigation2D : MonoBehaviour
                 if (jumpSpeed <= 0f || Mathf.Abs(delta.x) > jumpHorizontalSpeed * maxFlight || delta.y < -maxDrop) continue;
                 // Jumps also cross holes or a blocked walking segment on the same surface.
                 if (a.surface == b.surface && ClearSegment(a.feet, b.feet, size)) continue;
-                if (TryJump(a, b, size, jumpHorizontalSpeed, jumpSpeed, gravity, maxDrop, out float vx, out float duration, out float delay))
-                    graph.edges[i].Add(new Link { from = i, to = j, type = LinkType.Jump, velocityX = vx, duration = duration, horizontalDelay = delay, cost = duration + 0.35f });
+                if (TryJump(a, b, size, jumpHorizontalSpeed, jumpSpeed, gravity, maxDrop, out float vx, out float vy, out float duration, out float delay))
+                    graph.edges[i].Add(new Link { from = i, to = j, type = LinkType.Jump, velocityX = vx, velocityY = vy, duration = duration, horizontalDelay = delay, cost = duration + 0.35f });
             }
             // Drops start at a platform's outer node, walking beyond its lip before falling.
             foreach (int direction in new[] { -1, 1 })
@@ -193,11 +206,12 @@ public class PlatformNavigation2D : MonoBehaviour
                 Bounds bounds = points[i].surface.bounds;
                 float lip = direction < 0 ? bounds.min.x : bounds.max.x;
                 if (Mathf.Abs(points[i].feet.x - lip) > size.x * 0.5f + Skin + 0.01f) continue;
-                if (TryDrop(points[i], direction, size, speed, gravity, maxDrop, out BoxCollider2D landing, out Vector2 feet, out float duration))
+                if (TryDrop(points[i], direction, size, speed, gravity, maxDrop, out BoxCollider2D landing, out Vector2 feet, out float duration, out float velocity))
                 {
                     int closest = Nearest(graph, feet, landing);
                     if (closest >= 0) graph.edges[i].Add(new Link { from = i, to = closest, type = LinkType.Drop,
-                        velocityX = speed * direction, duration = duration, cost = duration + 0.2f });
+                        dropDepartureX = lip + direction * (size.x * 0.5f + Skin),
+                        velocityX = velocity, duration = duration, cost = duration + 0.2f });
                 }
             }
         }
@@ -205,6 +219,21 @@ public class PlatformNavigation2D : MonoBehaviour
         return graph;
     }
     public bool TryJump(Node from, Node to, Vector2 size, float speed, float jumpSpeed, float gravity,
+        float maxDrop, out float vx, out float duration, out float horizontalDelay)
+    {
+        return TryJumpAtSpeed(from, to, size, speed, jumpSpeed, gravity, maxDrop, out vx, out duration, out horizontalDelay);
+    }
+    public bool TryJump(Node from, Node to, Vector2 size, float speed, float jumpSpeed, float gravity,
+        float maxDrop, out float vx, out float vy, out float duration, out float horizontalDelay)
+    {
+        // Use a smaller validated hop for nearby ledges. Always launching at
+        // maximum strength wastes time and can send the actor into a low ceiling.
+        if (TryJumpAtSpeed(from, to, size, speed, jumpSpeed * 0.75f, gravity, maxDrop, out vx, out duration, out horizontalDelay))
+        { vy = jumpSpeed * 0.75f; return true; }
+        vy = jumpSpeed;
+        return TryJumpAtSpeed(from, to, size, speed, jumpSpeed, gravity, maxDrop, out vx, out duration, out horizontalDelay);
+    }
+    private bool TryJumpAtSpeed(Node from, Node to, Vector2 size, float speed, float jumpSpeed, float gravity,
         float maxDrop, out float vx, out float duration, out float horizontalDelay)
     {
         vx = duration = horizontalDelay = 0f;
@@ -215,14 +244,14 @@ public class PlatformNavigation2D : MonoBehaviour
         if (dy < -maxDrop || discriminant <= 0f || jumpSpeed <= 0f) return false;
         float time = (effectiveJump + Mathf.Sqrt(discriminant)) / gravity;
         float horizontal = (to.feet.x - from.feet.x) / time;
-        for (int attempt = 0; attempt < 2; attempt++)
+        for (int attempt = 0; attempt < 3; attempt++)
         {
             float delay = 0f;
-            if (attempt == 1)
+            if (attempt > 0)
             {
                 if (dy <= 0f) continue;
                 // Lift clear of a nearby riser before steering across it.
-                delay = (effectiveJump - Mathf.Sqrt(Mathf.Max(0f, effectiveJump * effectiveJump - 2f * gravity * (dy + Skin)))) / gravity + 0.04f;
+                delay = (effectiveJump - Mathf.Sqrt(Mathf.Max(0f, effectiveJump * effectiveJump - 2f * gravity * (dy + Skin)))) / gravity + (attempt == 1 ? 0.02f : 0.04f);
             }
             horizontal = (to.feet.x - from.feet.x) / Mathf.Max(0.01f, time - delay);
             if (Mathf.Abs(horizontal) > speed) continue;
@@ -233,18 +262,28 @@ public class PlatformNavigation2D : MonoBehaviour
         }
         return false;
     }
-    private bool TryDrop(Node from, int direction, Vector2 size, float speed, float gravity, float maxDrop,
-        out BoxCollider2D surface, out Vector2 end, out float duration)
+    public bool TryDrop(Node from, int direction, Vector2 size, float speed, float gravity, float maxDrop,
+        out BoxCollider2D surface, out Vector2 end, out float duration, out float velocityX)
     {
         float lip = direction < 0 ? from.surface.bounds.min.x : from.surface.bounds.max.x;
         // Full-body clearance before predicting free fall is conservative for a box character.
         Vector2 leave = new Vector2(lip + direction * (size.x * 0.5f + Skin), from.feet.y);
-        surface = null; end = default; duration = 0f;
+        surface = null; end = default; duration = velocityX = 0f;
         if (!ClearSegment(from.feet, leave, size)) return false;
-        if (!TraceFlight(leave, size, Vector2.right * (direction * speed), gravity, from.surface, true,
-            maxDrop, out surface, out end, out duration)) return false;
-        duration += Mathf.Abs(leave.x - from.feet.x) / speed;
-        return surface != from.surface && from.feet.y - end.y <= maxDrop + 0.1f;
+        // Walk fully clear of the lip, then brake horizontally. Continuing at
+        // chase speed can hit the side of a lower platform or overshoot it.
+        // Retain controlled sideways drops for gaps where a straight fall has
+        // no landing. Every candidate is swept against the actual obstacles.
+        for (int attempt = 0; attempt < 3; attempt++)
+        {
+            velocityX = attempt == 0 ? 0f : direction * speed * (attempt == 1 ? 0.5f : 1f);
+            if (!TraceFlight(leave, size, Vector2.right * velocityX, gravity, from.surface, true,
+                maxDrop, out surface, out end, out duration)) continue;
+            if (surface == from.surface || from.feet.y - end.y > maxDrop + 0.1f) continue;
+            duration += Mathf.Abs(leave.x - from.feet.x) / speed;
+            return true;
+        }
+        return false;
     }
     private bool TraceFlight(Vector2 start, Vector2 size, Vector2 velocity, float gravity, BoxCollider2D source,
         bool drop, float maxDrop, out BoxCollider2D landing, out Vector2 end, out float duration, float horizontalDelay = 0f)
@@ -256,7 +295,10 @@ public class PlatformNavigation2D : MonoBehaviour
             velocity.y -= gravity * step;
             Vector2 delta = velocity * step;
             if (duration < horizontalDelay) delta.x = 0f;
-            int count = Physics2D.BoxCast(end + Vector2.up * size.y * 0.5f, size - Vector2.one * Skin,
+            // Predict almost the full physical collider. The walking skin is
+            // too generous here: a corner can catch the real body while the
+            // smaller prediction passes it and incorrectly promises a landing.
+            int count = Physics2D.BoxCast(end + Vector2.up * size.y * 0.5f, size - Vector2.one * (Skin * 0.1f),
                 0f, delta.normalized, Filter(), hits, delta.magnitude);
             int closest = -1; float distance = float.PositiveInfinity;
             for (int i = 0; i < count; i++)
@@ -275,9 +317,13 @@ public class PlatformNavigation2D : MonoBehaviour
                 end += delta.normalized * distance;
                 if (velocity.y >= 0f || hit.normal.y < 0.5f || landing == null) return false;
                 Bounds b = landing.bounds;
-                // BoxCast uses a slightly inset body. Permit its skin-width contact
-                // offset while still requiring essentially the whole body on the top.
-                if (end.x < b.min.x + size.x * 0.5f - Skin * 0.5f || end.x > b.max.x - size.x * 0.5f + Skin * 0.5f) return false;
+                // Drops permit a center-supported overhang. Jump landings on
+                // broad surfaces keep their full-body margin; a narrow wall
+                // must support at least half the body, with its center inset.
+                bool narrowTop = b.size.x < size.x + Skin * 2f;
+                if (!drop && narrowTop && b.size.x < size.x * 0.5f + Skin * 2f) return false;
+                float landingInset = drop ? Skin : narrowTop ? Skin * 2f : size.x * 0.5f - Skin * 0.5f;
+                if (end.x < b.min.x + landingInset || end.x > b.max.x - landingInset) return false;
                 end.y = b.max.y + Skin;
                 return start.y - end.y <= maxDrop + 0.1f;
             }

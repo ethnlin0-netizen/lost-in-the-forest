@@ -9,6 +9,8 @@ public sealed class StoryEnding : MonoBehaviour
     public BlightBossHealth boss;
     public Movement player;
     public StoryDialogue dialogue;
+    [Tooltip("Start this ending when the defeated boss's crystal is collected.")]
+    public bool waitForCrystal;
     [Min(.01f)] public float wakeDuration = .5f;
     [Min(.01f)] public float celebrationDuration = 2f;
     [Min(1)] public int bounceCount = 3;
@@ -18,17 +20,33 @@ public sealed class StoryEnding : MonoBehaviour
     private float elapsed;
     private Vector2 tkRest, lennyRest;
     private bool waitingForKeyRelease;
+    private bool bossDefeated;
 
     private void OnEnable()
     {
         if (boss == null) return;
-        boss.Died += BeginEnding;
-        if (boss.IsDead) BeginEnding();
+        boss.Died += RememberDefeat;
+        if (boss.IsDead) RememberDefeat();
+    }
+
+    private void RememberDefeat()
+    {
+        // The death animation destroys the boss before a player may reach its crystal.
+        bossDefeated = true;
+        if (!waitForCrystal) BeginEnding();
+    }
+
+    public bool PlayAfterCrystal()
+    {
+        if (!bossDefeated && boss != null && boss.IsDead) bossDefeated = true;
+        if (!bossDefeated || State != EndingState.WaitingForBoss || player == null || dialogue == null) return false;
+        BeginEnding();
+        return State == EndingState.Waking;
     }
 
     private void BeginEnding()
     {
-        if (boss == null || !boss.IsDead || State != EndingState.WaitingForBoss) return;
+        if (!bossDefeated || State != EndingState.WaitingForBoss) return;
         StoryRunSession.EnsureStoryRun();
         pause = new StoryGameplayPause(player, dialogue.canvas);
         tkRest = dialogue.sleepingTK.anchoredPosition;
@@ -99,7 +117,7 @@ public sealed class StoryEnding : MonoBehaviour
 
     private void OnDisable()
     {
-        if (boss != null) boss.Died -= BeginEnding;
+        if (boss != null) boss.Died -= RememberDefeat;
         pause?.Dispose();
         pause = null;
         if (dialogue != null) dialogue.Hide();

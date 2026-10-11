@@ -20,7 +20,7 @@ half of it toxic and hostile.
 | --- | --- | --- |
 | ctkimondo | Game mechanics | Movement, fighting, health, and status systems. |
 | ethanlin0-netizen | Level design | Biome layouts, level structure, terrain, and placement of gameplay elements. |
-| RyanRothmund | Art | Character and enemy art, environments, sprites, animations, and other visual assets. |
+| RyanRothmund | Design/UI | Character/enemy art, environments, sprites, animations, and other visual and technical assets. |
 | mattmirf | Enemy AI | Enemy behavior, detection, navigation, targeting, and attack decisions. |
 
 ## Collaboration guidelines

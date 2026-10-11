@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmuletPickup
   amuletNumber: 5
-  nextScene: Level06
+  nextScene: Boss
 --- !u!61 &90714681
 BoxCollider2D:
   m_ObjectHideFlags: 0

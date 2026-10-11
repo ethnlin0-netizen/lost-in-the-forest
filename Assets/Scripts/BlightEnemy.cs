@@ -77,6 +77,7 @@ public class BlightEnemy : MonoBehaviour
         for (int i = 0; i < cueRenderers.Length; i++) cueAlpha[i] = cueRenderers[i].color.a;
         if (attackVisual != null) attackVisual.SetActive(false);
     }
+    private void OnEnable() { FindPlayer(); }
     private void OnDisable()
     {
         AttackCanceled?.Invoke();
@@ -91,6 +92,14 @@ public class BlightEnemy : MonoBehaviour
     {
         target = FindAnyObjectByType<Movement>();
         targetShape = target != null ? target.GetComponent<Collider2D>() : null;
+        if (target == null) return;
+        // Attacks use explicit damage queries. Body contact must not stall a
+        // validated jump or push the player onto an enemy's collider as ground.
+        // Reapply on enable because Unity resets ignored pairs when disabled.
+        foreach (var enemyCollider in GetComponentsInChildren<Collider2D>())
+            foreach (var playerCollider in target.GetComponentsInChildren<Collider2D>())
+                if (!enemyCollider.isTrigger && !playerCollider.isTrigger)
+                    Physics2D.IgnoreCollision(enemyCollider, playerCollider, true);
     }
     private void Die()
     {
@@ -142,7 +151,7 @@ public class BlightEnemy : MonoBehaviour
     }
     private bool HoldMeleeDistance()
     {
-        if (kind == BlightType.Spora || !navigator.IsGrounded || navigator.IsTraversing || !CanSeePlayer())
+        if (kind == BlightType.Spora || !navigator.IsGrounded || !navigator.CanStopForAttack || !CanSeePlayer())
         { holdingMeleeDistance = false; return false; }
         Vector2 delta = TargetPosition - (Vector2)shape.bounds.center;
         if (Mathf.Abs(delta.y) > verticalTolerance) { holdingMeleeDistance = false; return false; }
@@ -194,7 +203,7 @@ public class BlightEnemy : MonoBehaviour
                 lastKnownFeet = new Vector2(TargetPosition.x, targetShape != null ? targetShape.bounds.min.y : TargetPosition.y);
             }
             if (nearby) AimAtPlayer();
-            if (sees && InAttackRange() && Time.time >= nextAttack && !navigator.IsTraversing && (kind == BlightType.Spora || navigator.IsGrounded))
+            if (sees && InAttackRange() && Time.time >= nextAttack && navigator.CanStopForAttack && (kind == BlightType.Spora || navigator.IsGrounded))
             {
                 State = BehaviourState.Windup; windupStarted = Time.time; stateUntil = Time.time + windup;
                 attackDirectionLocked = false; navigator.Stop();

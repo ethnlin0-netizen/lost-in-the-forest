@@ -583,9 +583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d56406c968a924fb0a16d015aaf21c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyNavigator2D
-  jumpSpeed: 12
+  jumpSpeed: 16
   jumpHorizontalSpeedMultiplier: 1
-  maximumDropDistance: 4
+  maximumDropDistance: 6.5
   routeRefreshInterval: 0.35
   stuckTimeout: 1
   showRoute: 1

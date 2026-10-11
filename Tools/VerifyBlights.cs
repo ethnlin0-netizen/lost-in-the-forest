@@ -17,10 +17,12 @@ var playerHealth = player.GetComponent<PlayerHealth>();
 Assert(playerHealth != null,"Missing player health component.");
 float originalHealth = playerHealth.CurrentHealth;
 float originalMaximumHealth = playerHealth.MaximumHealth;
-void PlacePlayer(float x) { playerBody.position = new UnityEngine.Vector2(x,-2.7f); playerBody.linearVelocity = UnityEngine.Vector2.zero; UnityEngine.Physics2D.SyncTransforms(); }
+// Keep combat fixtures in clear ground space rather than inside the low center platform.
+const float combatOffset = -7f;
+void PlacePlayer(float x) { playerBody.position = new UnityEngine.Vector2(x+combatOffset,-2.7f); playerBody.linearVelocity = UnityEngine.Vector2.zero; UnityEngine.Physics2D.SyncTransforms(); }
 UnityEngine.GameObject Spawn(string name, float x=1f) {
     var asset = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>("Assets/Prefabs/Enemies/"+name+".prefab");
-    var go = UnityEngine.Object.Instantiate(asset,new UnityEngine.Vector3(x,-3.5f+asset.GetComponent<UnityEngine.BoxCollider2D>().size.y*0.5f,0),UnityEngine.Quaternion.identity);
+    var go = UnityEngine.Object.Instantiate(asset,new UnityEngine.Vector3(x+combatOffset,-3.5f+asset.GetComponent<UnityEngine.BoxCollider2D>().size.y*0.5f,0),UnityEngine.Quaternion.identity);
     temporary.Add(go); UnityEngine.Physics2D.SyncTransforms(); return go;
 }
 try {
@@ -44,7 +46,9 @@ try {
     results.Add("Keyboard movement, 10-speed first jump and 14-speed double jump passed.");
     foreach(var name in new string[]{"Chomper","Spora","Collusus"}) {
         for(int attack=0;attack<3;attack++) {
-            var enemy = Spawn(name); var health = enemy.GetComponent<EnemyHealth>(); var ai = enemy.GetComponent<BlightEnemy>(); ai.enabled=false;
+            // The current player fires from Lenny's mouth. Place ranged targets
+            // beyond that origin so the projectile travels into their collider.
+            var enemy = Spawn(name,attack==2?3.5f:1f); var health = enemy.GetComponent<EnemyHealth>(); var ai = enemy.GetComponent<BlightEnemy>(); ai.enabled=false;
             PlacePlayer(0);
             var extra = new UnityEngine.GameObject("ExtraHitCollider"); extra.transform.SetParent(enemy.transform,false); extra.AddComponent<UnityEngine.BoxCollider2D>().size=UnityEngine.Vector2.one*0.4f;
             UnityEngine.Physics2D.SyncTransforms();
@@ -97,11 +101,11 @@ try {
         Set(ai,"nextAttack",0f); Call(ai,"Update"); Assert(ai.State==BlightEnemy.BehaviourState.Windup,"Second windup failed.");
         PlacePlayer(20); Set(ai,"stateUntil",UnityEngine.Time.time-1f); Call(ai,"Update"); Assert(ai.AttacksPerformed==1,"Attack did not cancel when player escaped.");
         PlacePlayer(4);
-        var wall=new UnityEngine.GameObject("TestWall"); temporary.Add(wall); wall.transform.position=new UnityEngine.Vector3(2,-2.5f,0); wall.AddComponent<UnityEngine.BoxCollider2D>().size=new UnityEngine.Vector2(0.4f,2);
+        var wall=new UnityEngine.GameObject("TestWall"); temporary.Add(wall); wall.transform.position=new UnityEngine.Vector3(2+combatOffset,-2.5f,0); wall.AddComponent<UnityEngine.BoxCollider2D>().size=new UnityEngine.Vector2(0.4f,2);
         UnityEngine.Physics2D.SyncTransforms();
         bool canSee=(bool)typeof(BlightEnemy).GetMethod("CanSeePlayer",flags).Invoke(ai,null); Assert(!canSee,"Line of sight passed through wall.");
         if(name!="Spora") {
-            float nearWall = 1.8f - enemy.GetComponent<UnityEngine.BoxCollider2D>().bounds.extents.x - 0.08f;
+            float nearWall = 1.8f + combatOffset - enemy.GetComponent<UnityEngine.BoxCollider2D>().bounds.extents.x - 0.08f;
             enemy.GetComponent<UnityEngine.Rigidbody2D>().position=new UnityEngine.Vector2(nearWall,-2.8f); UnityEngine.Physics2D.SyncTransforms();
             Assert(!(bool)typeof(BlightEnemy).GetMethod("SafeToMove",flags).Invoke(ai,new object[]{1}),"Wall movement guard failed.");
             enemy.GetComponent<UnityEngine.Rigidbody2D>().position=new UnityEngine.Vector2(31.9f-enemy.GetComponent<UnityEngine.BoxCollider2D>().bounds.extents.x,-3.5f+enemy.GetComponent<UnityEngine.BoxCollider2D>().bounds.extents.y); UnityEngine.Physics2D.SyncTransforms();
@@ -112,7 +116,7 @@ try {
     }
     results.Add("All three enemy attacks damage the real PlayerHealth component and update its overhead bar.");
     PlacePlayer(0);
-    var practice=new UnityEngine.GameObject("TestPracticeTarget"); temporary.Add(practice); practice.transform.position=new UnityEngine.Vector3(1,-2.7f,0);
+    var practice=new UnityEngine.GameObject("TestPracticeTarget"); temporary.Add(practice); practice.transform.position=new UnityEngine.Vector3(1+combatOffset,-2.7f,0);
     var practiceBody=practice.AddComponent<UnityEngine.Rigidbody2D>(); practiceBody.gravityScale=0;
     var sprite=practice.AddComponent<UnityEngine.SpriteRenderer>(); sprite.sprite=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Sprite>("Assets/Art/Sprites/PlaceholderSquare.png"); sprite.color=UnityEngine.Color.red;
     practice.AddComponent<UnityEngine.BoxCollider2D>(); practice.AddComponent<PracticeTarget>(); UnityEngine.Physics2D.SyncTransforms();

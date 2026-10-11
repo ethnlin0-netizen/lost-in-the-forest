@@ -70,6 +70,8 @@ public sealed class BlightBoss : MonoBehaviour
     private int facing = -1, cycle, slamCount;
     private Vector2 lockedAim;
     private bool directionLocked, queuedVolley;
+    public event System.Action<AttackKind> AttackWindup, AttackPerformed;
+    public event System.Action AttackCanceled, PhaseChanged;
     public BossState State { get; private set; } = BossState.Waiting;
     public AttackKind CurrentAttack { get; private set; }
     public bool PhaseTwo { get; private set; }
@@ -138,6 +140,7 @@ public sealed class BlightBoss : MonoBehaviour
         CurrentAttack = attack; State = BossState.Windup; struck.Clear(); directionLocked = false; Aim();
         windupDuration = attack == AttackKind.Slam ? slamWindup : attack == AttackKind.Lunge ? lungeWindup : projectileWindup;
         timer = windupDuration;
+        AttackWindup?.Invoke(attack);
     }
     private void FixedUpdate()
     {
@@ -153,6 +156,7 @@ public sealed class BlightBoss : MonoBehaviour
         }
         else if (!LivePlayer)
         {
+            if (State == BossState.Windup) AttackCanceled?.Invoke();
             State = BossState.Waiting; queuedVolley = false; vulnerability = 0f;
         }
         else if (State == BossState.Windup)
@@ -219,6 +223,7 @@ public sealed class BlightBoss : MonoBehaviour
     {
         if (CurrentAttack == AttackKind.Slam)
         {
+            AttackPerformed?.Invoke(AttackKind.Slam);
             SlamsPerformed++; slamCount++; DamageMelee(slamDamage, slamRange);
             if (shockwavePrefab != null)
             {
@@ -229,6 +234,7 @@ public sealed class BlightBoss : MonoBehaviour
         }
         else if (CurrentAttack == AttackKind.Lunge)
         {
+            AttackPerformed?.Invoke(AttackKind.Lunge);
             LungesPerformed++; State = BossState.Lunge; lungeRemaining = lungeDistance;
         }
         else { FireVolley(); Recover(false); }
@@ -237,6 +243,7 @@ public sealed class BlightBoss : MonoBehaviour
     {
         if (sporePrefab == null || !CanAttack(AttackKind.Spores)) return;
         VolleysPerformed++;
+        AttackPerformed?.Invoke(AttackKind.Spores);
         for (int i = -1; i <= 1; i++)
         {
             Vector2 direction = Quaternion.Euler(0f, 0f, i * projectileSpread) * lockedAim;
@@ -261,6 +268,7 @@ public sealed class BlightBoss : MonoBehaviour
     }
     private void Recover(bool expose)
     {
+        AttackCanceled?.Invoke();
         State = BossState.Recovery;
         timer = CurrentAttack == AttackKind.Slam ? slamRecovery : CurrentAttack == AttackKind.Lunge ? lungeRecovery : projectileRecovery;
         cooldown = queuedVolley ? timer + comboDelay : CurrentAttack == AttackKind.Slam ? slamCooldown :
@@ -272,6 +280,8 @@ public sealed class BlightBoss : MonoBehaviour
         if (health.IsDead || PhaseTwo || health.CurrentHealth > health.MaximumHealth * phaseThreshold) return;
         PhaseTwo = true; PhaseTransitions++; State = BossState.PhaseTransition; timer = phaseTransitionDuration;
         phaseElapsed = 0f; slamCount = 0; vulnerability = 0f; queuedVolley = false; CancelHazards();
+        AttackCanceled?.Invoke();
+        PhaseChanged?.Invoke();
         body.linearVelocity = new Vector2(0f, body.linearVelocity.y);
     }
     private void RefreshVisuals()
@@ -312,6 +322,6 @@ public sealed class BlightBoss : MonoBehaviour
         if (attackCue != null) attackCue.gameObject.SetActive(false);
         enabled = false;
     }
-    private void OnDisable() { CancelHazards(); if (body != null && body.simulated) body.linearVelocity = Vector2.zero; }
+    private void OnDisable() { AttackCanceled?.Invoke(); CancelHazards(); if (body != null && body.simulated) body.linearVelocity = Vector2.zero; }
     private void OnDestroy() { if (health != null) { health.HealthChanged -= CheckPhase; health.Died -= Die; } }
 }

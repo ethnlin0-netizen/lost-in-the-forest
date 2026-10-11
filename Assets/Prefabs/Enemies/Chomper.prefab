@@ -419,6 +419,7 @@ GameObject:
   - component: {fileID: 5743302154055994438}
   - component: {fileID: 6309465170448844121}
   - component: {fileID: 5955663643116285527}
+  - component: {fileID: 6522080785947273649}
   m_Layer: 0
   m_Name: Chomper
   m_TagString: Untagged
@@ -612,6 +613,21 @@ MonoBehaviour:
   meshColumns: 32
   meshRows: 40
   deathDuration: 1.65
+--- !u!114 &6522080785947273649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8383718492751665984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ed93eefb5368647be66d2b504b5bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplaySfx
+  role: 1
+  volume: 1
+  stepDistance: 1.7
 --- !u!1 &8519315419088562030
 GameObject:
   m_ObjectHideFlags: 0

@@ -388,6 +388,7 @@ GameObject:
   - component: {fileID: 336218184778270327}
   - component: {fileID: 1529945519592601973}
   - component: {fileID: 1846098398194845803}
+  - component: {fileID: 459214851852476428}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -609,6 +610,7 @@ MonoBehaviour:
   knockbackRecovery: 20
   invulnerabilityDuration: 0.65
   bodyVisual: {fileID: 2389017241041542006}
+  deathRespawnDelay: 0.75
 --- !u!114 &1846098398194845803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,7 +621,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34facc316cabae944a1be64b59c3c6c7, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LennyAnimation
   facingRoot: {fileID: 1190759813471661782}
   leftWing: {fileID: 3407947457071929678}
@@ -630,6 +632,21 @@ MonoBehaviour:
   wingFlapAngle: 35
   restingTailReach: 0.56
   sweepArc: 35
+--- !u!114 &459214851852476428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043731123627293150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ed93eefb5368647be66d2b504b5bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplaySfx
+  role: 0
+  volume: 1
+  stepDistance: 1.7
 --- !u!1 &2772805807188293812
 GameObject:
   m_ObjectHideFlags: 0

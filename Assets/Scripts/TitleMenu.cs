@@ -16,7 +16,16 @@ public sealed class TitleMenu : MonoBehaviour
         "Caleb Kimondo - Gameplay Programmer\n\n" +
         "Ryan Rothmund - Artist/UI Programmer\n\n" +
         "Matthew Mirfield - AI Programmer\n\n" +
-        "Ethan Lin - Level Designer";
+        "Ethan Lin - Level Designer\n\n" +
+        "Music by Scott Buckley\n" +
+        "The Long Dark, Moonlight, Reverie, Decoherence\n" +
+        "www.scottbuckley.com.au\n" +
+        "CC BY 4.0 - creativecommons.org/licenses/by/4.0/\n" +
+        "Adapted: excerpts, loop crossfades and volume adjustment.\n\n" +
+        "Leaf effects by Tim Mortimer (OpenGameArt)\n" +
+        "opengameart.org/content/leaves-cracking-and-crumbling\n" +
+        "CC BY 3.0 - creativecommons.org/licenses/by/3.0/\n" +
+        "Adapted: trimming, pitch, layering and volume adjustment.";
 
     public const string ControlsText =
         "Left Arrow - Move Left\n" +
@@ -186,6 +195,7 @@ public sealed class TitleMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         BackToMenu();
+        GameAudioController.Instance?.Play(GameSound.Pause, this, 1f, true);
     }
 
     private void SuspendInput(Behaviour input)
@@ -197,6 +207,7 @@ public sealed class TitleMenu : MonoBehaviour
 
     private void ResumeGame()
     {
+        if (IsPaused) GameAudioController.Instance?.Play(GameSound.Resume, this, 1f, true);
         RestorePausedState();
         HideMenu();
     }

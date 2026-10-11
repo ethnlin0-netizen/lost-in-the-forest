@@ -1,0 +1,38 @@
+[
+  {
+    "file": "Level03_Ashpetal_Embers.wav",
+    "bpm": 76,
+    "bars": 16,
+    "seconds": 50.526326530612245,
+    "peak_dbfs": -5.55971097946167,
+    "rms_dbfs": -19.0,
+    "loop_boundary_step": 0.000684492290019989
+  },
+  {
+    "file": "Level04_Veinroot_Pulse.wav",
+    "bpm": 84,
+    "bars": 16,
+    "seconds": 45.714285714285715,
+    "peak_dbfs": -6.418604373931885,
+    "rms_dbfs": -19.0,
+    "loop_boundary_step": 0.007832974195480347
+  },
+  {
+    "file": "Level05_Wraithglass_Echoes.wav",
+    "bpm": 88,
+    "bars": 16,
+    "seconds": 43.636371882086166,
+    "peak_dbfs": -5.503218650817871,
+    "rms_dbfs": -19.0,
+    "loop_boundary_step": 0.006898984313011169
+  },
+  {
+    "file": "Boss_Dreadcrown_Amalgam.wav",
+    "bpm": 132,
+    "bars": 32,
+    "seconds": 58.18181405895692,
+    "peak_dbfs": -4.766247272491455,
+    "rms_dbfs": -17.0,
+    "loop_boundary_step": 0.016466878354549408
+  }
+]

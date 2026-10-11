@@ -5548,7 +5548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmuletPickup
   amuletNumber: 2
-  nextScene: Level03
+  nextScene: Ashpetal Level 03
 --- !u!61 &1121115793
 BoxCollider2D:
   m_ObjectHideFlags: 0

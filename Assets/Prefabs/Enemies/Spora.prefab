@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: 4874677397228718649}
   - component: {fileID: 260677389052206175}
   - component: {fileID: 868549672144641190}
+  - component: {fileID: 3610350800737379058}
   m_Layer: 0
   m_Name: Spora
   m_TagString: Untagged
@@ -688,3 +689,18 @@ MonoBehaviour:
   meshColumns: 32
   meshRows: 40
   deathDuration: 1.9
+--- !u!114 &3610350800737379058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9035940781724304739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ed93eefb5368647be66d2b504b5bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplaySfx
+  role: 2
+  volume: 1
+  stepDistance: 1.7

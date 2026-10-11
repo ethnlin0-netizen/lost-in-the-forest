@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9218778274891810691}
   - component: {fileID: 394309354321681166}
   - component: {fileID: 5730376967953766845}
+  - component: {fileID: 1446306244428486610}
   m_Layer: 0
   m_Name: Collusus
   m_TagString: Untagged
@@ -208,6 +209,21 @@ MonoBehaviour:
   meshColumns: 32
   meshRows: 40
   deathDuration: 2.2
+--- !u!114 &1446306244428486610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094796997189985717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ed93eefb5368647be66d2b504b5bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplaySfx
+  role: 3
+  volume: 1
+  stepDistance: 1.2
 --- !u!1 &2680550240603451042
 GameObject:
   m_ObjectHideFlags: 0

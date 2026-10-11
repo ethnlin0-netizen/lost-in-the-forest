@@ -61,6 +61,7 @@ public class PlaceholderProjectile : MonoBehaviour
                 var receiver = DamageUtility.Find(nearest);
                 if (receiver != null) receiver.TakeDamage(damage, direction, 0f);
             }
+            GetComponent<GameplaySfx>()?.Impact();
             Spend();
             return;
         }

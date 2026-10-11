@@ -35,7 +35,8 @@ public sealed class TitleMenu : MonoBehaviour
         "Z - Jump\n" +
         "Double tap Z - Double Jump\n" +
         "X: tail sweep\n" +
-        "F - Ranged Attack";
+        "F - Ranged Attack\n" +
+        "Esc - Pause Game";
 
     [SerializeField] private string firstBiomeScene = "PrismbloomLevel01";
     [SerializeField] private GameObject menuView;

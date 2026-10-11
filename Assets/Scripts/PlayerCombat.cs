@@ -8,6 +8,8 @@ public class PlayerCombat : MonoBehaviour
 {
     [Header("Melee")]
     [SerializeField, Min(0.01f)] private float swingDuration = 0.2f;
+    [Tooltip("Minimum time between tail strikes; measured from the start of each swipe.")]
+    [SerializeField, Min(0.01f)] private float meleeCooldown = 0.3f;
     [SerializeField, Min(0.01f)] private float meleeReach = 0.9f;
     [SerializeField, Min(0.01f)] private float tailSweepReach = 1.8f;
     [SerializeField, Min(0.01f)] private float hitHeight = 1.2f;
@@ -16,7 +18,6 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField, Min(0f)] private float tailSweepDamage = 30f;
     [SerializeField] private LayerMask targetLayers = ~0;
     [SerializeField] private Transform meleeVisual;
-    [SerializeField] private bool usePlaceholderChargedTailAnimation = true;
 
     [Header("Ranged")]
     [SerializeField] private PlaceholderProjectile projectilePrefab;
@@ -32,9 +33,10 @@ public class PlayerCombat : MonoBehaviour
     private Movement movement;
     private Collider2D bodyCollider;
     private ContactFilter2D targetFilter;
-    private float swingTimeRemaining;
     private int swingDirection;
-    private bool strongSwing;
+    private float nextMeleeAt = float.NegativeInfinity;
+
+    public float MeleeCooldownRemaining => Mathf.Max(0f, nextMeleeAt - Time.time);
 
     public bool LastMeleeWasCharged { get; private set; }
     // The legacy "charged" flag selects the full-strength tail visuals and knockback.
@@ -72,10 +74,10 @@ public class PlayerCombat : MonoBehaviour
 
     private void PerformMelee(bool charged)
     {
+        if (!isActiveAndEnabled || Time.timeScale <= 0f || Time.time < nextMeleeAt) return;
+        nextMeleeAt = Time.time + Mathf.Max(meleeCooldown, swingDuration);
         LastMeleeWasCharged = charged;
         swingDirection = movement.FacingDirection;
-        strongSwing = charged;
-        swingTimeRemaining = swingDuration;
         float reach = charged ? tailSweepReach : meleeReach;
         MeleePerformed?.Invoke(charged, swingDirection, swingDuration, bodyCollider.bounds.extents.x + reach);
         var direction = new Vector2(swingDirection, 0f);
@@ -100,14 +102,9 @@ public class PlayerCombat : MonoBehaviour
     private void UpdateSwingVisual()
     {
         if (meleeVisual == null) return;
-        swingTimeRemaining = Mathf.Max(0f, swingTimeRemaining - Time.deltaTime);
-        meleeVisual.gameObject.SetActive(swingTimeRemaining > 0f &&
-            (!strongSwing || usePlaceholderChargedTailAnimation));
-        if (swingTimeRemaining <= 0f) return;
-        float progress = 1f - swingTimeRemaining / swingDuration;
-        meleeVisual.localScale = new Vector3(swingDirection * (strongSwing ? 1.8f : 0.9f), 1f, 1f);
-        meleeVisual.localRotation = Quaternion.Euler(0f, 0f,
-            strongSwing ? Mathf.Lerp(65f, -65f, progress) * swingDirection : 0f);
+        // Older scene copies may still reference the orange placeholder box.
+        // Only the actual Lenny tail artwork should render during an attack.
+        meleeVisual.gameObject.SetActive(false);
     }
 
     private void FireProjectile()
@@ -127,7 +124,6 @@ public class PlayerCombat : MonoBehaviour
 
     private void ResetVisuals()
     {
-        swingTimeRemaining = 0f;
         if (meleeVisual != null) meleeVisual.gameObject.SetActive(false);
         VisualsReset?.Invoke();
     }
@@ -139,12 +135,4 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnDisable() => ResetVisuals();
 
-    private void OnGUI()
-    {
-        GUI.Box(new Rect(12, 12, 430, 114), "Movement practice");
-        GUI.Label(new Rect(24, 38, 406, 22), "Left / Right: move    Up / Down: aim");
-        GUI.Label(new Rect(24, 60, 406, 22), "Z: jump    Z again in the air: wing double jump");
-        GUI.Label(new Rect(24, 82, 406, 22), "X: tail sweep");
-        GUI.Label(new Rect(24, 104, 406, 22), "F: fireball    Orange block: practice target");
-    }
 }

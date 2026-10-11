@@ -167,8 +167,8 @@ public sealed class LennyVisualAnimator : MonoBehaviour
             p.y += height * flap * (leftWing + rightWing);
             p.x += width * wing * .025f * (rightWing - leftWing);
             float tail = Weight(c, .12f, .22f, .23f, .18f);
-            p.y += height * tail * (.025f * Mathf.Sin(clock * 3 + gait * .3f) + strike * (chargedAttack ? .12f : .04f));
-            p.x += width * tail * strike * (chargedAttack ? .16f : .04f);
+            p.y += height * tail * (.025f * Mathf.Sin(clock * 3 + gait * .3f) + strike * .04f);
+            p.x += width * tail * strike * .04f;
             if (death > 0) { p.y *= 1 - .7f * death; p.x += height * c.y * .35f * death; }
             vertices[i] = p;
         }
